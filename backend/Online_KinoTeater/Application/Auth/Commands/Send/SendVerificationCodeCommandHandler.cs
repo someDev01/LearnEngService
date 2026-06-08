@@ -48,7 +48,7 @@ public class SendVerificationCodeCommandHandler(
         #endregion
 
         #region SENDING
-        await emailService.SendAsync(request.Email, topic, body, cancellationToken);
+        _ = emailService.SendAsync(request.Email, topic, body, cancellationToken);
         #endregion
 
         return Result<TimeSpan>.Success(TimeSpan.FromSeconds(lockTtl.TotalSeconds));
