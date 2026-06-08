@@ -20,6 +20,7 @@ public class SmtpEmailService(IOptions<EmailSettings> options): IEmailService
 
         using var client = new SmtpClient(smtpHost, smtpPort)
         {
+            UseDefaultCredentials = false,
             EnableSsl = true,
             Credentials = new NetworkCredential(smtpUser, stmpPass)
         };
