@@ -7,6 +7,7 @@ import styles from '../edit_note/edit_note_form.module.css';
 import { noteApi } from '../../api/note';
 import { toast } from 'react-toastify';
 import { closeModalEditNote } from '../../redux/slices/modalSlice';
+import ErrorText from '../../ui/error/ErrorText';
 
 function EditNoteForm({isOpen, onClose, onCreateNote, onUpdateNote, note, isEditing, loadingSave}){
 
@@ -79,7 +80,7 @@ function EditNoteForm({isOpen, onClose, onCreateNote, onUpdateNote, note, isEdit
                         placeholder="word" 
                         maxLength={25}
                     />
-                    {wordInputError && <p style={{color: 'red', margin: 0}}>{wordInputError}</p>}
+                    {wordInputError && <ErrorText>{wordInputError}</ErrorText>}
                     <EditNoteInput 
                         text="ПЕРЕВОД (Ы)" 
                         value={translationsInput}

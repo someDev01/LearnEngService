@@ -5,20 +5,22 @@ import ErrorText from '../error/ErrorText';
 function InputField({value, setValue, error, onErrorClear}){
     return(
         <div className={`${styles.wrapper} ${styles.email}`}>
-            <div className={styles.icon}>
-                <Mail/>
+            <div className={styles.email_input}>
+                <div className={styles.icon}>
+                    <Mail/>
+                </div>
+                <input
+                    className={styles.input}
+                    type="email"
+                    name="email"
+                    value={value}
+                    onChange={(e) => {
+                        setValue(e.target.value);
+                        onErrorClear();
+                    }}
+                    placeholder="email"
+                />
             </div>
-            <input
-                className={styles.input}
-                type="email"
-                name="email"
-                value={value}
-                onChange={(e) => {
-                    setValue(e.target.value);
-                    onErrorClear();
-                }}
-                placeholder="email"
-            />
             {error && <ErrorText>{error}</ErrorText>}
         </div>
     )
