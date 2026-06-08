@@ -1,12 +1,12 @@
-﻿using System.Net.Mail;
-using System.Net;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Application.Interfaces.Email;
 using Infrastructure.Settings.Email;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace Infrastructure.Services.Email.Smtp;
 
-public class SmtpEmailService(IOptions<EmailSettings> options): IEmailService
+public class SmtpEmailService(IOptions<EmailSettings> options) : IEmailService
 {
     private readonly EmailSettings _settings = options.Value;
 
@@ -18,18 +18,22 @@ public class SmtpEmailService(IOptions<EmailSettings> options): IEmailService
         string smtpUser = _settings.SmtpUser ?? "";
         string stmpPass = _settings.SmtpPass ?? "";
 
-        using var client = new SmtpClient(smtpHost, smtpPort)
+        var message = new MimeMessage();
+        message.From.Add(new MailboxAddress("VoClip", $"{fromEmail}"));
+        message.To.Add(MailboxAddress.Parse(to));
+        message.Subject = topic;
+
+        message.Body = new TextPart("html")
         {
-            UseDefaultCredentials = false,
-            EnableSsl = true,
-            Credentials = new NetworkCredential(smtpUser, stmpPass)
+            Text = body,
         };
 
-        using var message = new MailMessage(fromEmail, to, topic, body)
-        {
-            IsBodyHtml = true
-        };
+        using var client = new SmtpClient();
 
-        await client.SendMailAsync(message, cancellationToken);
+        await client.ConnectAsync(smtpHost, smtpPort, MailKit.Security.SecureSocketOptions.StartTls, cancellationToken);
+        await client.AuthenticateAsync(smtpUser, stmpPass, cancellationToken);
+        await client.SendAsync(message, cancellationToken);
+
+        await client.DisconnectAsync(true, cancellationToken);
     }
 }
