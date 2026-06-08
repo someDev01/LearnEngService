@@ -1,0 +1,21 @@
+
+.button{
+    cursor: pointer;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 0px;
+    border-radius: 4px;
+}
+
+.training{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(163, 163, 163);
+    margin: 0;
+}

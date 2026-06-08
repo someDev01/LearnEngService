@@ -1,0 +1,35 @@
+
+.edit__container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 20px;
+    gap: 16px;
+    border: 1px solid rgb(48, 48, 48);
+    border-radius: 12px;
+    background-color: #1f1f1f;
+}
+
+.header_form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 12px 0px;
+    border-bottom: 1px solid rgb(50, 50, 50);
+
+    p{
+        margin: 0;
+        color: rgb(244, 244, 244);
+        font-size: 16px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+}
+
+.inputs_part{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+}

@@ -1,0 +1,13 @@
+
+.translations{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 2px;
+
+    p{
+        margin: 0;
+        color: rgb(171, 155, 141);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+}

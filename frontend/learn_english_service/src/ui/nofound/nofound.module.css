@@ -1,0 +1,11 @@
+
+.nofound{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 58px;
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(231, 231, 231);
+    margin: 0;
+}

@@ -1,0 +1,19 @@
+
+.button_add{
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 4px 6px;
+    border-radius: 4px;
+    background-color: rgb(255, 173, 106);
+
+    p{
+        margin: 0;
+        font-size: 14px;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: rgb(0, 0, 0);
+    }
+}

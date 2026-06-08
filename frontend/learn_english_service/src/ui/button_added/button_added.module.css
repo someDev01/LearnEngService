@@ -1,0 +1,19 @@
+
+.button_added{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 12px;
+    gap: 10px;
+    background-color: transparent;
+    border: 1px solid rgb(245, 163, 91);
+    border-radius: 6px;
+
+    p{
+        margin: 0;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+
+    }
+}

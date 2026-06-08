@@ -1,0 +1,27 @@
+
+.block_option{
+    display: flex;
+    width: 100%;
+    gap: 6px;
+}
+
+.option{
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 8px 10px;
+    color: rgb(163, 163, 163);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(30, 30, 30);
+    border-radius: 6px;
+    outline: none;
+    border: 1px solid rgb(55, 55, 55);
+    transition: all .3s ease;
+}
+
+.option:hover{
+    background-color: rgb(16, 16, 16);
+}

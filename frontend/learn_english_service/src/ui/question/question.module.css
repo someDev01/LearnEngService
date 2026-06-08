@@ -1,0 +1,15 @@
+
+.question{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 4px;
+    width: 100%;
+
+    p{
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: rgb(208, 208, 208);
+        font-size: 18px;
+    }
+}

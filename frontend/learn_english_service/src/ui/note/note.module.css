@@ -1,0 +1,41 @@
+
+.card{
+    display: flex;
+    flex-direction: column;
+    padding: 6px 10px;
+    border: 1px solid rgb(53, 53, 53);
+    background-color: rgb(30, 30, 30);
+    border-radius: 10px;
+    transition:  border-color .3s ease;
+}
+
+.card:hover{
+    border-color: rgb(108, 108, 108);
+}
+
+.top_part{
+    padding: 4px 0px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(58, 58, 58);
+}
+
+.info_note{
+    margin-top: 16px;
+}
+
+.header_note{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom_part{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.block_buttons{
+    display: flex;
+    gap: 4px;
+}

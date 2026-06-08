@@ -1,0 +1,45 @@
+
+.content__container{
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    max-width: 1250px;
+    width: 100%;
+    gap: 20px;
+    padding-top: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.top_part{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    p{
+        margin: 0;
+    }
+}
+
+.bottom_part{
+    margin-top: 10px;
+}
+
+.list_videos{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.video{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid white;
+    box-sizing: border-box;
+}

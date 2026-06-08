@@ -1,0 +1,36 @@
+
+.cart{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 12px;
+    background-color: rgb(30, 30, 30);
+    border-radius: 8px;
+    border: 1px solid rgb(42, 42, 42);
+}
+
+.count{
+    margin: 0;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.count.added{
+    color: rgb(255, 187, 85);
+}
+
+.count.learned{
+    color: rgb(74, 231, 121);
+}
+
+.count.watched{
+    color: white
+}
+
+.progress_text{
+    margin: 0;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(169, 169, 169);
+}

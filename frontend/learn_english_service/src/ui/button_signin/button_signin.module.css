@@ -1,0 +1,20 @@
+
+.button_signin{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    border-radius: 4px;
+    width: 80px;
+    border: 1px solid rgb(255, 154, 99);
+    background-color: rgb(105, 55, 28);
+
+    p{
+        user-select: none;
+        margin: 0;
+        color: #c7c7c7;
+        font-size: 16px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+}

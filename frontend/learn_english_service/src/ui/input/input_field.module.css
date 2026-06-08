@@ -1,0 +1,33 @@
+
+.wrapper.email{
+    position: relative;
+    width: 100%;
+    gap: 12px;
+}
+
+.icon{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-40%);
+    left: 12px;
+    color: #ff7c0a;
+}
+
+.input{
+    user-select: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+    padding-right: 18px;
+    border-radius: 6px;
+    width: 100%;
+    outline: none;
+    border: 1px solid rgb(60, 60, 60);
+    background-color: transparent;
+    transition: border-color .4s ease, box-shadow .3s ease;
+    font-size: 14px;
+}
+
+.input:focus{
+    border: 1px solid white;
+}

@@ -1,0 +1,16 @@
+
+.training_finish{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+
+    p{
+        margin: 0;
+        color: rgb(187, 187, 187);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 16px;
+    }
+}

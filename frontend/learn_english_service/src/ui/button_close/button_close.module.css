@@ -1,0 +1,20 @@
+
+.button{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid rgb(65, 65, 65);
+}
+
+.icon_close{
+    user-select: none;
+    margin: 0;
+    color: #bfbfbf;
+    font-size: 16px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

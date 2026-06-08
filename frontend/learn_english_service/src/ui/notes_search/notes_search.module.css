@@ -1,0 +1,22 @@
+
+.notes_search{
+    position: relative;
+    flex: 2;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+
+    input{
+        outline: none;
+        width: 100%;
+        padding: 8px 32px;
+        box-shadow: none;
+        border-radius: 12px;
+        border: 1px solid rgb(84, 84, 84);
+        transition: border-color .3s ease;
+    }
+
+    input:focus{
+        border-color: rgb(255, 129, 56);
+    }
+}

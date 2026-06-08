@@ -1,0 +1,9 @@
+.env
+bin/
+obj/
+dist/
+build/
+.vs/
+.idea/
+docker-data/
+node_mudules/

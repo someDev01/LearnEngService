@@ -1,0 +1,22 @@
+
+.button_create{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 12px;
+    gap: 6px;
+    border: none;
+    border-radius: 6px;
+    background-color: rgb(58, 29, 0);
+    border: 1px solid rgb(255, 127, 36);
+
+    p{
+        user-select: none;
+        color: rgb(255, 255, 255);
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 500;
+        font-size: 14px;
+        margin: 0;
+    }
+}
