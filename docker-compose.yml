@@ -26,9 +26,7 @@ services:
       ConnectionStrings__DataBase: Host=postgres;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
       ConnectionStrings__Redis: redis:6379
       JwtSettings__SecretKey: ${JWT_SECRET}
-      Email__From: ${EMAIL_FROM}
-      Email__SmtpUser: ${SMTP_USER}
-      Email__SmtpPass: ${SMTP_PASS}
+      Email__ResendApiKey: ${RESEND_APIKEY}
       YoutubeApi__ApiKey: ${YOUTUBE_APIKEY}
       Llm__ApiKey: ${LLM_APIKEY}
       Admin__Secret: ${ADMIN_SECRET}

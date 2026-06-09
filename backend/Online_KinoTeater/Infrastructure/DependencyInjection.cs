@@ -132,7 +132,7 @@ public static class DependencyInjection
         services.AddJwtAuth(Options.Create(jwtSettings.Get<JwtSettings>()!));
         services.AddScoped<ICodeGenerationService, CodeGenerationService>();
 
-        services.AddScoped<IEmailService, SmtpEmailService>();
+        services.AddScoped<IEmailService, ResendEmailService>();
         services.AddScoped<IEmailTemplateRender, EmailTemplateRender>();
 
         services.AddScoped<IAdminService, AdminService>();
@@ -149,6 +149,12 @@ public static class DependencyInjection
 
         services.AddScoped<INoteCacheService, NoteCacheService>();
         services.AddScoped<IVideoCacheService, VideoCacheService>();
+
+        services.AddHttpClient<IEmailService, ResendEmailService>(options =>
+        {
+            options.BaseAddress = new Uri(configuration["Email:BaseUrl"]!);
+            options.DefaultRequestHeaders.Add("Authorization", $"Bearer {configuration["Email:ResendApiKey"]}");
+        });
 
         services.AddHttpClient<ILlmClient, GroqClient>(options =>
         {
