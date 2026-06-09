@@ -52,8 +52,8 @@ public static class AuthEndpoints
             context.Response.Cookies.Append("__Secure-token", jwt, new CookieOptions
             {
                 HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.Strict,
+                Secure = false,
+                SameSite = SameSiteMode.Lax,
                 Expires = DateTimeOffset.UtcNow.AddDays(options.Value.TokenExpireUserDays)
             });
 
