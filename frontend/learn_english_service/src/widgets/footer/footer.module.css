@@ -5,9 +5,9 @@
     align-items: center;
     width: 100%;
     margin-top: 100px;
-    height: 120px;
+    height: 100px;
     background-color: rgb(15, 15, 15);
-    border-top: 1px solid #2e2e2e;
+    border-top: 1px solid #292929;
     
 }
 
@@ -23,11 +23,12 @@
 .desc_block{
     .logo{
         color: white;
-        font-size: 20px;
+        font-size: 18px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     p{
+        font-size: 14px;
         color: rgb(195, 195, 195);
         font-family:'Times New Roman', Times, serif;
     }
