@@ -96,7 +96,6 @@ public class VerificationCodeCommandHandler(
 
         #region JWT
         var jwt = tokenService.GenerationToken(userExisting!);
-        Console.WriteLine($"=== Создание токена JWT === : ${jwt}");
         if (jwt is null)
             return Result<VerifyDto>.Failure($"Ошибка создания токена");
         #endregion
@@ -122,7 +121,6 @@ public class VerificationCodeCommandHandler(
         #endregion
 
         var result = new VerifyDto(jwt, userExisting.Email!.Value);
-        Console.WriteLine($"=== Результат отпраки уже с токеном из handler=== : ${result}");
 
         return Result<VerifyDto>.Success(result);
     }

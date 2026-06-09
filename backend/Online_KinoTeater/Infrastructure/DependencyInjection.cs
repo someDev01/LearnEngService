@@ -256,7 +256,9 @@ public static class DependencyInjection
                 {
                     OnMessageReceived = context =>
                     {
-                        var token = context.Request.Cookies["__Secure-token"];
+                        var jwtSettings =
+                            context.HttpContext.RequestServices.GetRequiredService<IOptions<JwtSettings>>().Value;
+                        var token = context.Request.Cookies[jwtSettings.TokenName];
                         if (!string.IsNullOrEmpty(token))
                             context.Token = token;
 
@@ -297,10 +299,13 @@ public static class DependencyInjection
                         context.HandleResponse();
 
                         context.Response.StatusCode = 401;
+                        
+                        var jwtSettings =
+                            context.HttpContext.RequestServices.GetRequiredService<IOptions<JwtSettings>>().Value;
 
-                        if(context.Request.Cookies.TryGetValue("__Secure-token", out _))
+                        if(context.Request.Cookies.TryGetValue(jwtSettings.TokenName, out _))
                         {
-                            context.Response.Cookies.Append("__Secure-token", "", new CookieOptions
+                            context.Response.Cookies.Append(jwtSettings.TokenName, "", new CookieOptions
                             {
                                 HttpOnly = true,
                                 Secure = true,

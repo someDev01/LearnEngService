@@ -15,7 +15,8 @@ namespace Api.Endpoints.Auth;
 
 public static class AuthEndpoints
 {
-    public static IEndpointRouteBuilder AddEmailEnpoints(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder AddEmailEnpoints(
+        this IEndpointRouteBuilder app)
     {
         var authGroup = app.MapGroup("/api/auth")
             .WithTags("Auth");
@@ -49,17 +50,14 @@ public static class AuthEndpoints
                 return Results.BadRequest(result.Error!);
 
             var jwt = result.Value!.Jwt;
-            Console.WriteLine($"=== ТОкен jwt в endpoint=== :${jwt}");
-            Console.WriteLine($"Время жизни токена из конфига=== : ${options.Value.TokenExpireUserDays}");
-            Console.WriteLine($"=== Кладем токен в куку===");
-            context.Response.Cookies.Append("__Secure-token", jwt, new CookieOptions
+
+            context.Response.Cookies.Append(options.Value.TokenName, jwt, new CookieOptions
             {
                 HttpOnly = true,
                 Secure = true,
                 SameSite = SameSiteMode.Strict,
                 Expires = DateTimeOffset.UtcNow.AddDays(options.Value.TokenExpireUserDays)
             });
-            Console.WriteLine($"=== Положили токен в куку===");
             
             return Results.Ok(new
             {
@@ -79,7 +77,7 @@ public static class AuthEndpoints
             if (!result.IsSuccess)
                 return Results.BadRequest(result.Error!);
 
-            context.Response.Cookies.Append("__Secure-token", result.Value!, new CookieOptions
+            context.Response.Cookies.Append(options.Value.TokenName, result.Value!, new CookieOptions
             {
                 HttpOnly = true,
                 Secure = true,
@@ -111,7 +109,10 @@ public static class AuthEndpoints
             });
         }).RequireAuthorization();
 
-        authGroup.MapPost("logout", async (HttpContext context, [FromServices] IOptions<JwtSettings> options, IMediator mediator) =>
+        authGroup.MapPost("logout", async (
+            HttpContext context, 
+            [FromServices] IOptions<JwtSettings> options, 
+            IMediator mediator) =>
         {
             var jti = context.User.GetJti();
 
@@ -123,7 +124,7 @@ public static class AuthEndpoints
             if (!result.IsSuccess)
                 return Results.BadRequest(result.Error!);
 
-            context.Response.Cookies.Delete("__Secure-token", new CookieOptions
+            context.Response.Cookies.Delete(options.Value.TokenName, new CookieOptions
             {
                 HttpOnly = true,
                 Secure = true,
