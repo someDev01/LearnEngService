@@ -49,6 +49,9 @@ public static class AuthEndpoints
                 return Results.BadRequest(result.Error!);
 
             var jwt = result.Value!.Jwt;
+            Console.WriteLine($"=== ТОкен jwt в endpoint=== :${jwt}");
+            Console.WriteLine($"Время жизни токена из конфига=== : ${options.Value.TokenExpireUserDays}");
+            Console.WriteLine($"=== Кладем токен в куку===");
             context.Response.Cookies.Append("__Secure-token", jwt, new CookieOptions
             {
                 HttpOnly = true,
@@ -56,7 +59,8 @@ public static class AuthEndpoints
                 SameSite = SameSiteMode.Strict,
                 Expires = DateTimeOffset.UtcNow.AddDays(options.Value.TokenExpireUserDays)
             });
-
+            Console.WriteLine($"=== Положили токен в куку===");
+            
             return Results.Ok(new
             {
                 isVerified = result.IsSuccess,
