@@ -27,6 +27,7 @@ services:
       ConnectionStrings__Redis: redis:6379
       JwtSettings__SecretKey: ${JWT_SECRET}
       Email__ResendApiKey: ${RESEND_APIKEY}
+      Email__From: ${EMAIL_FROM}
       YoutubeApi__ApiKey: ${YOUTUBE_APIKEY}
       Llm__ApiKey: ${LLM_APIKEY}
       Admin__Secret: ${ADMIN_SECRET}
