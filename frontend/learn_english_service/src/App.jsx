@@ -1,4 +1,3 @@
-import { ToastContainer } from 'react-toastify';
 import Layout from './layout/Layout'
 import HomePage from './pages/home/HomePage';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
