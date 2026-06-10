@@ -18,10 +18,10 @@ public static class AuthEndpoints
     public static IEndpointRouteBuilder AddEmailEnpoints(
         this IEndpointRouteBuilder app)
     {
-        var authGroup = app.MapGroup("auth")
+        var authGroup = app.MapGroup("/api/auth")
             .WithTags("Auth");
 
-        var authGroupAdmin = app.MapGroup("admin-auth")
+        var authGroupAdmin = app.MapGroup("/api/admin-auth")
             .WithTags("Admin-Auth");
 
         #region EMAIL ENDPOINTS
@@ -109,10 +109,7 @@ public static class AuthEndpoints
             });
         }).RequireAuthorization();
 
-        authGroup.MapPost("logout", async (
-            HttpContext context, 
-            [FromServices] IOptions<JwtSettings> options, 
-            IMediator mediator) =>
+        authGroup.MapPost("logout", async (HttpContext context, [FromServices] IOptions<JwtSettings> options, IMediator mediator) =>
         {
             var jti = context.User.GetJti();
 
@@ -124,7 +121,7 @@ public static class AuthEndpoints
             if (!result.IsSuccess)
                 return Results.BadRequest(result.Error!);
 
-            context.Response.Cookies.Delete(options.Value.TokenName, new CookieOptions
+            context.Response.Cookies.Delete(jwtSettings!.TokenName, new CookieOptions
             {
                 HttpOnly = true,
                 Secure = true,

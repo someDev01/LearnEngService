@@ -12,10 +12,10 @@ public static class YoutubeVideoEnpoints
 {
     public static IEndpointRouteBuilder AddYoutubeVideoEnpoints(this IEndpointRouteBuilder app)
     {
-        var youtubeVideos = app.MapGroup("youtubeVideos")
+        var youtubeVideos = app.MapGroup("api/youtubeVideos")
             .WithTags("Videos");
 
-        var filterGroup = app.MapGroup("youtubeVideos")
+        var filterGroup = app.MapGroup("api/youtubeVideos")
             .WithTags("Search");
 
         #region ENDPOINTS YOUTUBEVIDEOS

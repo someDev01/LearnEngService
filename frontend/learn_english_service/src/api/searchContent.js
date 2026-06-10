@@ -3,7 +3,7 @@ import apiClient from "./client";
 export const searchContentApi = {
     search: async(title) => {
         try{
-            const response = await apiClient.get('learningContetns/search', {
+            const response = await apiClient.get('api/learningContetns/search', {
                 params: {title}
             });
             return {success: true, data: response.data};
@@ -31,7 +31,7 @@ export const searchContentApi = {
     },
      getContents: async() => {
             try{
-            const response = await apiClient.get('learningContetns/all');
+            const response = await apiClient.get('api/learningContetns/all');
             return {success: true, data: response.data};
         }
         catch(e){

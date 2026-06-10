@@ -3,7 +3,7 @@ import {store} from '../redux/store/store';
 import { resetStep, resetTempUser, resetUser } from "../redux/slices/authSlice";
 
 const apiClient = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    //baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true
 });
 

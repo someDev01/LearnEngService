@@ -7,7 +7,7 @@ public static class TranslateEndpoints
 {
     public static IEndpointRouteBuilder AddTranslateEndpoints(this IEndpointRouteBuilder app)
     {
-        var translateGroup = app.MapGroup("translate")
+        var translateGroup = app.MapGroup("api/translate")
             .WithTags("Show Translation");
 
         translateGroup.MapGet("/show/translation", async (string word, IMediator mediator) =>
