@@ -15,7 +15,7 @@ function EditNoteForm({isOpen, onClose, onCreateNote, onUpdateNote, note, isEdit
     const [wordInputError, setWordInputError] = useState(null);
     const [translationsInput, setTranslationsInput] = useState('');
     const [examplesInput, setExamplesInput] = useState([
-        {text: '', translateText: ''}
+        {text: '', translate: ''}
     ]);
 
     const onWordInputChange = (e) => {
@@ -40,12 +40,12 @@ function EditNoteForm({isOpen, onClose, onCreateNote, onUpdateNote, note, isEdit
         if(note){
             setWordInput(note.word || '');
             setTranslationsInput(note.translations?.join(', ') || '');
-            setExamplesInput(note.examples || [{text: '', translateText: ''}]);
+            setExamplesInput(note.examples || [{text: '', translate: ''}]);
         }
         else{
             setWordInput('');
             setTranslationsInput('');
-            setExamplesInput([{text: '', translateText: ''}]);
+            setExamplesInput([{text: '', translate: ''}]);
         }
     }, [note]);
 
@@ -55,7 +55,7 @@ function EditNoteForm({isOpen, onClose, onCreateNote, onUpdateNote, note, isEdit
             return;
         }
         const translationsArray = translationsInput.split(', ');
-        const examplesArray = examplesInput.filter(ex => ex.text.trim() && ex.translateText.trim());    
+        const examplesArray = examplesInput.filter(ex => ex.text.trim() && ex.translate.trim());    
         
         if(isEditing){
             onUpdateNote(note.id, wordInput, translationsArray, examplesArray);
@@ -99,8 +99,8 @@ function EditNoteForm({isOpen, onClose, onCreateNote, onUpdateNote, note, isEdit
                             />
                             <EditNoteInput
                                 text='ПРИМЕР RU' 
-                                value={ex.translateText}
-                                onInputChange={(e) => onExamplesInputChange(index, 'translateText', e.target.value)}
+                                value={ex.translate}
+                                onInputChange={(e) => onExamplesInputChange(index, 'translate', e.target.value)}
                                 placeholder="(необязательно)" 
                                 maxLength={100}
                             />
