@@ -85,6 +85,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Application.Validators.UpdateNote;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
@@ -113,7 +114,14 @@ public static class DependencyInjection
         #endregion
 
         #region PERSISTENCES
-        services.AddDbContext<DataContext>();
+        services.AddDbContext<DataContext>(options =>
+        {
+            options.UseNpgsql(configuration.GetConnectionString("DataBase"), npgsql =>
+            {
+                npgsql.EnableRetryOnFailure();
+            });
+        });
+
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IDataContext, DataContext>();
 

@@ -18,7 +18,7 @@ public class NoteConfiguration : IEntityTypeConfiguration<Note>
 
         #region PROPERTIES
         builder.Property(n => n.Word)
-            .HasMaxLength(100)
+            .HasMaxLength(25)
             .IsRequired();
 
         builder.Property(n => n.Translations)
