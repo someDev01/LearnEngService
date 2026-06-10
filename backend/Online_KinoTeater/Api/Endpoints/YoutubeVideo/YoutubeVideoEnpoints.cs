@@ -12,10 +12,10 @@ public static class YoutubeVideoEnpoints
 {
     public static IEndpointRouteBuilder AddYoutubeVideoEnpoints(this IEndpointRouteBuilder app)
     {
-        var youtubeVideos = app.MapGroup("api/youtubeVideos")
+        var youtubeVideos = app.MapGroup("youtubeVideos")
             .WithTags("Videos");
 
-        var filterGroup = app.MapGroup("api/youtubeVideos")
+        var filterGroup = app.MapGroup("youtubeVideos")
             .WithTags("Search");
 
         #region ENDPOINTS YOUTUBEVIDEOS
@@ -38,7 +38,7 @@ public static class YoutubeVideoEnpoints
                 return Results.BadRequest(result.Error);
 
             return Results.Ok(result.Value);
-        });//.RequireAuthorization("AdminOnlyAccess");
+        }).RequireAuthorization("AdminOnlyAccess");
 
         youtubeVideos.MapPatch("/update", async ([FromBody] UpdateYoutubeVideoCommand command, IMediator mediator) =>
         {
@@ -56,7 +56,7 @@ public static class YoutubeVideoEnpoints
                 return Results.BadRequest(result.Error);
 
             return Results.NoContent();
-        });//.RequireAuthorization("AdminOnlyAccess");
+        }).RequireAuthorization("AdminOnlyAccess");
         #endregion
 
         #region ENDPOINT SEARCH

@@ -3,7 +3,7 @@ import apiClient from "./client";
 export const translateApi = {
     showTranslation: async(word) => {
         try{
-            const response = await apiClient.get('api/translate/show/translation', {
+            const response = await apiClient.get('translate/show/translation', {
                 params: {word}
             });
 

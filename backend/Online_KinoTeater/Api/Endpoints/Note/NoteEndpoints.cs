@@ -17,10 +17,10 @@ public static class NoteEndpoints
 {
     public static IEndpointRouteBuilder AddNoteEndpoints(this IEndpointRouteBuilder app)
     {
-        var noteGroup = app.MapGroup("/api/note")
+        var noteGroup = app.MapGroup("note")
             .WithTags("Notes");
 
-        var filterGroup = app.MapGroup("api/notes")
+        var filterGroup = app.MapGroup("notes")
             .WithTags("Search");
 
         #region ENDPOINTS NOTES

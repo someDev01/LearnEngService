@@ -18,10 +18,10 @@ public static class AuthEndpoints
     public static IEndpointRouteBuilder AddEmailEnpoints(
         this IEndpointRouteBuilder app)
     {
-        var authGroup = app.MapGroup("/api/auth")
+        var authGroup = app.MapGroup("auth")
             .WithTags("Auth");
 
-        var authGroupAdmin = app.MapGroup("/api/admin-auth")
+        var authGroupAdmin = app.MapGroup("admin-auth")
             .WithTags("Admin-Auth");
 
         #region EMAIL ENDPOINTS

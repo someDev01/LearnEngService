@@ -36,7 +36,7 @@ public static class SubtitleEndpoints
                 return Results.BadRequest(result.Error);
 
             return Results.Ok(result.Value);
-        });//.RequireAuthorization("AdminOnlyAccess");
+        })RequireAuthorization("AdminOnlyAccess");
 
         subtitleGroup.MapPost("/create", async (
             [FromForm] CreateSubtitlesRequest request,
@@ -55,7 +55,7 @@ public static class SubtitleEndpoints
 
             return Results.Ok();
         }).DisableAntiforgery()
-            ;//.RequireAuthorization("AdminOnlyAccess");
+            .RequireAuthorization("AdminOnlyAccess");
 
         subtitleGroup.MapPatch("/update", async ([FromBody]UpdateSubtitleCommand command, IMediator mediator) =>
         {
@@ -73,7 +73,7 @@ public static class SubtitleEndpoints
                 return Results.BadRequest(result.Error!);
 
             return Results.NoContent();
-        });//.RequireAuthorization("AdminOnlyAccess");
+        }).RequireAuthorization("AdminOnlyAccess");
         #endregion
 
         return app;
