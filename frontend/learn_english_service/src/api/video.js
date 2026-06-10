@@ -3,7 +3,7 @@ import apiClient from "./client"
 export const videoApi = {
     getVideos: async(page, pageSize) => {
         try{
-            const response = await apiClient.get('api/youtubeVideos/all', {
+            const response = await apiClient.get('youtubeVideos/all', {
                 params:{
                     page,
                     pageSize
@@ -36,7 +36,7 @@ export const videoApi = {
 
     searchVideos: async(query, page, pageSize) => {
         try{
-            const response = await apiClient.get('api/youtubeVideos/search', {
+            const response = await apiClient.get('youtubeVideos/search', {
                 params:{
                     query,
                     page,

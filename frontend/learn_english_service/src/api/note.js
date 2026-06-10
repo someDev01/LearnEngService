@@ -3,7 +3,7 @@ import apiClient from "./client";
 export const noteApi = {
     createNoteWithContext: async(youtubeVideoId, youtubeId, youtubeVideoTitle, hours, minutes, seconds, word, context) => {
         try{
-            const response = await apiClient.post('/api/note/create/with/context', {
+            const response = await apiClient.post('note/create/with/context', {
                 youtubeVideoId,
                 youtubeId,
                 youtubeVideoTitle,
@@ -40,7 +40,7 @@ export const noteApi = {
 
     createNote: async(word, translations = [], examples = []) => {
         try{
-            const response = await apiClient.post('/api/note/create', {
+            const response = await apiClient.post('note/create', {
                 word, 
                 translations, 
                 examples
@@ -72,7 +72,7 @@ export const noteApi = {
 
     updateNote: async(noteId, word, translations, examples) => {
         try{
-            const response = await apiClient.patch('api/note/update', {
+            const response = await apiClient.patch('note/update', {
                 noteId,
                 word,
                 translations,
@@ -105,7 +105,7 @@ export const noteApi = {
 
     getDictionary: async() => {
         try{
-            const response = await apiClient.get('/api/note/dictionary');
+            const response = await apiClient.get('note/dictionary');
 
             return { success: true, data: response.data};
         }
@@ -133,7 +133,7 @@ export const noteApi = {
 
     getNotes: async(page, pageSize) => {
         try{
-            const response = await apiClient.get('api/note/all', {
+            const response = await apiClient.get('note/all', {
                 params: {
                     page,
                     pageSize
@@ -166,7 +166,7 @@ export const noteApi = {
 
     searchNotes: async(query, page, pageSize) => {
         try{
-            const response = await apiClient.get('api/notes/search', {
+            const response = await apiClient.get('notes/search', {
                 params:{
                     query,
                     page,
@@ -200,7 +200,7 @@ export const noteApi = {
 
     deleteNote: async(noteId) => {
         try{
-            const response = await apiClient.delete(`/api/note/delete`, {
+            const response = await apiClient.delete(`note/delete`, {
                 params: {noteId}
             });
 
@@ -230,7 +230,7 @@ export const noteApi = {
 
     updateRepetitionScore: async(noteId, isCorrect) => {
         try{
-            const response = await apiClient.patch('api/note/updateRepetitionScore', {
+            const response = await apiClient.patch('note/updateRepetitionScore', {
                 noteId,
                 isCorrect
             });

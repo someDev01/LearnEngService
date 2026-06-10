@@ -3,7 +3,7 @@ import apiClient from "./client";
 export const videoPlayerApi = {
     getByVideoId: async(videoId) => {
         try{
-            const response = await apiClient.get('api/videoPlayer/get/by/videoId', {
+            const response = await apiClient.get('videoPlayer/get/by/videoId', {
                 params: {videoId}
             });
             

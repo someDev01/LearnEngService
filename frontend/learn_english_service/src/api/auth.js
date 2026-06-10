@@ -3,7 +3,7 @@ import apiClient from "./client";
 export const authApi = {
     sendCode: async (email) => {
         try{
-            const response = await apiClient.post('api/auth/send-code', { email });
+            const response = await apiClient.post('auth/send-code', { email });
             return {success: true, data: response.data};
         }
         catch(e){
@@ -27,7 +27,7 @@ export const authApi = {
 
     verifyCode: async (email, code) => {
         try{
-            const response = await apiClient.post('api/auth/verify-code', { email, code });
+            const response = await apiClient.post('auth/verify-code', { email, code });
             return {success: true, data: response.data}
         }
         catch(e){
@@ -51,7 +51,7 @@ export const authApi = {
 
     me: async () => {
         try{
-            const response = await apiClient.get('api/auth/me');
+            const response = await apiClient.get('auth/me');
             return {success: true, data: response.data}
         }
         catch(e){
@@ -75,7 +75,7 @@ export const authApi = {
 
     logout: async () => {
         try{
-            const response =  await apiClient.post('api/auth/logout');
+            const response =  await apiClient.post('auth/logout');
             return {success: true, data: response.data}
         }
         catch(e){

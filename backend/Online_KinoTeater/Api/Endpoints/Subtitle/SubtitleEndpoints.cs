@@ -12,10 +12,10 @@ public static class SubtitleEndpoints
 {
     public static IEndpointRouteBuilder AddSubtitleEndpoints(this IEndpointRouteBuilder app)
     {
-        var subtitleGroup = app.MapGroup("api/subtitles")
+        var subtitleGroup = app.MapGroup("subtitles")
             .WithTags("Subtitles");
 
-        var videoPlayerGroup = app.MapGroup("api/videoPlayer")
+        var videoPlayerGroup = app.MapGroup("videoPlayer")
             .WithTags("VideoPlayer");
 
         #region ENDPOINTS SUBTITLE
