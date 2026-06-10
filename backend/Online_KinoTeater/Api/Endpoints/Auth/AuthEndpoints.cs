@@ -119,9 +119,9 @@ public static class AuthEndpoints
             var command = new RevokeJwtCommand(jti, ttl);
             var result = await mediator.Send(command);
             if (!result.IsSuccess)
-                return Results.BadRequest(result.Error!);
+                return Results.BadRequest(result.Error);
 
-            context.Response.Cookies.Delete(jwtSettings!.TokenName, new CookieOptions
+            context.Response.Cookies.Delete(options.Value.TokenName, new CookieOptions
             {
                 HttpOnly = true,
                 Secure = true,
