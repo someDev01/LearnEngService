@@ -24,6 +24,7 @@ using Application.Interfaces.VideoCache;
 using Application.Interfaces.VideoRead;
 using Application.Interfaces.Vocabulary;
 using Application.Note.Commands.CreateNote;
+using Application.Note.Commands.UpdateNote;
 using Application.Services.AuthVerificationPolicy;
 using Application.Services.NoteCache;
 using Application.Services.NotePolicy;
@@ -83,6 +84,7 @@ using StackExchange.Redis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Application.Validators.UpdateNote;
 
 namespace Infrastructure;
 
@@ -201,6 +203,7 @@ public static class DependencyInjection
 
         services.AddScoped<IValidator<CreateNoteCommand>, CreateNoteCommandValidator>();
         services.AddScoped<IValidator<CreateNoteWithContextCommand>, CreateNoteWithContextCommandValidator>();
+        services.AddScoped<IValidator<UpdateNoteCommand>, UpdateNoteCommandValidator>();
         services.AddScoped<IValidator<CreateSubtitleCommand>, CreateSubtitleCommandValidator>();
         services.AddScoped<IValidator<UpdateSubtitleCommand>, UpdateSubtitleCommandValidator>();
         services.AddScoped<IValidator<TranslateWordCommand>, TranslateWordCommandValidator>();
