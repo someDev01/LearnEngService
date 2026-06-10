@@ -5,6 +5,7 @@ using Application.SharedDtos;
 using Domain.Model.Common;
 using Domain.Model.ValueObjects;
 using Domain.Repositories.Note;
+using FluentValidation;
 using MediatR;
 
 namespace Application.Note.Commands.UpdateNote;
@@ -13,6 +14,7 @@ public class UpdateNoteCommandHandler(
     INoteRepository noteRepository,
     INotePolicyService notePolicyService,
     INoteCacheService noteCacheService,
+    IValidator<UpdateNoteCommand> validator,
     IUnitOfWork unitOfWork) : IRequestHandler<UpdateNoteCommand, Result<NoteDto>>
 {
     public async Task<Result<NoteDto>> Handle(UpdateNoteCommand request, CancellationToken cancellationToken)
@@ -21,6 +23,16 @@ public class UpdateNoteCommandHandler(
         var noteRateLimitResult = await notePolicyService.CheckRateLimitAsync(request.UserId);
         if (!noteRateLimitResult.IsSuccess)
             return Result<NoteDto>.Failure(noteRateLimitResult.Error!);
+        #endregion
+        
+        #region VALIDATION
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            var errors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
+            return Result<NoteDto>.Failure(errors);
+        }
+
         #endregion
 
         #region EXISTING

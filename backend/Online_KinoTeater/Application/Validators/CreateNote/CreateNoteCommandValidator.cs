@@ -16,5 +16,9 @@ public class CreateNoteCommandValidator: AbstractValidator<CreateNoteCommand>
         RuleFor(p => p.Examples)
             .Must(ex => ex?.Count <= 3)
             .WithMessage("Максимальное кол-во примеров которое можно указать - 3");
+        
+        RuleFor(p => p.Translations)
+            .Must(t => t?.Count <= 3)
+            .WithMessage("Максимальное кол-во переводов которое можно указать - 3");
     }
 }
