@@ -7,6 +7,7 @@ import { useAuthMe } from './hooks/auth_me/useAuthMe';
 import { useEffect, useState } from 'react';
 import DictionaryPage from './pages/dictionary/DictionaryPage';
 import ContentPage from './pages/content/ContentPage';
+import NotificationToast from './ui/notif_toast/NotificationToast';
 
 function App() {
 
@@ -44,14 +45,7 @@ function App() {
           <Route path='*' element={<p style={{color: 'white'}}>Страница не найдена</p>}/>
       </Routes>
 
-      <ToastContainer
-        position='top-right'
-        autoClose={2000}
-        hideProgressBar={true}
-        pauseOnFocusLoss={false}
-        pauseOnHover={false}
-        theme='dark'
-      />
+      <NotificationToast/>
     </>
   )
 }

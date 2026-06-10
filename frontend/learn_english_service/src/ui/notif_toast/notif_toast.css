@@ -1,0 +1,25 @@
+
+
+.Toastify__toast{
+    min-height: 30px;
+    width: 350px;
+    font-size: 14px;
+    border-radius: 16px;
+}
+
+.Toastify__toast--success{
+    background-color: #002b0e !important;
+    border-left: 3px solid #009637;
+}
+
+.Toastify__toast--error{
+    background-color: #2b0100 !important;
+    border-left: 3px solid #961e00;
+}
+
+@media (max-width: 768px){
+
+    .Toastify__toast{
+        width: 82vw;
+    }
+}
