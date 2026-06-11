@@ -22,6 +22,7 @@
 @media (min-width: 1440px){
     .button_signin{
         padding: 6px;
+        width: 90px;
     }
 
     .button_signin p{
