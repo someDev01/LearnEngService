@@ -10,7 +10,7 @@ function SearchVideo({query, setQuery}){
                 style={{position:'absolute', left: '8px'}}
             />
             <input 
-                placeholder="поиск контента"
+                placeholder="поиск видео"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 maxLength={24}

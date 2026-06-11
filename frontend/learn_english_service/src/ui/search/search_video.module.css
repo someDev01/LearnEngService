@@ -24,3 +24,9 @@ input:focus{
     border-color: #e68a48;
     box-shadow: 0 0 5px 2px rgba(255,165,0,.3);
 }
+
+@media (min-width: 1440px){
+    .block_input input{
+        padding: 12px 30px;
+    }
+}

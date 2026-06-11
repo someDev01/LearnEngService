@@ -1,6 +1,13 @@
 
 .word{
     margin: 0;
+    font-size: 22px;
     color: rgb(215, 215, 215);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+@media (min-width: 1440px){
+    .word {
+        font-size: 26px;
+    }
 }

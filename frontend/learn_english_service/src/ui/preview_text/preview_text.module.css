@@ -38,3 +38,17 @@
         margin: 0;
     }
 }
+
+@media (min-width: 1440px){
+    .block_text .text_preview p{
+        font-size: 40px;
+    }
+
+    .block_description{
+        max-width: 1250px;
+    }
+
+    .block_description .text_description p{
+        font-size: 16px;
+    }
+}

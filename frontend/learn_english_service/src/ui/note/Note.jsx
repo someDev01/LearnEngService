@@ -13,7 +13,7 @@ function Note({word, translations = [], transcription, lvl, createdAt, onOpenVie
         <div className={styles.card}>
             <div className={styles.top_part}>
                 <div className={styles.header_note}>
-                    <Word word={word} size={24}/>
+                    <Word word={word}/>
                     <WordLvl lvl={lvl}/>
                 </div>
                 <div className={styles.info_note}>

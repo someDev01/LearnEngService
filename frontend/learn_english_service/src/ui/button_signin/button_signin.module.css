@@ -18,3 +18,13 @@
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 }
+
+@media (min-width: 1440px){
+    .button_signin{
+        padding: 6px;
+    }
+
+    .button_signin p{
+        font-size: 18px;
+    }
+}

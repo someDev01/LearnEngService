@@ -74,7 +74,7 @@ function EditNoteForm({isOpen, onClose, onCreateNote, onUpdateNote, note, isEdit
                 </div>
                 <div className={styles.inputs_part}>
                     <EditNoteInput 
-                        text="СЛОВО (EN)" 
+                        text="СЛОВО (EN/RU)" 
                         value={wordInput}
                         onInputChange={onWordInputChange}
                         placeholder="word" 

@@ -9,7 +9,7 @@ function Examples({ examples = [], word }) {
             <p style={{margin: 0, color: '#6c5a51'}}>Примеры</p>
 
             {examples.map((ex, index) => (
-                <div style={{display:'flex', width:'100%', gap:'4px'}} key={index}>
+                <div className={styles.wrapper} style={{display:'flex', width:'100%', gap:'4px'}} key={index}>
                     <div className={styles.note_text}>
                         <p>
                             {highlightWord(ex.text, word, styles.highlight)}

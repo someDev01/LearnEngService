@@ -18,3 +18,9 @@
     align-items: center;
     width: 100%;
 }
+
+@media (min-width: 1440px){
+    .header__container{
+        height: 60px;
+    }
+}

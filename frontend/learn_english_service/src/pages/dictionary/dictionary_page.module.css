@@ -57,3 +57,12 @@
     gap: 16px;
 }
 
+@media (min-width: 1440px){
+    .section_dictionary{
+        max-width: 1420px;
+    }
+
+    .section_dictionary .list_notes{
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
