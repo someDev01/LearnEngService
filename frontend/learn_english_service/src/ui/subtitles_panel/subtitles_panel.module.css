@@ -63,7 +63,7 @@
 
 .subtitles_en{
     text-align: center;
-    span{
+    .en{
         user-select: text;
         font-size: 22px;
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -129,7 +129,7 @@
     
     .subtitles_en{
         text-align: center;
-        span{
+        .en{
             user-select: text;
             font-size: 18px;
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -145,5 +145,15 @@
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             margin: 0;
         }
+    }
+}
+
+@media (min-width: 1440px){
+    .subtitles_en .en{
+        font-size: 24px;
+    }
+
+    .subtitles_ru p{
+        font-size: 18px;
     }
 }

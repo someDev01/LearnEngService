@@ -35,6 +35,7 @@ function SubtitlesPanel({
 
               return (
                 <span
+                  className={styles.en}
                   key={index}
                   onClick={(e) => handleWordClick(word, e)}
                   style={{

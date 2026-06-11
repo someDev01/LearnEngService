@@ -27,3 +27,9 @@
     margin: 0;
     color: white;
 }
+
+@media (min-width: 1440px){
+    .video_container{
+        max-width: 1420px;
+    }
+}
