@@ -21,7 +21,7 @@ function WordPronunciation({word}){
     };
 
     const toggleRate = () => {
-        const newRate = rateRef.current === 1 ? .5 : 1;
+        const newRate = rateRef.current === 1 ? 0.5 : rateRef.current === 0.5 ? 0.25 : 1;
         rateRef.current = newRate;
         setRate(newRate);
     }
