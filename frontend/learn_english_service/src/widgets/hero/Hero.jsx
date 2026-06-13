@@ -25,7 +25,7 @@ function Hero(){
     return(
         <div className={styles.hero}>
             <PreviewText/>
-            <GoToVideosButton onClick={onToVideos}/>
+            {isAuth && (<GoToVideosButton onClick={onToVideos}/>)}
         </div>
     )
 }

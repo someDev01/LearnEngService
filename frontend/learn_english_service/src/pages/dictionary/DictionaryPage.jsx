@@ -34,6 +34,7 @@ function DictionaryPage(){
     const [videoTime, setVideoTime] = useState(0); 
 
     const [notes, setNotes] = useState([]);
+    const [totalCount, setTotalCount] = useState(0);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(false);
     const pageSize = GetPageSize();
@@ -179,6 +180,7 @@ function DictionaryPage(){
 
         if(response.success){            
             setNotes(response.data.data);
+            setTotalCount(response.data.totalCount);
         }
         else{
             toast.error("Ошибка получения заметок");
@@ -206,7 +208,7 @@ function DictionaryPage(){
             <div className={styles.section_dictionary}>
                 <div className={styles.header_dictionary}>
                     <div className={styles.top_part}>
-                        <TitleDictionary count={notes.length}/>
+                        <TitleDictionary count={`${notes.length}/${totalCount}`}/>
                         <ButtonCreateNote onClick={onOpenEditNote}/>
                     </div>
                     <div className={styles.bottom_part}>
