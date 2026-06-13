@@ -54,7 +54,7 @@ public class VerificationCodeAndSecretAdminCommandHandler(
 
         #region KEYS
         var keyAttempts = CacheKeyBuilder.BuildAttemptsKey(request.Email);
-        var ttlKeyAttempts = TimeSpan.FromSeconds(_codeSettings.AttemptsExpireSeconds);
+        var ttlKeyAttempts = TimeSpan.FromSeconds(_codeSettings.AttemptsExpireHours);
 
         var keyCode = CacheKeyBuilder.BuildCodeKey(request.Email);
         TimeSpan ttlKeyCode = TimeSpan.FromSeconds(_codeSettings.ExpireSecondsCode);

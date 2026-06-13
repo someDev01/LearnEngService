@@ -4,7 +4,7 @@ public class CodeSettings
 {
     public int ExpireSecondsCode { get; set; }
     public int ResendIntervalSeconds { get; set; }
-    public int AttemptsExpireSeconds { get; set; }
+    public int AttemptsExpireHours { get; set; }
     public int UserMaxAttempts { get; set; }
     public int AdminMaxAttempts { get; set; }
 }

@@ -49,7 +49,7 @@ public class AuthVerificationPolicyService(
     public async Task IncrementVerificationAttemptsAsync(string email)
     {
         var attemptsKey = CacheKeyBuilder.BuildAttemptsKey(email);
-        var attemptsKeyTtl = TimeSpan.FromSeconds(_codeSettings.AttemptsExpireSeconds);
+        var attemptsKeyTtl = TimeSpan.FromSeconds(_codeSettings.AttemptsExpireHours);
 
         var incrKeyAttempts = await cacheService.IncrementAsync(attemptsKey);
         if (incrKeyAttempts == 1)
