@@ -78,9 +78,15 @@ function DictionaryPage(){
         dispatch(openModalEditNote());
     };
 
-    const onDeleteNote = (noteId) => {setNotes(prev => prev.filter(n => n.id !== noteId));};
+    const onDeleteNote = (noteId) => {
+        setNotes(prev => prev.filter(n => n.id !== noteId));
+        setTotalCount(prev => prev - 1);
+    };
 
-    const onAddNote = (newNote) => {setNotes(prev => [newNote,...prev]);};
+    const onAddNote = (newNote) => {
+        setNotes(prev => [newNote,...prev]);
+        setTotalCount(prev => prev + 1);
+    };
 
     const handleDelete = async(noteId) => {
         const response = await noteApi.deleteNote(noteId);
