@@ -12,6 +12,8 @@ import TrainingFinish from "../../ui/training_finish/TrainingFinish";
 import Source from "../../ui/source/Source";
 import EllipsisText from "../../ui/ellipsis_text/EllipsisText";
 import NoNotes from "../../ui/no_notes/NoNotes";
+import QuestionTranslation from "../../ui/question_translation/QuestionTranslation";
+import ButtonQuestionTranslation from "../../ui/button_question_translation/ButtonQuestionTranslation";
 
 const timeoutNext = 1500;
 
@@ -253,14 +255,10 @@ function TrainingModal({ isOpen }) {
                         <>
                             <Question question={currentQuestion.question} />
                             {showTranslation && currentQuestion.translate && (
-                                <div className={styles.question_translation}>
-                                    {currentQuestion.translate}
-                                </div>
+                                <QuestionTranslation translation={currentQuestion.translate}/>
                             )}
                             {!showTranslation && (
-                                <div className={styles.showTranslation_btn} onClick={() => setShowTranslation(true)}>
-                                    показать  перевод
-                                </div>
+                                <ButtonQuestionTranslation onClick={() => setShowTranslation(true)}/>
                             )}
 
                             <div className={styles.options}>
