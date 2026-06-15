@@ -126,7 +126,7 @@ function ContentPage(){
                 <div className={styles.content}>
                     <div className={styles.top_part}>
                         <ButtonBack/>
-                        {showWarming && (<VpnWarming onClick={() => showWarming(false)}/>)}
+                        {showWarming && (<VpnWarming onClick={() => setShowWarming(false)}/>)}
                         <SearchVideo
                             query={query}
                             setQuery={setQuery}
