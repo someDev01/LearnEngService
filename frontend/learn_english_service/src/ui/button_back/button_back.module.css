@@ -4,6 +4,7 @@
     justify-content: start;
     align-items: center;
     gap: 6px;
+    max-width: 160px;
     p{
         user-select: none;
         cursor: pointer;

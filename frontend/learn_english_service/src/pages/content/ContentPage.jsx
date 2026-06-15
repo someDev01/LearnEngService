@@ -15,6 +15,7 @@ import { useSearch } from "../../hooks/search/useSearch";
 import LoadMoreButton from "../../ui/button_load_more/LoadMoreButton";
 import LoaderSearch from "../../ui/loader_search/LoaderSearch";
 import NoFound from "../../ui/nofound/NoFound";
+import VpnWarming from "../../ui/vpn_warming/VpnWarming";
 
 const timeoutVideos = 500;
 
@@ -33,12 +34,13 @@ function ContentPage(){
 
     const [searchPage, setSearchPage] = useState(1);
 
-
     const {query, setQuery, searchResults, setSearchResults, isLoading, setIsLoading, hasSearched, hasMore: searchHasMore, setHasMore: setSearchHasMore} 
     = useSearch({
         fetchFunction: (query, page) => videoApi.searchVideos(query, page, pageSize), 
         extractData: (response) => response.data.data
     });
+
+    const [showWarming, setShowWarming] = useState(true);
 
     const loadMore = async() => {
         const nextPage = page + 1;
@@ -124,6 +126,7 @@ function ContentPage(){
                 <div className={styles.content}>
                     <div className={styles.top_part}>
                         <ButtonBack/>
+                        {showWarming && (<VpnWarming onClick={() => showWarming(false)}/>)}
                         <SearchVideo
                             query={query}
                             setQuery={setQuery}
