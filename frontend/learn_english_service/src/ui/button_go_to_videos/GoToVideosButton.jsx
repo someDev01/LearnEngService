@@ -6,7 +6,7 @@ function GoToVideosButton({onClick}){
         <>
             <button className={styles.go_to} onClick={onClick}>
                 Перейти  к видео
-                <ArrowBigRight size={20} color='#ff995a'/>
+                <ArrowBigRight size={20} color='rgb(255, 129, 75)'/>
             </button>
         </>
     )
