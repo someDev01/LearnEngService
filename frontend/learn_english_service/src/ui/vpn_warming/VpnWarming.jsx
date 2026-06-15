@@ -8,7 +8,7 @@ function VpnWarming({onClick}){
                 <AlertCircle size={26} color='#e8b600'/>
                 <p>Для просмотра youtube-видео вам понадобится vpn</p>
             </div>
-            <button className={styles.close_warming_btn} onClick={onClick}>x</button>
+            <button className={styles.close_warming_btn} onClick={onClick}>X</button>
         </div>
     )
 }
