@@ -20,6 +20,7 @@ function TrainingModal({ isOpen }) {
     const dispatch = useDispatch();
 
     const [questions, setQuestions] = useState([]);
+    const [showTranslation, setShowTranslation] = useState(false);
     const [currentIndexQ, setCurrentIndexQ] = useState(0);
     const [selectedAns, setSelectedAns] = useState(null);
     const [isShowResult, setIsShowResult] = useState(false);
@@ -65,18 +66,14 @@ function TrainingModal({ isOpen }) {
             })
             .map(note => {
 
-                const { text, step } = getSentence(note);
-
+                const { text, translate } = getSentence(note);
+                const examples = note.examples || [{ text: '', translate: ''}]
+                const translation = examples.find(t => t.text === text).translate;
                 const question = text.replaceAll(note.word.toLowerCase(), "___");
 
-                const source = note.source?.learningContentTitle && note.source?.youtubeVideoTitle ? {
-                    learningContentTitle: note.source?.learningContentTitle,
-                    youtubeVideoTitle: note.source?.youtubeVideoTitle
-                } : null;
-
                 return {
-                    source,
                     question,
+                    translate,
                     step: 0,
                     options: generateOptions(note, notes),
                     correct: note.word,
@@ -93,21 +90,15 @@ function TrainingModal({ isOpen }) {
     }, [notes]);
 
     const getSentence = (note) => {
-        const examples = note.examples || [{text: '', translateText: ''}];
+        const examples = note.examples || [{text: '', translate: ''}];
         const step = stepMap[note.id] || 0;
 
-        if (note.source?.context && step === 0) {
-            
-            return {
-                text: note.source.context,
-                type: "context",
-            };
-        }
         if (examples.length > 0) {
             const idx = (step - 1) % examples.length;
             const idxSafe = (idx < 0 ? examples.length + idx : idx) % examples.length;
             return {
                 text: examples[idxSafe].text,
+                translate: examples[idxSafe].translate,
                 type: "example",
             };
         }
@@ -179,10 +170,11 @@ function TrainingModal({ isOpen }) {
         const selected = shuffle(sorted);
 
         const qs = selected.map(note => {
-            const { text } = getSentence(note);
+            const { text, translate } = getSentence(note);
 
             return {
                 question: text.replaceAll(note.word, "___"),
+                translate,
                 options: generateOptions(note, notes),
                 correct: note.word,
                 noteId: note.id,
@@ -196,6 +188,7 @@ function TrainingModal({ isOpen }) {
         setIsFinished(false);
         setCountCorrect(0);
         setStepMap({});
+        setShowTranslation(false);
     };
 
     const goNext = () => {
@@ -207,6 +200,7 @@ function TrainingModal({ isOpen }) {
         setCurrentIndexQ(prev => prev + 1);
         setSelectedAns(null);
         setIsShowResult(false);
+        setShowTranslation(false);
     };
 
     const getButtonStyle = (option) => {
@@ -247,12 +241,9 @@ function TrainingModal({ isOpen }) {
             <div className={styles.training__container}>
                 <div className={styles.training}>
                     <div className={styles.header_part}>
-                        {!isFinished && currentQuestion?.source && currentQuestion.step === 0  && <div className={styles.source_part}>
-                            <EllipsisText 
-                                learningContentTitle={currentQuestion?.source.learningContentTitle}
-                                youtubeVideoTitle={currentQuestion?.source.youtubeVideoTitle}
-                            />
-                        </div>}
+                        <div className={styles.steps}>
+                            <p>{currentIndexQ + 1} / {questions.length}</p>
+                        </div>
                         <div className={styles.close_part}>
                             <ButtonClose onClick={onClose} />
                         </div>
@@ -260,11 +251,17 @@ function TrainingModal({ isOpen }) {
 
                     {currentQuestion && !isFinished && (
                         <>
-                            <div className={styles.steps}>
-                                <p>{currentIndexQ + 1} / {questions.length}</p>
-                            </div>
-
                             <Question question={currentQuestion.question} />
+                            {showTranslation && currentQuestion.translate && (
+                                <div className={styles.question_translation}>
+                                    {currentQuestion.translate}
+                                </div>
+                            )}
+                            {!showTranslation && (
+                                <div className={styles.showTranslation_btn} onClick={() => setShowTranslation(true)}>
+                                    показать  перевод
+                                </div>
+                            )}
 
                             <div className={styles.options}>
                                 {currentQuestion.options.map((opt, i) => (
