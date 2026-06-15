@@ -1,5 +1,7 @@
 
 .showTranslation_btn{
+    user-select: none;
+    cursor: pointer;
     display: flex;
     justify-content: start;
     align-items: center;

@@ -47,7 +47,7 @@ function DictionaryPage(){
     const [selectedLanguage, setSelectedLanguage] = useState(null);
     const [loadingSave, setLoadingSave] = useState(false);
 
-    const {query, setQuery, searchResults, setSearchResults, isLoading, setIsLoading, hasSearched, hasMore: searchHasMore, setHasMore: setSearchHasMore} 
+    const {query, setQuery, searchResults, setSearchResults, totalSearched, isLoading, setIsLoading, hasSearched, hasMore: searchHasMore, setHasMore: setSearchHasMore} 
     = useSearch({fetchFunction: (query, page) => noteApi.searchNotes(query, page, pageSize), extractData: (response) => response.data.data});
 
     const onOpenViewNote = (note) => {
@@ -206,7 +206,10 @@ function DictionaryPage(){
         loadFirstPage();
     }, [])
 
-    const displayNotes = query.trim().length >= 2 ? searchResults: notes;
+    const isSearching = query.trim().length >= 2;
+    const countText = isSearching ? `${totalSearched}` : `${totalCount}`;
+
+    const displayNotes = isSearching ? searchResults: notes;
 
     return(
         <>
@@ -214,7 +217,7 @@ function DictionaryPage(){
             <div className={styles.section_dictionary}>
                 <div className={styles.header_dictionary}>
                     <div className={styles.top_part}>
-                        <TitleDictionary count={`${notes.length}/${totalCount}`}/>
+                        <TitleDictionary count={countText}/>
                         <ButtonCreateNote onClick={onOpenEditNote}/>
                     </div>
                     <div className={styles.bottom_part}>
@@ -244,15 +247,15 @@ function DictionaryPage(){
                         />
                     ))}
                 </div>
-                {!loadingNotes && !isLoading && query.trim().length >= 2 && hasSearched && searchResults.length === 0 && (
+                {!loadingNotes && !isLoading && isSearching && hasSearched && searchResults.length === 0 && (
                     <div className="" style={{display: 'flex', justifyContent:'center', alignItems:'center', width:'100%'}}>
                         <NoFound/>
                     </div>
                 )}
-                {!loadingNotes && !isLoading && query.trim().length < 2 && hasMore && (
+                {!loadingNotes && !isLoading && !isSearching && hasMore && (
                     <LoadMoreButton onClick={loadMore}/>
                 )}
-                {!loadingNotes && !isLoading && query.trim().length >= 2 && searchHasMore && (
+                {!loadingNotes && !isLoading && isSearching && searchHasMore && (
                     <LoadMoreButton onClick={loadMoreSearch}/>
                 )}
             </div>

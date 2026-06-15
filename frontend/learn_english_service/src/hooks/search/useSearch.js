@@ -10,6 +10,7 @@ export const useSearch = ({
     const [isLoading, setIsLoading] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
     const [hasMore, setHasMore] = useState(false);
+    const [totalSearched, setTotalSearched] = useState(0);
 
     const normalisedQuery = query.trim();
 
@@ -29,6 +30,7 @@ export const useSearch = ({
             if(response.success){
                 const data = extractData(response);
                 setSearchResults(data);
+                setTotalSearched(response.data.totalCount);
 
                 setHasMore(response.data.page < response.data.totalPages);
             }
@@ -49,6 +51,7 @@ export const useSearch = ({
         setQuery,
         searchResults,
         setSearchResults,
+        totalSearched,
         isLoading,
         setIsLoading,
         hasSearched,
