@@ -13,7 +13,7 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
 
     public DbSet<Subtitle> Subtitles { get; set; }
 
-    public DbSet<Domain.Model.Common.Entity.User> Users { get; set; }
+    public DbSet<Domain.Model.Entyties.User> Users { get; set; }
 
     public DbSet<Note> Notes { get; set; }
 
