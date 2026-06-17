@@ -73,7 +73,7 @@ public class VerificationCodeCommandHandler(
             var role = Role.User;
             #endregion
 
-            var userResult = Domain.Model.Common.Entity.User.Create(
+            var userResult = Domain.Model.Entyties.User.Create(
                 email,
                 role);
             if (!userResult.IsSuccess)

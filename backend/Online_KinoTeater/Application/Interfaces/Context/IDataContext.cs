@@ -9,7 +9,7 @@ public interface IDataContext
 
     DbSet<Domain.Model.Entyties.Subtitle> Subtitles { get; set; }
 
-    DbSet<Domain.Model.Common.Entity.User> Users { get; set; }
+    DbSet<Domain.Model.Entyties.User> Users { get; set; }
 
     DbSet<Domain.Model.Entyties.Note> Notes { get; set; }
 
