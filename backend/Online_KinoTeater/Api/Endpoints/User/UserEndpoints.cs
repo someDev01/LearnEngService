@@ -7,7 +7,7 @@ public static class UserEndpoints
 {
     public static IEndpointRouteBuilder AddUserEndpoints(this IEndpointRouteBuilder app)
     {
-        var userGroup = app.MapGroup("/api/user")
+        var userGroup = app.MapGroup("user")
             .WithTags("Users");
 
         userGroup.MapGet("all", async (IMediator mediator) =>
