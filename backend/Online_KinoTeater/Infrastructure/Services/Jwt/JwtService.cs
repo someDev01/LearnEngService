@@ -11,7 +11,7 @@ namespace Infrastructure.Services.Jwt;
 
 public class JwtService(IOptions<JwtSettings> options) : ITokenService
 {
-    public string GenerationToken(Domain.Model.Entyties.User user)
+    public string GenerationToken(User user)
     {
         byte[] keyBytes = Encoding.UTF8.GetBytes(options.Value.SecretKey!);
         var secretKey = new SymmetricSecurityKey(keyBytes);

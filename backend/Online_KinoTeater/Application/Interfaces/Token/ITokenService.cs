@@ -1,6 +1,4 @@
-﻿using Domain.Model.Entyties;
-
-namespace Application.Interfaces.Token;
+﻿namespace Application.Interfaces.Token;
 
 public interface ITokenService
 {
