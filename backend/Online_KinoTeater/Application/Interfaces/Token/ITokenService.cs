@@ -4,5 +4,5 @@ namespace Application.Interfaces.Token;
 
 public interface ITokenService
 {
-    string GenerationToken(User user);
+    string GenerationToken(Domain.Model.Common.Entity.User user);
 }

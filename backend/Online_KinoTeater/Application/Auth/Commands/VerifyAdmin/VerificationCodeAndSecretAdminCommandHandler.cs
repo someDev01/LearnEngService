@@ -97,7 +97,7 @@ public class VerificationCodeAndSecretAdminCommandHandler(
             var email = emailResult.Value!;
             #endregion
 
-            var userResult = User.Create(
+            var userResult = Domain.Model.Common.Entity.User.Create(
                 email,
                 role);
             if (!userResult.IsSuccess)
