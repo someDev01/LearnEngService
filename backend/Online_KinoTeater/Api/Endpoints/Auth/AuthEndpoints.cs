@@ -15,7 +15,7 @@ namespace Api.Endpoints.Auth;
 
 public static class AuthEndpoints
 {
-    public static IEndpointRouteBuilder AddEmailEnpoints(
+    public static IEndpointRouteBuilder AddEmailEndpoints(
         this IEndpointRouteBuilder app)
     {
         var authGroup = app.MapGroup("auth")

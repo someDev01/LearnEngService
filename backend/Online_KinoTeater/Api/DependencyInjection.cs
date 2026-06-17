@@ -3,6 +3,7 @@ using Api.Endpoints.Note;
 using Api.Endpoints.Subtitle;
 using Api.Endpoints.Translate;
 using Api.Endpoints.YoutubeVideo;
+using Api.Endpoints.User;
 using Api.Middlewares;
 using Api.Settings;
 using Infrastructure.Persistence.Context;
@@ -65,9 +66,10 @@ public static class DependencyInjection
     {
         app.AddYoutubeVideoEnpoints();
         app.AddSubtitleEndpoints();
-        app.AddEmailEnpoints();
+        app.AddEmailEndpoints();
         app.AddNoteEndpoints();
         app.AddTranslateEndpoints();
+        app.AddUserEndpoints();
         return app;
     }
 
