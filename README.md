@@ -63,6 +63,7 @@ Backend
 - S3 Storage (Supabase)
 - Groq Api (LLM)
 - Youtube Data Api
+- MyMemory Api (translation service)
 - Resend Api (send email)
 
 Frontend
