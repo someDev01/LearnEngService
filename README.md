@@ -28,21 +28,21 @@
 Backend
 - C#
 - ASP.NET CORE 8
-- Fluent Validation
-- Entity Framework Core
-- MediatR
-- CQRS
-- Unit of Work
-- Domain Driven Design (частичное следование DDD)
-- Repository Pattern
-- JWT Auth
 - Clean Architecture
+- CQRS
+- MediatR
+- Repository Pattern
+- Unit of Work
+- Domain Driven Design (Entities, ValueObjects, Factory Methods)
+- Entity Framework Core
+- Fluent Validation
 - PostgreSQL
 - Redis
+- JWT Auth
 - S3 Storage (Supabase)
-- Resend Api (send email)
-- Youtube Data Api
 - Groq Api (LLM)
+- Youtube Data Api
+- Resend Api (send email)
 
 Frontend
 - JS
