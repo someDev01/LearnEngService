@@ -24,5 +24,39 @@
 На серивисе есть  короткие youtube-видео по которым пользователь может собирать свой словарь. Когда пользователь смотрит видео он видит подсвеченные слова которые уже есть в его словаре.
 Весь контент на серивисе доступен пользователям, которые прошли авторизацию/регистрацию. Авторизация/регистрация реализована через ввод кода, который приходит на почту, которую указал пользователь.
 
-==BACKEND СЕРВИСА==
+## ВЕСЬ СТЕК СЕРВИСА
+Backend
+- C#
+- ASP.NET CORE 8
+- Fluent Validation
+- Entity Framework Core
+- MediatR
+- CQRS
+- Unit of Work
+- Domain Driven Design (частичное следование DDD)
+- Repository Pattern
+- JWT Auth
+- Clean Architecture
+- PostgreSQL
+- Redis
+- S3 Storage (Supabase)
+- Resend Api (send email)
+- Youtube Data Api
+- Groq Api (LLM)
+
+Frontend
+- JS
+- React
+- React Router
+- Axios Api
+- Redux Toolkit
+- CSS Modules
+
+DevOps
+- Docker
+- Docker compose
+- Nginx
+- Linux VPS
+- env (на сервере)
+
 
