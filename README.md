@@ -79,6 +79,7 @@ DevOps
 - Docker compose
 - Nginx
 - Linux VPS
+- Git
 - env (на сервере)
 
 
