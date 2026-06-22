@@ -43,23 +43,13 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_API_URL: /api/
-    depends_on:
-      - backend
-
-
-  nginx:
-    image: nginx:stable
-    container_name: learn-english-nginx
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
-      - frontend
       - backend
-
 
 volumes:
   postgres_data:
