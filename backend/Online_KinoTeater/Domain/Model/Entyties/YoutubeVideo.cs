@@ -10,6 +10,8 @@ public class YoutubeVideo : Entity
     public Duration Duration { get; private set; }
     public LexicalComplexity LexicalComplexity { get; private set; }
     public bool IsBlocked { get; private set; } = false;
+    
+    public DateTime CreatedAt { get; private set; }
 
     private YoutubeVideo() { }
 
@@ -23,6 +25,7 @@ public class YoutubeVideo : Entity
         Title = title;
         Duration = duration;
         LexicalComplexity = lexicalComplexity;
+        CreatedAt = DateTime.UtcNow;   
     }
 
     public static Result<YoutubeVideo> Create(

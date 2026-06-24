@@ -38,6 +38,7 @@ public class VideoReadService(
         var query = context.YoutubeVideos
             .AsNoTracking()
             .Where(yv => !yv.IsBlocked)
+            .OrderByDescending(yv => yv.CreatedAt)
             .Select(yv => new YoutubeVideosPreviewDto(
                 yv.Id,
                 yv.YoutubeId,
@@ -74,6 +75,7 @@ public class VideoReadService(
             .AsNoTracking()
             .Where(yv => EF.Functions.ILike(yv.Title, like))
             .OrderBy(yv => yv.Title)
+            .ThenByDescending(yv => yv.CreatedAt)
             .Select(yv => new YoutubeVideosPreviewDto(
                 yv.Id,
                 yv.YoutubeId,
