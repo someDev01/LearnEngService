@@ -21,7 +21,7 @@
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-@media (min-width: (1440px)){
+@media (min-width: 1440px){
     .opportunites{
         max-width: 1000px;
     }
