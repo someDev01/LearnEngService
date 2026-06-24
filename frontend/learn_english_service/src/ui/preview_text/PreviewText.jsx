@@ -1,5 +1,6 @@
-import Opportunites from '../opportunites/Opportunies';
+import Opportunites from '../../widgets/opportunites/Opportunies';
 import styles from '../preview_text/preview_text.module.css';
+
 
 function PreviewText(){
     return(
