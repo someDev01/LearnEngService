@@ -3,7 +3,6 @@ import PreviewText from '../../ui/preview_text/PreviewText';
 import styles from '../hero/hero.module.css';
 import { openModalAuth } from '../../redux/slices/modalSlice';
 import { useNavigate } from 'react-router-dom';
-import GoToVideosButton from '../../ui/button_go_to_videos/GoToVideosButton';
 
 function Hero(){
 
@@ -25,7 +24,6 @@ function Hero(){
     return(
         <div className={styles.hero}>
             <PreviewText/>
-            {isAuth && (<GoToVideosButton onClick={onToVideos}/>)}
         </div>
     )
 }
