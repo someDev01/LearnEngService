@@ -10,6 +10,8 @@ import { closeMenu } from '../../redux/slices/menuSlice';
 import { useNavigate } from 'react-router-dom';
 import ButtonTraining from '../../ui/button_training/ButtonTraining';
 import { openModalTraining } from '../../redux/slices/modalSlice';
+import ButtonNavigate from '../../ui/button_navigate/ButtonNavigate';
+import { Book, ListCheck, LogOutIcon, LucideTvMinimalPlay } from 'lucide-react';
 
 function Menu({isOpen, email}){
 
@@ -18,8 +20,12 @@ function Menu({isOpen, email}){
 
     if(!isOpen) return null;
 
-    const onNavigate = () => {
+    const onNavigateDictionary = () => {
         navigation('/dictionary')
+        dispatch(closeMenu());
+    }
+    const onNavigateVideos = () => {
+        navigation('/videos')
         dispatch(closeMenu());
     }
 
@@ -51,12 +57,33 @@ function Menu({isOpen, email}){
             <div className={styles.menu_section}>
                 <Profile email={email}/>
                 <div className={styles.line_dividing}></div>
-                <ButtonDictionary onClick={onNavigate}/>
-                <ButtonTraining onClick={() => {
-                    dispatch(openModalTraining());
-                    dispatch(closeMenu())
-                }}/>
-                <ButtonSignOut onClick={onLogout}/>
+                <ButtonNavigate
+                    onClick={onNavigateDictionary}
+                    title="Словарь"
+                >
+                    <Book size={20} color='#c4c4c4'/>
+                </ButtonNavigate>
+                <ButtonNavigate
+                    onClick={() => {
+                        dispatch(openModalTraining());
+                        dispatch(closeMenu())
+                    }}
+                    title="Тренировка"
+                >
+                    <ListCheck size={20} color='#c4c4c4'/>
+                </ButtonNavigate>
+                <ButtonNavigate
+                    onClick={onNavigateVideos}
+                    title='Видео'
+                >
+                    <LucideTvMinimalPlay size={20} color='#c4c4c4'/>
+                </ButtonNavigate>
+                <ButtonNavigate
+                    onClick={onLogout}
+                    title="Выйти"
+                >
+                    <LogOutIcon size={20} color='#cd0e00'/>
+                </ButtonNavigate>
             </div>
         </div>
     )
