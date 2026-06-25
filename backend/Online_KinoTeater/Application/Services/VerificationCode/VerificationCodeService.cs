@@ -17,7 +17,7 @@ public class VerificationCodeService(
     public async Task SaveCodeAsync(string email, string code)
     {
         var codeKey = CacheKeyBuilder.BuildCodeKey(email);
-        var codeKeyTtl = TimeSpan.FromMinutes(_codeSettings.ExpireSecondsCode);
+        var codeKeyTtl = TimeSpan.FromSeconds(_codeSettings.ExpireSecondsCode);
 
         await cacheService.DeleteByKeyAsync(codeKey);
 
