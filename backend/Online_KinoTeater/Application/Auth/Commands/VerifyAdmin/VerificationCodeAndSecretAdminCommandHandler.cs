@@ -34,11 +34,11 @@ public class VerificationCodeAndSecretAdminCommandHandler(
     public async Task<Result<string>> Handle(VerificationCodeAndSecretAdminCommand request, CancellationToken cancellationToken)
     {
         #region ATTEMPTS
-        long maxAttempts = _codeSettings.AdminMaxAttempts;
+        int maxAttempts = _codeSettings.AdminMaxAttempts;
         var isAttemptsBlocked = await authVerificationPolicyService.IsVerificationAttemptsBlockedAsync(
             request.Email,
             maxAttempts);
-        if (!isAttemptsBlocked)
+        if (isAttemptsBlocked)
             return Result<string>.Failure("Лимит на кол-во попыток превышен. Введите код позже");
         #endregion
 

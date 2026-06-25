@@ -6,7 +6,7 @@ public interface IAuthVerificationPolicyService
 
     Task<TimeSpan> LockCodeSendingAsync(string email);
 
-    Task<bool> IsVerificationAttemptsBlockedAsync(string email, long maxAttempts);
+    Task<bool> IsVerificationAttemptsBlockedAsync(string email, int maxAttempts);
 
     Task IncrementVerificationAttemptsAsync(string email);
 
