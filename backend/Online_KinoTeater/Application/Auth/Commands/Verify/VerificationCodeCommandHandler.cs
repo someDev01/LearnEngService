@@ -31,11 +31,11 @@ public class VerificationCodeCommandHandler(
     public async Task<Result<VerifyDto>> Handle(VerificationCodeCommand request, CancellationToken cancellationToken)
     {
         #region ATTEMPTS
-        long maxAttempts = _codeSettings.UserMaxAttempts;
+        int maxAttempts = _codeSettings.UserMaxAttempts;
         var isAttemptsBlocked = await authVerificationPolicyService.IsVerificationAttemptsBlockedAsync(
             request.Email, 
             maxAttempts);
-        if (!isAttemptsBlocked)
+        if (isAttemptsBlocked)
             return Result<VerifyDto>.Failure("Лимит на кол-во попыток превышен. Введите код позже");
         #endregion
 

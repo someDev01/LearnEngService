@@ -36,14 +36,14 @@ public class AuthVerificationPolicyService(
     }
 
     public async Task<bool> IsVerificationAttemptsBlockedAsync(
-        string email, long maxAttempts)
+        string email, int maxAttempts)
     {
         var attemptsKey = CacheKeyBuilder.BuildAttemptsKey(email);
 
-        var currentAttempts = await cacheService.GetByKeyAsync<long>(attemptsKey);
-        if (currentAttempts >= maxAttempts) return false;
+        var currentAttempts = await cacheService.GetByKeyAsync<int>(attemptsKey);
+        if (currentAttempts >= maxAttempts) return true;
 
-        return true;
+        return false;
     }
 
     public async Task IncrementVerificationAttemptsAsync(string email)
