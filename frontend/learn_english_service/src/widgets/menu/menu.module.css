@@ -17,12 +17,12 @@
     padding: 16px 6px;
     gap: 18px;
     border-radius: 10px;
-    background-color: #1f1e1e;
-    border: 2px solid rgb(63, 63, 63);
+    background-color: #161616;
+    border: 2px solid rgb(60, 60, 60);
 }
 
 .line_dividing{
-    border: 1px solid rgb(77, 77, 77);
+    border: 1px solid rgb(70, 70, 70);
 }
 
 @media (min-width: 1440px){
