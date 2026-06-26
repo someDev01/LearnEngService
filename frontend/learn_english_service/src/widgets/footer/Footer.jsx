@@ -10,7 +10,7 @@ function Footer(){
                     <p>© 2026 VoClip</p>
                 </div>
                 <div className={styles.contact}>
-                    <Mail size={20} color='white'/>
+                    <Mail size={16} color='white'/>
                     <p>test@gmail.com</p>
                 </div>
             </div>

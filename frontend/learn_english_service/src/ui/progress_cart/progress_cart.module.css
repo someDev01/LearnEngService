@@ -5,9 +5,9 @@
     justify-content: center;
     align-items: center;
     padding: 18px 12px;
-    background-color: rgb(30, 30, 30);
+    background-color: rgb(26, 26, 26);
     border-radius: 8px;
-    border: 1px solid rgb(42, 42, 42);
+    border: 1px solid rgb(40, 40, 40);
 }
 
 .count{

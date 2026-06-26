@@ -5,10 +5,8 @@
     align-items: center;
     width: 100%;
     margin-top: 20px;
-    height: 100px;
-    background-color: rgb(15, 15, 15);
-    border-top: 1px solid #292929;
-    
+    height: auto;
+    border-top: 1px solid #282828;
 }
 
 .content{
@@ -23,12 +21,12 @@
 .desc_block{
     .logo{
         color: white;
-        font-size: 18px;
+        font-size: 16px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     p{
-        font-size: 14px;
+        font-size: 12px;
         color: rgb(195, 195, 195);
         font-family:'Times New Roman', Times, serif;
     }
@@ -42,5 +40,6 @@
     p{
         color: rgb(195, 195, 195);
         font-family:'Times New Roman', Times, serif;
+        font-size: 14px;
     }
 }

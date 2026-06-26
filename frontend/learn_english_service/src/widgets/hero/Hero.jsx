@@ -3,6 +3,7 @@ import PreviewText from '../../ui/preview_text/PreviewText';
 import styles from '../hero/hero.module.css';
 import { openModalAuth } from '../../redux/slices/modalSlice';
 import { useNavigate } from 'react-router-dom';
+import Opportunites from '../opportunites/Opportunies';
 
 function Hero(){
 
@@ -24,6 +25,7 @@ function Hero(){
     return(
         <div className={styles.hero}>
             <PreviewText/>
+            <Opportunites/>
         </div>
     )
 }

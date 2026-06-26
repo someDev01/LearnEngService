@@ -14,8 +14,8 @@
     align-items: start;
     padding: 10px 12px;
     gap: 4px;
-    background-color: rgb(28, 28, 28);
-    border: 1px solid rgb(45, 45, 45);
+    background-color: rgb(24, 24, 24);
+    border: 1px solid rgb(42, 42, 42);
     border-radius: 6px;
 
     p{

@@ -4,7 +4,7 @@ import styles from '../oppotrunity_option/opportunity_option.module.css';
 function OpportunityOption({index, openIndex, title, type, imgTag, content, onClick}){
     return(
         <div className={styles.option_block}>
-            <div className={styles.option_trigger} onClick={onClick} style={{borderRadius: `${openIndex === index ?  '6px 6px 0px 0px' : '6px'}`}}>
+            <div className={styles.option_trigger} onClick={onClick} style={{borderBottom: openIndex === index ? '1px solid rgb(48, 48, 48)' : ''}}>
                 <div className={styles.option_title}>
                     {type === "clip" ? 
                         <Clapperboard size={22} color='#ff7f1e'/> :
@@ -17,8 +17,8 @@ function OpportunityOption({index, openIndex, title, type, imgTag, content, onCl
                 </div>
                 <div className={styles.dropdown_button}>
                     {openIndex === index ? 
-                        <ChevronUpIcon size={20} color='rgb(201, 201, 201'/> : 
-                        <ChevronDown size={20} color='rgb(201, 201, 201)'/>
+                        <ChevronUpIcon size={20} color='rgb(184, 184, 184)'/> : 
+                        <ChevronDown size={20} color='rgb(184, 184, 184)'/>
                     }
                     
                 </div>

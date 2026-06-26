@@ -14,10 +14,10 @@
         align-items: center;
         width: 100%;
         padding: 6px 18px;
-        color: rgb(0, 0, 0);
+        color: rgb(215, 215, 215);
         font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         border-radius: 6px;
-        background-color: rgb(255, 154, 100);
+        background-color: rgb(200, 84, 22);
     }
 }
 
