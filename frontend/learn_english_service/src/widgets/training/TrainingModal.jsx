@@ -14,6 +14,7 @@ import EllipsisText from "../../ui/ellipsis_text/EllipsisText";
 import NoNotes from "../../ui/no_notes/NoNotes";
 import QuestionTranslation from "../../ui/question_translation/QuestionTranslation";
 import ButtonQuestionTranslation from "../../ui/button_question_translation/ButtonQuestionTranslation";
+import ButtonX from "../../ui/button_x/ButtonX";
 
 const timeoutNext = 1500;
 
@@ -247,7 +248,7 @@ function TrainingModal({ isOpen }) {
                             <p>{currentIndexQ + 1} / {questions.length}</p>
                         </div>
                         <div className={styles.close_part}>
-                            <ButtonClose onClick={onClose} />
+                            <ButtonX onClick={onClose} />
                         </div>
                     </div>
 

@@ -8,6 +8,7 @@ import { noteApi } from '../../api/note';
 import { toast } from 'react-toastify';
 import { closeModalEditNote } from '../../redux/slices/modalSlice';
 import ErrorText from '../../ui/error/ErrorText';
+import ButtonX from '../../ui/button_x/ButtonX';
 
 function EditNoteForm({isOpen, onClose, onCreateNote, onUpdateNote, note, isEditing, loadingSave}){
 
@@ -70,7 +71,7 @@ function EditNoteForm({isOpen, onClose, onCreateNote, onUpdateNote, note, isEdit
             <div className={styles.edit__container}>
                 <div className={styles.header_form}>
                     {isEditing ? <p>Редактировать слово</p> : <p>Добавить слово</p>}
-                    <ButtonClose onClick={onClose}/>
+                    <ButtonX onClick={onClose}/>
                 </div>
                 <div className={styles.inputs_part}>
                     <EditNoteInput 

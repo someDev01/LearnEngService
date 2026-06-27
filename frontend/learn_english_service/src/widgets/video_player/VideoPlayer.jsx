@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 import { formatTime } from '../../utils/format_time/formatTime';
 import { noteApi } from '../../api/note';
 import WordPopUp from '../popup/WordPopup';
+import ButtonX from '../../ui/button_x/ButtonX';
 
 function VideoPlayer({isOpen, videoId, selectedYoutubeId , startTime = null}){
 
@@ -141,7 +142,7 @@ function VideoPlayer({isOpen, videoId, selectedYoutubeId , startTime = null}){
             <Modal isOpen={isOpen}>
                 <div className={styles.video_container}>                
                     <div className={styles.top_part}>
-                        <ButtonClose onClick={closeModal}/>
+                        <ButtonX onClick={closeModal}/>
                     </div>
                     <YoutubePlayer 
                         youtubeId={selectedYoutubeId}

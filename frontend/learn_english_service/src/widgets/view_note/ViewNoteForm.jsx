@@ -1,5 +1,6 @@
 import Modal from '../../modal/Modal';
 import ButtonClose from '../../ui/button_close/ButtonClose';
+import ButtonX from '../../ui/button_x/ButtonX';
 import Examples from '../../ui/examples/Examples';
 import WordLvl from '../../ui/lvl/WordLvl';
 import Source from '../../ui/source/Source';
@@ -22,7 +23,7 @@ function ViewNoteForm({isOpen, note, onClose, onOpenVideo}){
                 <div className={styles.top_part}>
                     <div className={styles.block_lvl_close}>
                         <WordLvl lvl={note.lvl}/>
-                        <ButtonClose onClick={onClose}/>
+                        <ButtonX onClick={onClose}/>
                     </div>
                     <div className={styles.block_word_transcription}>
                         <Word word={note.word} size={36}/>
