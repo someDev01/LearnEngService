@@ -30,7 +30,7 @@ function EmailSignInForm(){
 
     return(
         <>
-            <div className={styles.logo}>VoClip</div>
+            <div className={styles.logo}>VOCLIP</div>
             <div className={styles.title}>Введите почту</div>
             <div className={styles.description}>чтобы войти или создать аккаунт</div>
 
