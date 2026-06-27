@@ -6,13 +6,15 @@ function OpportunityOption({index, openIndex, title, type, imgTag, content, onCl
         <div className={styles.option_block}>
             <div className={styles.option_trigger} onClick={onClick} style={{borderBottom: openIndex === index ? '1px solid rgb(48, 48, 48)' : ''}}>
                 <div className={styles.option_title}>
-                    {type === "clip" ? 
-                        <Clapperboard size={22} color='#ff7f1e'/> :
-                        type === "sub" ? 
-                        <SubtitlesIcon size={22} color='#ff7f1e'/> : 
-                        type === "dict" ?
-                        <BookMarkedIcon size={22} color='#ff7f1e'/> :
-                        <Brain size={22} color='#ff7f1e'/> }
+                    <div className={styles.option_icon}>
+                        {type === "clip" ? 
+                            <Clapperboard size={22} color='#ff7f1e'/> :
+                            type === "sub" ? 
+                            <SubtitlesIcon size={22} color='#ff7f1e'/> : 
+                            type === "dict" ?
+                            <BookMarkedIcon size={22} color='#ff7f1e'/> :
+                            <Brain size={22} color='#ff7f1e'/> }
+                    </div>
                     <p>{title}</p>
                 </div>
                 <div className={styles.dropdown_button}>

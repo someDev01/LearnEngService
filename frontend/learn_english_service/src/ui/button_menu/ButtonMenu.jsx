@@ -6,8 +6,8 @@ function ButtonMenu({isOpen, onToggle}){
         <>
             <div className={styles.button} onClick={onToggle}>
                 {isOpen ? 
-                    <X size={22} color='#6a6a6a'/> :
-                    <MenuIcon size={22} color='#6a6a6a'/>} 
+                    <X size={22} color='#b1b1b1'/> :
+                    <MenuIcon size={22} color='#b1b1b1'/>} 
             </div>
         </>
     )
