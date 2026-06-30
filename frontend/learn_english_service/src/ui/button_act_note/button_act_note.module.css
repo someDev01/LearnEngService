@@ -22,16 +22,16 @@
 }
 
 .view{
-    border: 1px solid rgb(148, 98, 56);
-    background-color: rgb(52, 43, 32);
+    border: 1px solid rgb(134, 88, 50);
+    background-color: rgb(78, 64, 48);
 }
 
 .edit{
-    border: 1px solid rgb(156, 79, 12);
+    border: 1px solid rgb(136, 69, 10);
     background-color: rgb(59, 29, 0);
 }
 
 .delete{
-    border: 1px solid rgb(144, 3, 3);
+    border: 1px solid rgb(128, 2, 2);
     background-color: rgb(59, 0, 0);
 }

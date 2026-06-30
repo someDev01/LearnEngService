@@ -25,13 +25,17 @@
     padding-bottom: 12px;
     padding-left: 50px;
     padding-right: 18px;
-    border-radius: 8px;
+    border-radius: 10px;
     width: 100%;
     outline: none;
     border: 1px solid rgb(60, 60, 60);
     background-color: transparent;
     transition: border-color .4s ease, box-shadow .3s ease;
     font-size: 14px;
+}
+
+.input.invalid{
+    border: 1px solid rgb(255, 16, 68);
 }
 
 .input:focus{

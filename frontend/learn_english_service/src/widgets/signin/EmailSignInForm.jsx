@@ -6,21 +6,29 @@ import useEmailSignIn from '../../hooks/email/useEmailSignIn';
 import { resetTempUser, setError, setResendTime, setStep, setTempUser } from '../../redux/slices/authSlice';
 import { toast } from 'react-toastify';
 import ContinueButtonLoader from '../../ui/button_loader/ContinueButtonLoader';
+import { useState } from 'react';
 
 function EmailSignInForm(){
 
     const dispatch = useDispatch();
     const { loading, email, setEmail, emailError, setEmailError, handleSubmit } = useEmailSignIn();
 
+    const [highLightErrorBorder, setHighLightErrorBorder] = useState(false);
+
+    const onShowInvalidInput = () => {setHighLightErrorBorder(true)};
+    const onClearInvalidInput = () => {setHighLightErrorBorder(false)};
+
     const onSubmit = async () => {
         const result = await handleSubmit();
         
         if(result.success){
+            onClearInvalidInput();
             dispatch(setTempUser(result.tempUser));
             dispatch(setStep(result.step));
             dispatch(setResendTime(result.resendTime));
         } 
         else{
+            onShowInvalidInput();
             dispatch(resetTempUser());
             toast.error(result.error);
             
@@ -40,6 +48,8 @@ function EmailSignInForm(){
                     setValue={setEmail}
                     error={emailError}
                     onErrorClear={() => setEmailError('')}
+                    onClearInvalidInput={onClearInvalidInput}
+                    highLightErrorBorder={highLightErrorBorder}
                 />
             </div>
             <ButtonContinue onClick={onSubmit} disabled={loading}>

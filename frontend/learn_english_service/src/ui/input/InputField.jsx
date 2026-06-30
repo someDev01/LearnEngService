@@ -2,7 +2,7 @@ import { Mail, User } from 'lucide-react';
 import styles from '../input/input_field.module.css';
 import ErrorText from '../error/ErrorText';
 
-function InputField({value, setValue, error, onErrorClear}){
+function InputField({value, setValue, error, onErrorClear, onClearInvalidInput, highLightErrorBorder}){
     return(
         <div className={`${styles.wrapper} ${styles.email}`}>
             <div className={styles.email_input}>
@@ -10,15 +10,16 @@ function InputField({value, setValue, error, onErrorClear}){
                     <Mail/>
                 </div>
                 <input
-                    className={styles.input}
+                    className={`${styles.input} ${highLightErrorBorder ? styles.invlaid : ''}`}
                     type="email"
                     name="email"
                     value={value}
                     onChange={(e) => {
                         setValue(e.target.value);
                         onErrorClear();
+                        onClearInvalidInput();
                     }}
-                    placeholder="email"
+                    placeholder="e-mail"
                 />
             </div>
             {error && <ErrorText>{error}</ErrorText>}
