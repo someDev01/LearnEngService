@@ -27,7 +27,10 @@
 }
 
 .block_word_transcription{
+    display: flex;
+    flex-direction: column;
     margin-top: 10px;
+    gap: 4px;
 }
 
 .block_translations{

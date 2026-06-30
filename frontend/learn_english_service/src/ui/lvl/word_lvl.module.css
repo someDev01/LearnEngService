@@ -5,6 +5,7 @@
     align-items: center;
     padding: 2px 8px;
     background-color: rgb(69, 48, 0);
+    border: 1px solid rgb(159, 98, 0);
     border-radius: 12px;
 }
 

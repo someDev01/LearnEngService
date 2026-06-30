@@ -4,7 +4,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 4px 8px;
+    width: 32px;
+    height: 30px;
     background-color: rgb(51, 51, 51);
     border: 1px solid transparent;
     border-radius: 6px;
@@ -20,17 +21,17 @@
     }
 }
 
-.view:hover{
-    border: 1px solid rgb(255, 174, 107);
-    background-color: rgb(66, 55, 41);
+.view{
+    border: 1px solid rgb(148, 98, 56);
+    background-color: rgb(52, 43, 32);
 }
 
-.edit:hover{
-    border: 1px solid rgb(255, 134, 28);
-    background-color: rgb(78, 38, 0);
+.edit{
+    border: 1px solid rgb(156, 79, 12);
+    background-color: rgb(59, 29, 0);
 }
 
-.delete:hover{
-    border: 1px solid rgb(255, 10, 10);
-    background-color: rgb(89, 0, 0);
+.delete{
+    border: 1px solid rgb(144, 3, 3);
+    background-color: rgb(59, 0, 0);
 }
