@@ -10,7 +10,7 @@ function InputField({value, setValue, error, onErrorClear, onClearInvalidInput, 
                     <Mail/>
                 </div>
                 <input
-                    className={`${styles.input} ${highLightErrorBorder ? styles.invlaid : ''}`}
+                    className={`${styles.input} ${highLightErrorBorder ? styles.invalid : ''}`}
                     type="email"
                     name="email"
                     value={value}
