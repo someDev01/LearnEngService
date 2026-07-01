@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import Modal from "../../modal/Modal";
 import ButtonAddNote from "../../ui/button_add/ButtonAddNote";
-import ButtonClose from "../../ui/button_close/ButtonClose";
 import styles from '../popup/word_popup.module.css';
 import { translateApi } from "../../api/translate";
 import { toast } from "react-toastify";
 import ButtonAdded from "../../ui/button_added/ButtonAdded";
 import { Check, X } from "lucide-react";
+import ButtonX from "../../ui/button_x/ButtonX";
 
 function WordPopUp({isOpen, word, onAddNoteWithContext, onClose, noteCreating, setWord, onHasWordInNotes}){
 
@@ -50,7 +50,7 @@ function WordPopUp({isOpen, word, onAddNoteWithContext, onClose, noteCreating, s
                         maxLength={25}
                         onChange={(e) => {setWord(e.target.value)}} 
                     />
-                    <ButtonClose onClick={onClose}/>
+                    <ButtonX onClick={onClose}/>
                 </div>
                 <div className={styles.translation_part} onClick={() => handleShowTranslation(word)}>
                     {loading ? <p>загрузка...</p> : <p>{translation}</p>}
