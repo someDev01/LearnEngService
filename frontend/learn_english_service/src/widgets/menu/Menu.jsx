@@ -11,14 +11,45 @@ import { useNavigate } from 'react-router-dom';
 import ButtonTraining from '../../ui/button_training/ButtonTraining';
 import { openModalTraining } from '../../redux/slices/modalSlice';
 import ButtonNavigate from '../../ui/button_navigate/ButtonNavigate';
-import { Book, ListCheck, LogOutIcon, LucideTvMinimalPlay } from 'lucide-react';
+import { Book, ListCheck, LogOut, LogOutIcon, LucideTvMinimalPlay, TvMinimalPlay } from 'lucide-react';
+import Modal from '../../modal/Modal';
+import { useEffect, useState } from 'react';
+import ButtonX from '../../ui/button_x/ButtonX';
+import Progress from '../progress/Progress';
+import { noteApi } from '../../api/note';
 
-function Menu({isOpen, email}){
+function Menu({isOpen, onClose, email}){
 
     const dispatch = useDispatch();
     const navigation = useNavigate();
 
-    if(!isOpen) return null;
+    const [isOpening, setIsOpening] = useState(false);
+    const [notes, setNotes] = useState([]);
+
+    useEffect(() => {
+        if(isOpen){
+            requestAnimationFrame(() => setIsOpening(true));
+        }
+        else{
+            setIsOpening(false);
+        }
+    }, [isOpen]);
+
+    useEffect(() => {
+        const fetchDictionary = async() => {
+            const response = await noteApi.getDictionary();
+
+            if(response.success){
+                setNotes(response.data);
+            }
+            else{
+                setNotes([]);
+                toast.error(response.error);
+            }
+        }
+
+        fetchDictionary();
+    }, []);
 
     const onNavigateDictionary = () => {
         navigation('/dictionary')
@@ -53,39 +84,51 @@ function Menu({isOpen, email}){
     }
 
     return(
-        <div className={styles.menu__container}>
-            <div className={styles.menu_section}>
-                <Profile email={email}/>
-                <div className={styles.line_dividing}></div>
-                <ButtonNavigate
-                    onClick={onNavigateDictionary}
-                    title="Словарь"
-                >
-                    <Book size={20} color='#c4c4c4'/>
-                </ButtonNavigate>
-                <ButtonNavigate
-                    onClick={() => {
-                        dispatch(openModalTraining());
-                        dispatch(closeMenu())
-                    }}
-                    title="Тренировка"
-                >
-                    <ListCheck size={20} color='#c4c4c4'/>
-                </ButtonNavigate>
-                <ButtonNavigate
-                    onClick={onNavigateVideos}
-                    title='Видео'
-                >
-                    <LucideTvMinimalPlay size={20} color='#c4c4c4'/>
-                </ButtonNavigate>
-                <ButtonNavigate
-                    onClick={onLogout}
-                    title="Выйти"
-                >
-                    <LogOutIcon size={20} color='#cd0e00'/>
-                </ButtonNavigate>
+        <Modal isOpen={isOpen}>
+            <div className={`${styles.menu__container} ${isOpening ? styles.open : ''}`}>
+                <div className={styles.menu_section}>
+                    <div className={styles.header_part}>
+                        <ButtonX onClick={onClose}/>
+                        <Profile email={email}/>
+                        <Progress userNotes={notes}/>
+                    </div>
+                    <div className={styles.middle_part}>
+                        <div className={styles.menu_buttons}>
+                            <ButtonNavigate 
+                                onClick={onNavigateDictionary}
+                                title="Личный словарь"
+                                type="dict"
+                                count={notes.length}
+                            >
+                                <Book size={18} color='#c4c4c4'/>
+                            </ButtonNavigate>
+                            <ButtonNavigate
+                                onClick={() => {
+                                    dispatch(openModalTraining());
+                                }}
+                                title="Тренировка"
+                            >
+                                <ListCheck size={20} color='#c4c4c4'/>
+                            </ButtonNavigate>
+                            <ButtonNavigate
+                                onClick={onNavigateVideos}
+                                title="Видео"
+                            >
+                                <TvMinimalPlay size={20} color='#c4c4c4'/>
+                            </ButtonNavigate>
+                        </div>
+                    </div>
+                    <div className={styles.bottom_part}>
+                        <ButtonNavigate
+                            onClick={onLogout}
+                            title="Выйти"
+                        >
+                            <LogOut size={20} color='#f70000'/>
+                        </ButtonNavigate>
+                    </div>
+                </div>
             </div>
-        </div>
+        </Modal>
     )
 }
 

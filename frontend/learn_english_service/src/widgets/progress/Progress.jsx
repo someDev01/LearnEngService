@@ -20,7 +20,7 @@ function Progress({userNotes}){
     return(
         <div className={styles.progress__container}>
             <p>Прогресс за сегодня: </p>
-            <div className={styles.carts}>
+            <div className={styles.cards}>
                 <ProgressCart count={addedToday} text="Добавлено слов" type="added"/>
                 <ProgressCart count={learnedToday} text="Изучено слов" type="learned"/>
             </div>

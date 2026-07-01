@@ -19,7 +19,8 @@ function Header(){
     const isOpenTraining = useSelector(state => state.modal.isOpenModalTraining);
     const dispatch = useDispatch();
 
-    const onToggleMenu = () => {dispatch(isOpenMenu ? closeMenu() : openMenu())};
+    const onOpen = () => {dispatch(openMenu());};
+    const onClose = () => {dispatch(closeMenu());};
 
     return(
         <>
@@ -29,11 +30,11 @@ function Header(){
                         <Logo title="VoClip"/>
                     </Link>
                     {user ? 
-                        <ButtonMenu isOpen={isOpenMenu} onToggle={onToggleMenu}/> : 
+                        <ButtonMenu onOpen={onOpen} /> : 
                         <ButtonSignIn onClick={() => dispatch(openModalAuth())}/>}
                 </div>
             </div>
-            {isOpenMenu && <Menu isOpen={isOpenMenu} email={user?.email}/>}
+            {isOpenMenu && <Menu isOpen={isOpenMenu} onClose={onClose} email={user?.email}/>}
             {isOpenAuth && <AuthFlow isOpen={isOpenAuth}/>}
             {isOpenTraining && <TrainingModal isOpen={isOpenTraining}/>}
         </>

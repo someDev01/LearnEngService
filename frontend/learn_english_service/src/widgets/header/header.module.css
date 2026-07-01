@@ -1,6 +1,5 @@
 
 .header__container{
-    position: relative;
     display: flex;
     inset: 0;
     height: 50px;

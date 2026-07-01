@@ -1,18 +1,28 @@
 
-
 .button{
     cursor: pointer;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
     gap: 12px;
-    padding: 4px 0px;
-    border-radius: 4px;
+    padding: 12px;
+    background-color: rgb(24, 24, 24);
+    border: 1px solid rgb(55, 55, 55);
+    border-radius: 6px;
+}
+
+.svg_block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px;
+    border: 1px solid rgb(52, 52, 52);
+    border-radius: 8px;
 }
 
 .button svg{
-    width: clamp(20px, 4vw, 26px);
-    height: clamp(20px, 4vw, 26px);
+    width: clamp(18px, 4vw, 24px);
+    height: clamp(18px, 4vw, 24px);
 }
 
 .button .title{
@@ -27,8 +37,21 @@
     margin: 0;
 }
 
+.count_block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p{
+        margin: 0;
+        color: rgb(166, 166, 166);
+        font-size: 16px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+}
+
 @media (min-width: 1280px){
     .button .title{
-        font-size: 18px;
+        font-size: 16px;
     }
 }
