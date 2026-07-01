@@ -213,7 +213,6 @@ function DictionaryPage(){
 
     return(
         <>
-            <Progress userNotes={notes}/>
             <div className={styles.section_dictionary}>
                 <div className={styles.header_dictionary}>
                     <div className={styles.top_part}>
