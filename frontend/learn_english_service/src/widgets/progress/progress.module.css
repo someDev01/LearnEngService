@@ -24,3 +24,11 @@
     width: 100%;
     gap: 10px;
 }
+
+@media (min-width: 1440px){
+    .progress__container{
+        p{
+            font-size: 16px;
+        }
+    }
+}

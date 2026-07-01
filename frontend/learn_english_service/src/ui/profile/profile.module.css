@@ -47,3 +47,16 @@
         font-weight: 500;
     }
 }
+
+@media (min-width: 1440px){
+    .profile_circle{
+        width: 80px;
+        height: 80px;
+    }
+
+    .user_email{
+        p{
+            font-size: 16px;
+        }
+    }
+}

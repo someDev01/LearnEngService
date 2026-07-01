@@ -31,3 +31,9 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: rgb(169, 169, 169);
 }
+
+@media (min-width: 1440px){
+    .progress_text{
+        font-size: 12px;
+    }
+}
