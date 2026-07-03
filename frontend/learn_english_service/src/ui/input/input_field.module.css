@@ -14,22 +14,22 @@
     position: absolute;
     top: 50%;
     transform: translateY(-40%);
-    left: 12px;
+    left: 18px;
     color: #ff7c0a;
 }
 
 .input{
     
     user-select: none;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 14px;
+    padding-bottom: 14px;
     padding-left: 50px;
     padding-right: 18px;
     border-radius: 10px;
     width: 100%;
     outline: none;
     border: 1px solid rgb(60, 60, 60);
-    background-color: transparent;
+    background-color: #222222;
     transition: border-color .4s ease, box-shadow .3s ease;
     font-size: 14px;
 }
@@ -39,5 +39,5 @@
 }
 
 .input:focus{
-    border: 1px solid white;
+    border: 1px solid rgb(255, 110, 37);
 }

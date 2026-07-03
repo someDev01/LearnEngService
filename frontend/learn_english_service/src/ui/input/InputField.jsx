@@ -7,7 +7,7 @@ function InputField({value, setValue, error, onErrorClear, onClearInvalidInput, 
         <div className={`${styles.wrapper} ${styles.email}`}>
             <div className={styles.email_input}>
                 <div className={styles.icon}>
-                    <Mail/>
+                    <Mail size={20}/>
                 </div>
                 <input
                     className={`${styles.input} ${highLightErrorBorder ? styles.invalid : ''}`}

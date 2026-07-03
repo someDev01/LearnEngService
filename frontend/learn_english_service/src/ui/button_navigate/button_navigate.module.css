@@ -6,9 +6,10 @@
     align-items: center;
     gap: 12px;
     padding: 12px;
-    background-color: rgb(24, 24, 24);
+    background-color: rgb(28, 28, 28);
     border: 1px solid rgb(55, 55, 55);
-    border-radius: 12px;
+    border-left: 2px solid rgb(255, 86, 13);
+    border-radius: 16px;
 }
 
 .svg_block{
@@ -16,8 +17,6 @@
     justify-content: center;
     align-items: center;
     padding: 6px;
-    border: 1px solid rgb(52, 52, 52);
-    border-radius: 8px;
 }
 
 .button svg{

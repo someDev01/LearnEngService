@@ -100,7 +100,7 @@ function Menu({isOpen, onClose, email}){
                                 type="dict"
                                 count={notes.length}
                             >
-                                <Book size={18} color='#c4c4c4'/>
+                                <Book size={18} color='rgb(255, 86, 13)'/>
                             </ButtonNavigate>
                             <ButtonNavigate
                                 onClick={() => {
@@ -108,13 +108,13 @@ function Menu({isOpen, onClose, email}){
                                 }}
                                 title="Тренировка"
                             >
-                                <ListCheck size={20} color='#c4c4c4'/>
+                                <ListCheck size={20} color='rgb(255, 86, 13)'/>
                             </ButtonNavigate>
                             <ButtonNavigate
                                 onClick={onNavigateVideos}
                                 title="Видео"
                             >
-                                <TvMinimalPlay size={20} color='#c4c4c4'/>
+                                <TvMinimalPlay size={20} color='rgb(255, 86, 13)'/>
                             </ButtonNavigate>
                         </div>
                     </div>
