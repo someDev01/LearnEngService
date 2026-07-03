@@ -15,7 +15,7 @@ function ButtonNavigate({onClick, title, children, type=null, count=null}){
                     </div>
                 )}
             </div>
-            <ChevronRight size={14} color='#c4c4c4'/>
+            {type !== "logout" && <ChevronRight size={14} color='#c4c4c4'/>}
         </div>
     )
 }
