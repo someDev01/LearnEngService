@@ -47,19 +47,19 @@
 
 ## ВЕСЬ СТЕК СЕРВИСА
 Backend
-- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" width="18"> C#
-- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" width="18"> ASP.NET CORE 8
+- C#
+- ASP.NET CORE 8
 - Clean Architecture
 - CQRS
 - MediatR
 - Repository Pattern
 - Unit of Work
 - Domain Driven Design (Entities, ValueObjects, Factory Methods)
-- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" width="18"> Entity Framework Core
-- ![FluentValidation](https://img.shields.oi/badge/FluentValidation-blue) Fluent Validation
+- Entity Framework Core
+- Fluent Validation
 - PostgreSQL
-- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" width="18" height="18"> Redis
-- <img src="https://cdn.simpleicons.org/jsonwebtokens/EF4444" width="18"> JWT 
+- Redis
+- JWT 
 - S3 Storage (Supabase)
 - Groq Api (LLM)
 - Youtube Data Api
