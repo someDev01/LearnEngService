@@ -59,7 +59,7 @@ Backend
 - Fluent Validation
 - PostgreSQL
 - <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" width="18" height="18"> Redis
-- <img src="https://cdn.simpleicons.org/jsonwebtokens" width="18"> JWT 
+- <img src="https://cdn.simpleicons.org/jsonwebtokens/EF4444" width="18"> JWT 
 - S3 Storage (Supabase)
 - Groq Api (LLM)
 - Youtube Data Api
