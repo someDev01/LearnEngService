@@ -56,7 +56,7 @@ Backend
 - Unit of Work
 - Domain Driven Design (Entities, ValueObjects, Factory Methods)
 - <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" width="18"> Entity Framework Core
-- Fluent Validation
+- ![FluentValidation](https://img.shields.oi/badge/FluentValidation-blue) Fluent Validation
 - PostgreSQL
 - <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" width="18" height="18"> Redis
 - <img src="https://cdn.simpleicons.org/jsonwebtokens/EF4444" width="18"> JWT 
