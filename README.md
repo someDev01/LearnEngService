@@ -55,7 +55,7 @@ Backend
 - Repository Pattern
 - Unit of Work
 - Domain Driven Design (Entities, ValueObjects, Factory Methods)
-- Entity Framework Core
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/efcore/efcore-original.svg" width="18"> Entity Framework Core
 - Fluent Validation
 - PostgreSQL
 - <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" width="18" height="18"> Redis
