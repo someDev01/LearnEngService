@@ -48,7 +48,7 @@
 ## ВЕСЬ СТЕК СЕРВИСА
 Backend
 - <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" width="18"> C#
-- ASP.NET CORE 8
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" width="18"> ASP.NET CORE 8
 - Clean Architecture
 - CQRS
 - MediatR
