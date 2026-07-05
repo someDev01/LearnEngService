@@ -58,7 +58,7 @@ Backend
 - Entity Framework Core
 - Fluent Validation
 - PostgreSQL
-- <img src="redis.svg" width="18" height="18"> Redis
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" width="18" height="18"> Redis
 - JWT Auth
 - S3 Storage (Supabase)
 - Groq Api (LLM)
