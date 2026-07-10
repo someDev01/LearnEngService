@@ -35,7 +35,8 @@ services:
       S3Storage__AccessKey: ${S3_ACCESSKEY}
       S3Storage__SecretKey: ${S3_SECRETKEY}
       S3Storage__BucketName: ${S3_BUCKET}
-
+    ports:
+      - "5001:8080"
 
   frontend:
     build: 
