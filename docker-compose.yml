@@ -35,6 +35,8 @@ services:
       S3Storage__AccessKey: ${S3_ACCESSKEY}
       S3Storage__SecretKey: ${S3_SECRETKEY}
       S3Storage__BucketName: ${S3_BUCKET}
+    ports:
+      - "5001:8080"
 
 
   frontend:
@@ -44,8 +46,7 @@ services:
       args:
         VITE_API_URL: /api/
     ports:
-      - "80:80"
-      - "443:443"
+      - "8081:80"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
