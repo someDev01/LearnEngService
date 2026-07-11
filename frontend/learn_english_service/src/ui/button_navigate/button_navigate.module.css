@@ -11,18 +11,6 @@
     border-radius: 16px;
 }
 
-.svg_block{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 6px;
-}
-
-.button svg{
-    width: clamp(18px, 4vw, 24px);
-    height: clamp(18px, 4vw, 24px);
-}
-
 .button .title{
     display: flex;
     justify-content: center;
@@ -39,7 +27,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0px 18px;
+    padding: 0px 16px;
     background-color: rgb(42, 21, 13);
     border-radius: 8px;
     border: 1px solid rgb(147, 52, 0);
@@ -66,7 +54,7 @@
 
     .count_block{
         p{
-            font-size: 18px;
+            font-size: 16px;
         }
     }
 }

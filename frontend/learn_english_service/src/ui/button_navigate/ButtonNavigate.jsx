@@ -17,7 +17,7 @@ function ButtonNavigate({onClick, title, children, type=null, count=null}){
                         <p>{count}</p>
                     </div>
                 )}
-                {type !== "logout" && <ChevronRight size={14} color='#c4c4c4'/>}
+                {type !== "logout" && <ChevronRight size={12} color='#c4c4c4'/>}
             </div>
         </div>
     )
