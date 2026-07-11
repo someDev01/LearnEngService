@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import ButtonTraining from '../../ui/button_training/ButtonTraining';
 import { openModalTraining } from '../../redux/slices/modalSlice';
 import ButtonNavigate from '../../ui/button_navigate/ButtonNavigate';
-import { Book, ListCheck, LogOut, LogOutIcon, LucideTvMinimalPlay, TvMinimalPlay } from 'lucide-react';
+import { Book, Ear, ListCheck, LogOut, LogOutIcon, LucideTvMinimalPlay, TvMinimalPlay } from 'lucide-react';
 import Modal from '../../modal/Modal';
 import { useEffect, useState } from 'react';
 import ButtonX from '../../ui/button_x/ButtonX';
@@ -100,21 +100,23 @@ function Menu({isOpen, onClose, email}){
                                 type="dict"
                                 count={notes.length}
                             >
-                                <Book size={18} color='#c4c4c4'/>
+                                <Book size={18} color='rgb(255, 86, 13)'/>
                             </ButtonNavigate>
                             <ButtonNavigate
                                 onClick={() => {
                                     dispatch(openModalTraining());
                                 }}
                                 title="Тренировка"
+                                type="train"
                             >
-                                <ListCheck size={20} color='#c4c4c4'/>
+                                <Ear size={18} color='rgb(255, 223, 13)'/>
                             </ButtonNavigate>
                             <ButtonNavigate
                                 onClick={onNavigateVideos}
                                 title="Видео"
+                                type="videos"
                             >
-                                <TvMinimalPlay size={20} color='#c4c4c4'/>
+                                <TvMinimalPlay size={18} color='rgb(255, 86, 13)'/>
                             </ButtonNavigate>
                         </div>
                     </div>
@@ -124,7 +126,7 @@ function Menu({isOpen, onClose, email}){
                             title="Выйти"
                             type="logout"
                         >
-                            <LogOut size={20} color='#f70000'/>
+                            <LogOut size={18} color='#f70000'/>
                         </ButtonNavigate>
                     </div>
                 </div>

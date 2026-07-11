@@ -6,9 +6,9 @@
     align-items: center;
     padding: 14px 8px;
     width: 100%;
-    background-color: rgb(30, 30, 30);
+    background-color: rgb(23, 24, 24);
     border-radius: 8px;
-    border: 1px solid rgb(42, 42, 42);
+    border: 1px solid rgb(42, 40, 40);
 }
 
 .count{

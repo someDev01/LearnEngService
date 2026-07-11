@@ -1,0 +1,31 @@
+
+
+.svg_block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border-radius: 10px;
+
+}
+
+.svg_block svg{
+    width: clamp(18px, 4vw, 24px);
+    height: clamp(18px, 4vw, 24px);
+}
+
+.dict{
+    background-color: rgb(53, 30, 12);
+}
+
+.train{
+    background-color: rgb(48, 47, 11);
+}
+
+.videos{
+    background-color: rgb(53, 30, 12);
+}
+
+.logout{
+    background-color: rgb(53, 12, 12);
+}
