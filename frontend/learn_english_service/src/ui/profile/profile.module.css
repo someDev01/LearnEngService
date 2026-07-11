@@ -14,8 +14,8 @@
     justify-content: center;
     align-items: center;
     padding: 4px;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     background-color: rgb(255, 140, 0);
     border-radius: 50%;
     border: 2px solid rgb(86, 39, 0);
@@ -50,8 +50,8 @@
 
 @media (min-width: 1440px){
     .profile_circle{
-        width: 80px;
-        height: 80px;
+        width: 90px;
+        height: 90px;
     }
 
     .user_email{
