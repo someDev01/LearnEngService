@@ -1,7 +1,9 @@
 
 .wrapper.email{
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    gap: 12px;
+    gap: 6px;
 }
 
 .email_input{
@@ -35,7 +37,7 @@
 }
 
 .input.invalid{
-    border: 1px solid rgb(255, 16, 68);
+    border: 1px solid rgb(255, 16, 16);
 }
 
 .input:focus{
