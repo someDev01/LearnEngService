@@ -8,7 +8,9 @@ public interface ICacheService
 
     Task<bool> KeyExistsAsync(string key);
 
-    public Task SetExpireAsync(string value, TimeSpan ttl);
+    Task SetExpireAsync(string value, TimeSpan ttl);
+
+    Task<T> GetOrCreateAsync<T>(string key, TimeSpan ttl, Func<Task<T>> factory);
 
     Task<long> IncrementAsync(string value);
 

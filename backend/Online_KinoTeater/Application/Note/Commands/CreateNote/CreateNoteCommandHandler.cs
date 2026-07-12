@@ -59,12 +59,7 @@ public class CreateNoteCommandHandler(
                 ex.Text.ToLowerInvariant().Trim(),
                 ex.Translate.ToLowerInvariant().Trim()))
             .ToList();
-        var examplesDto = new List<ExampleDto>();
-        examplesDto.AddRange(editedExamples);
-
-        var examples = new List<Example>();
-
-        var translations = editedTranslations;
+        
         var resultFromGroq = await vocabularyService.GenerationTranslateAsync(
             new VocabularyRequestDto(
                 editedWord,
@@ -82,12 +77,10 @@ public class CreateNoteCommandHandler(
         var groqExamples = data?.Examples;
         var groqLvl = data?.Level;
 
+        var translations = editedTranslations.Count > 0 ? editedTranslations : groqTranslations ?? [];
+        var examplesDto = editedExamples.Count > 0 ? editedExamples : groqExamples ?? [];
+        var word = string.IsNullOrWhiteSpace(groqWord) ? editedWord : groqWord;
         int repetitionScore = 0;
-
-        if(groqTranslations is not null)
-            translations.AddRange(groqTranslations);
-        if(groqExamples is not null)
-            examplesDto.AddRange(groqExamples);
         #endregion
 
         #region VALUEOBJECTS/ONE -> DOMAIN
@@ -101,6 +94,8 @@ public class CreateNoteCommandHandler(
         #endregion
 
         #region VALUEOBJECTS/MANY -> DOMAIN
+
+        var examples = new List<Example>();
         foreach (var ex in examplesDto)
         {
             var result = Example.Create(ex.Text, ex.Translate);
@@ -114,7 +109,7 @@ public class CreateNoteCommandHandler(
         #region CREATE
         var noteResult = Domain.Model.Entyties.Note.Create(
             request.UserId,
-            groqWord!,
+            word!,
             translations,
             transcriptionResult.Value!,
             examples!,

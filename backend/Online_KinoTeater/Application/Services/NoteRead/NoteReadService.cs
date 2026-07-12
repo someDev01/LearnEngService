@@ -31,46 +31,42 @@ public class NoteReadService(
             pageNormalized,
             pageSizeNormalized);
         TimeSpan pagedKeyTtl = TimeSpan.FromMinutes(_cacheTtlSettings.PagedNotesTtlMinutes);
+        
+        var result = await cacheService.GetOrCreateAsync(pagedKey, pagedKeyTtl, async () =>
+        {
+            var query = context.Notes
+                .AsNoTracking()
+                .Where(n => n.UserId == userId)
+                .OrderByDescending(n => n.CreatedAt)
+                .Select(n => new NoteDto(
+                    n.Id,
+                    n.Word,
+                    n.Translations,
+                    n.Transcription.Value,
+                    n.Lvl!.Value,
+                    n.Examples
+                        .Select(ex => new ExampleDto(ex.Text!, ex.Translate!))
+                        .ToList(),
+                    n.RepetitionScore,
+                    n.Source == null
+                        ? null
+                        : new SourceDto(
+                            n.Source.YoutubeVideoId,
+                            n.Source.YoutubeId,
+                            n.Source.YoutubeVideoTitle,
+                            n.Source.Context,
+                            new DurationContextDto(
+                                n.Source.Hours,
+                                n.Source.Minutes,
+                                n.Source.Seconds)),
+                    n.LastTrainedAt,
+                    n.CreatedAt));
 
-        var cached = await cacheService.GetByKeyAsync<PagedResult<NoteDto>>(pagedKey);
-        if (cached is not null)
-            return cached;
-
-        var notesDto = context.Notes
-            .AsNoTracking()
-            .Where(n => n.UserId == userId)
-            .OrderByDescending(n => n.CreatedAt)
-            .Select(n => new NoteDto(
-                n.Id,
-                n.Word,
-                n.Translations,
-                n.Transcription.Value,
-                n.Lvl!.Value,
-                n.Examples
-                    .Select(ex => new ExampleDto(ex.Text!, ex.Translate!))
-                    .ToList(),
-                n.RepetitionScore,
-                n.Source == null ? null : new SourceDto(
-                    n.Source.YoutubeVideoId,
-                    n.Source.YoutubeId,
-                    n.Source.YoutubeVideoTitle,
-                    n.Source.Context,
-                    new DurationContextDto(
-                        n.Source.Hours,
-                        n.Source.Minutes,
-                        n.Source.Seconds)),
-                n.LastTrainedAt,
-                n.CreatedAt));
-
-        var result = await notesDto.ToPagedResultAsync(
-            pageNormalized,
-            pageSizeNormalized,
-            cancellationToken);
-
-        await cacheService.SetAsync(
-            pagedKey,
-            result,
-            pagedKeyTtl);
+            return await query.ToPagedResultAsync(
+                pageNormalized,
+                pageSizeNormalized,
+                cancellationToken);
+        });
 
         return result;
     }

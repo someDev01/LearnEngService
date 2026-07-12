@@ -14,6 +14,17 @@ public class RedisCacheService(IConnectionMultiplexer connection) : ICacheServic
         return !result.IsNullOrEmpty ? JsonSerializer.Deserialize<T>(result!): default;
     }
 
+    public async Task<T> GetOrCreateAsync<T>(string key, TimeSpan ttl, Func<Task<T>> factory)
+    {
+        var cached = await GetByKeyAsync<T>(key);
+        if(cached is not null)
+            return cached;
+        
+        var value = await factory();
+        await SetAsync(key, value, ttl);
+        return value;
+    }
+
     public async Task<long> IncrementAsync(string value) =>
         await _dataBase.StringIncrementAsync(value);
 

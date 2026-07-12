@@ -31,33 +31,27 @@ public class VideoReadService(
             pageSizeNormalized);
         TimeSpan pagedKeyTtl = TimeSpan.FromMinutes(_cacheTtlSettings.PagedVideosTtlMinutes);
 
-        var cached = await cacheService.GetByKeyAsync<PagedResult<YoutubeVideosPreviewDto>>(pagedKey);
-        if (cached is not null)
-            return cached;
+        var result = await cacheService.GetOrCreateAsync(pagedKey, pagedKeyTtl, async () =>
+        {
+            var query = context.YoutubeVideos
+                .AsNoTracking()
+                .Where(yv => !yv.IsBlocked)
+                .OrderByDescending(yv => yv.CreatedAt)
+                .Select(yv => new YoutubeVideosPreviewDto(
+                    yv.Id,
+                    yv.YoutubeId,
+                    yv.Title,
+                    new DurationContextDto(
+                        yv.Duration.Hour,
+                        yv.Duration.Minutes,
+                        yv.Duration.Seconds),
+                    yv.LexicalComplexity.Value!));
 
-        var query = context.YoutubeVideos
-            .AsNoTracking()
-            .Where(yv => !yv.IsBlocked)
-            .OrderByDescending(yv => yv.CreatedAt)
-            .Select(yv => new YoutubeVideosPreviewDto(
-                yv.Id,
-                yv.YoutubeId,
-                yv.Title,
-                new DurationContextDto(
-                    yv.Duration.Hour,
-                    yv.Duration.Minutes,
-                    yv.Duration.Seconds),
-                yv.LexicalComplexity.Value!));
-
-        var result = await query.ToPagedResultAsync(
-            pageNormalized,
-            pageSizeNormalized,
-            cancellationToken);
-
-        await cacheService.SetAsync(
-            pagedKey,
-            result,
-            pagedKeyTtl);
+            return await query.ToPagedResultAsync(
+                pageNormalized,
+                pageSizeNormalized,
+                cancellationToken);
+        });
 
         return result;
     }

@@ -51,8 +51,6 @@ public class CreateNoteWithContextCommandHandler(
             .Trim();
         string context = request.Context;
 
-        var examples = new List<Example>();
-
         var resultFromGroq = await vocabularyService.GenerationTranslateAsync(
             new VocabularyRequestDto(
                 editedWord,
@@ -66,7 +64,7 @@ public class CreateNoteWithContextCommandHandler(
         var groqTranscription = data?.Transcription;
         var groqExamples = data?.Examples;
         var groqLvl = data?.Level;
-
+        
         int repetitionScore = 0;
         #endregion
 
@@ -92,6 +90,8 @@ public class CreateNoteWithContextCommandHandler(
         #endregion
 
         #region VALUEOBJECTS/MANY -> DOMAIN
+        
+        var examples = new List<Example>();
         foreach(var ex in groqExamples!)
         {
             var result = Example.Create(ex.Text, ex.Translate);
