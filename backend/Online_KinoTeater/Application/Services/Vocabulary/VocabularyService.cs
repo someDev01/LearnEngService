@@ -39,9 +39,9 @@ public class VocabularyService(ILlmClient llmClient) : IVocabularyService
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             return Result<NoteDataDto?>.Success(result);
         }
-        catch (JsonException)
+        catch (JsonException ex)
         {
-            return Result<NoteDataDto?>.Success(null);
+            return Result<NoteDataDto?>.Failure($"{ex.Message}");
         }
     }
 }
