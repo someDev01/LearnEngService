@@ -13,12 +13,13 @@ public class GetUsersHandler(IDataContext context) : IRequestHandler<GetUsersQue
         var users = await context.Users
             .AsNoTracking()
             .Select(u => new UserDto(
+                u.Id,
                 u.Email!.Value,
                 u.Role.ToString()!,
                 u.CreatedAt))
             .ToListAsync(cancellationToken);
         if (users is null || users.Count == 0)
-            return Result<List<UserDto>>.Failure("Пользователей не найдено");
+            return Result<List<UserDto>>.Failure("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 
         return Result<List<UserDto>>.Success(users);
     }
