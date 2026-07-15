@@ -1,0 +1,12 @@
+
+
+.progress{
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgb(172, 172, 172);
+    p{
+        margin: 0;
+        color: white;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        font-size: 14px;
+    }
+}

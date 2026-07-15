@@ -6,35 +6,43 @@ import { toast } from "react-toastify";
 import ButtonClose from "../../ui/button_close/ButtonClose";
 import { useDispatch } from "react-redux";
 import { closeModalTrainig } from "../../redux/slices/modalSlice";
-import Question from "../../ui/question/Question";
-import Option from "../../ui/option/Option";
-import TrainingFinish from "../../ui/training_finish/TrainingFinish";
 import Source from "../../ui/source/Source";
-import EllipsisText from "../../ui/ellipsis_text/EllipsisText";
 import NoNotes from "../../ui/no_notes/NoNotes";
-import QuestionTranslation from "../../ui/question_translation/QuestionTranslation";
-import ButtonQuestionTranslation from "../../ui/button_question_translation/ButtonQuestionTranslation";
 import ButtonX from "../../ui/button_x/ButtonX";
+import { Volume2Icon } from "lucide-react";
+import Translations from "../../ui/translations/Translations";
+import Examples from "../../ui/examples/Examples";
+import TrainingProgress from "../../ui/training_progress/TrainingProgress";
+import TrainingPronuntion from "../../ui/training_pronuntion/TrainingPronuntion";
+import Slots from "../../ui/slots/Slots";
+import Tiles from "../../ui/tiles/Tiles";
+import TrainingNextButton from "../../ui/training_next_button/TrainingNextButton";
+import TrainingFinish from './../../ui/training_finish/TrainingFinish';
 
-const timeoutNext = 1500;
-
-function TrainingModal({ isOpen }) {
+function TrainingModal({isOpen, trainingNotes=[]}) {
 
     const dispatch = useDispatch();
 
-    const [questions, setQuestions] = useState([]);
-    const [showTranslation, setShowTranslation] = useState(false);
-    const [currentIndexQ, setCurrentIndexQ] = useState(0);
-    const [selectedAns, setSelectedAns] = useState(null);
-    const [isShowResult, setIsShowResult] = useState(false);
     const [notes, setNotes] = useState([]);
+    const [trainingWords, setTrainingWords] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [wordProgressIndex, setWordProgressIndex] = useState(0);
+    const [tiles, setTiles] = useState([]);
+    const [builded, setBuilded] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
-    const [stepMap, setStepMap] = useState({});
-    const [countCorrect, setCountCorrect] = useState(0);    
-
-    const currentQuestion = questions[currentIndexQ] || null;
+    const [wrongTouchCount, setWrongTouchCount] = useState(0);
+    
+    const currentIndexView = currentIndex + 1;
+    const currentWord = trainingWords?.[currentIndex];
+    const target = currentWord?.word ?? '';
+    const targetTranslations = currentWord?.translations ?? [];
 
     useEffect(() => {
+        if(trainingNotes.length > 0){
+            setNotes(trainingNotes);
+            return;
+        }
+
         const getNotes = async () => {
             const response = await noteApi.getDictionary();
 
@@ -52,175 +60,29 @@ function TrainingModal({ isOpen }) {
     useEffect(() => {
         if (!notes.length) return;
 
-        const sorted = [...notes]
+        const selected = shuffle([...notes]
             .sort((a, b) => a.repetitionScore - b.repetitionScore)
-            .slice(0, 10);
+            .slice(0, 10));
 
-        const selected = shuffle(sorted);
-
-        const qs = selected
-            .filter(note => {
-                const {text} = getSentence(note);
-
-                const normalizedText = text.trim().toLowerCase();
-                const normalizedWord = note.word.trim().toLowerCase();
-
-                return normalizedText !== normalizedWord;
-            })
-            .map(note => {
-
-                const { text, translate } = getSentence(note);
-                const examples = note.examples || [{ text: '', translate: ''}]
-                const translation = examples.find(t => t.text === text).translate;
-                const question = text.replaceAll(note.word.toLowerCase(), "___");
-
-                return {
-                    question,
-                    translate,
-                    step: 0,
-                    options: generateOptions(note, notes),
-                    correct: note.word,
-                    noteId: note.id,
-                };
-        });
-
-        setQuestions(qs);
-        setCurrentIndexQ(0);
-        setSelectedAns(null);
-        setIsShowResult(false);
-        setIsFinished(false);
-
+        setTrainingWords(selected);
+        setCurrentIndex(0);
     }, [notes]);
 
-    const getSentence = (note) => {
-        const examples = note.examples || [{text: '', translate: ''}];
-        const step = stepMap[note.id] || 0;
+    useEffect(() => {
+        if(!currentWord) return;
 
-        if (examples.length > 0) {
-            const idx = (step - 1) % examples.length;
-            const idxSafe = (idx < 0 ? examples.length + idx : idx) % examples.length;
-            return {
-                text: examples[idxSafe].text,
-                translate: examples[idxSafe].translate,
-                type: "example",
-            };
-        }
+        setTiles(shuffle(currentWord.word.split('').filter(c => c !== ' ').map((char, id) => ({char, id, isWrong: false}))));
+    }, [currentWord, trainingWords])
 
-        return {
-            text: `Translate "${note.word}"`,
-            type: "fallback",
-        };
-    };
-
-    const generateOptions = (note, notes) => {
-        const options = new Set();
-
-        options.add(note.word);
-
-        const otherWords = notes
-            .filter(n => n.id !== note.id)
-            .map(n => n.word);
-
-        const shuffled = shuffle(otherWords);
-
-        for (let word of shuffled) {
-            options.add(word);
-
-            if (options.size === Math.min(4, notes.length)) {
-                break;
-            }
-        }
-
-        return shuffle([...options]);
-    };
-
-    const handleSelect = async (option) => {
-        if (isShowResult) return;
-
-        setSelectedAns(option);
-        setIsShowResult(true);
-
-        const isCorrect = option === currentQuestion.correct;
-        const noteId = currentQuestion.noteId;
-
-        if(isCorrect){
-            setCountCorrect(prev => prev + 1);
-        }
-
-        setStepMap(prev => {
-            const currentStep = prev[noteId] || 0;
-
-            return {
-                ...prev,
-                [noteId]: isCorrect ? currentStep + 1 : currentStep
-            };
-        });
-
-        await noteApi.updateRepetitionScore(noteId, isCorrect);
-
-        setTimeout(() => {
-            goNext();
-        }, timeoutNext);
-    };
-
-    const restartTraining = () => {
-        if (!notes.length) return;
-
-        const sorted = [...notes]
-            .sort((a, b) => a.repetitionScore - b.repetitionScore)
-            .slice(0, 10);
-
-        const selected = shuffle(sorted);
-
-        const qs = selected.map(note => {
-            const { text, translate } = getSentence(note);
-
-            return {
-                question: text.replaceAll(note.word, "___"),
-                translate,
-                options: generateOptions(note, notes),
-                correct: note.word,
-                noteId: note.id,
-            };
-        });
-
-        setQuestions(qs);
-        setCurrentIndexQ(0);
-        setSelectedAns(null);
-        setIsShowResult(false);
-        setIsFinished(false);
-        setCountCorrect(0);
-        setStepMap({});
-        setShowTranslation(false);
-    };
-
-    const goNext = () => {
-        if (currentIndexQ === questions.length - 1) {
+    const onGoNext = () => {
+        if (currentIndex === trainingWords.length - 1) {
             setIsFinished(true);
             return;
         }
-
-        setCurrentIndexQ(prev => prev + 1);
-        setSelectedAns(null);
-        setIsShowResult(false);
-        setShowTranslation(false);
-    };
-
-    const getButtonStyle = (option) => {
-        if (!isShowResult) return;
-
-        const isCorrect = option === currentQuestion.correct;
-        const isSelected = option === selectedAns;
-
-        if (isCorrect) {
-            return { backgroundColor: '#12be6e', color: 'black' };
-        }
-
-        if (isSelected && !isCorrect) {
-            return { backgroundColor: '#c71515', color: 'black' };
-        }
-
-        return {};
+        
+        setCurrentIndex(prev => prev + 1);
+        setWordProgressIndex(0);
+        setBuilded(false);
     };
 
     function shuffle(array) {
@@ -232,59 +94,87 @@ function TrainingModal({ isOpen }) {
         return a;
     }
 
+    const onTileClick = async(clickedTile) => {
+
+        const needed = target[wordProgressIndex];
+        if(clickedTile.char === needed){
+            setTiles(prev => prev.filter(t => t.id !== clickedTile.id));
+
+            let next = wordProgressIndex + 1;
+            while(target[next] === ' ') next++;
+            setWordProgressIndex(next);
+
+            const isDone = next === target.length;
+            if(isDone) {
+                setBuilded(true);
+                await noteApi.updateRepetitionScore(currentWord.id, isDone);
+            }
+        }
+        else{
+            setWrongTouchCount(prev => prev + 1);
+            navigator.vibrate?.(50);
+            setTiles(prev => prev.map(tile => tile.id === clickedTile.id ? {...tile, isWrong: true} : tile));
+
+            setTimeout(() => {
+                setTiles(prev => prev.map(tile => tile.id === clickedTile.id ? {...tile, isWrong: false} : tile));
+            }, 300);
+        }
+    };
+
+    const onRestartTraining = () => {
+        setTrainingWords(prev => shuffle([...prev]));
+        setCurrentIndex(0);
+        setWordProgressIndex(0);
+        setBuilded(false);
+        setIsFinished(false);
+        setWrongTouchCount(0);
+    }
+
     const onClose = () => {
         dispatch(closeModalTrainig());
-        restartTraining();
     };
 
     if (!isOpen) return null;
 
     return (
         <Modal isOpen={isOpen}>
-            <div className={styles.training__container}>
-                <div className={styles.training}>
-                    <div className={styles.header_part}>
-                        <div className={styles.steps}>
-                            <p>{currentIndexQ + 1} / {questions.length}</p>
-                        </div>
-                        <div className={styles.close_part}>
-                            <ButtonX onClick={onClose} />
-                        </div>
-                    </div>
-
-                    {currentQuestion && !isFinished && (
-                        <>
-                            <Question question={currentQuestion.question} />
-                            {showTranslation && currentQuestion.translate && (
-                                <QuestionTranslation translation={currentQuestion.translate}/>
-                            )}
-                            {!showTranslation && (
-                                <ButtonQuestionTranslation onClick={() => setShowTranslation(true)}/>
-                            )}
-
-                            <div className={styles.options}>
-                                {currentQuestion.options.map((opt, i) => (
-                                    <Option
-                                        key={i}
-                                        word={opt}
-                                        onClick={() => handleSelect(opt)}
-                                        isShowResult={isShowResult}
-                                        style={getButtonStyle(opt)}
-
-                                    />
-                                ))}
-                            </div>
-                        </>
+            <section className={styles.training}>
+                <header className={styles.header}>
+                    {notes.length > 0 && !isFinished && (
+                        <TrainingProgress currentIndex={currentIndex} notes={notes}/>
                     )}
-
-                    {isFinished && (
-                        <TrainingFinish countCorrect={countCorrect} questions={questions} onClick={restartTraining}/>
+                    <ButtonX onClick={onClose}/>
+                </header>
+                {notes.length > 0 ? (
+                    <main className={styles.main}>
+                    {!isFinished ? (
+                        <div className={styles.content}>
+                            <TrainingPronuntion target={target}/>
+                            <section className={styles.word_builder}>
+                                <Slots target={target} wordProgressIndex={wordProgressIndex} builded={builded}/>
+                                <Tiles tiles={tiles} onTileClick={onTileClick}/>
+                            </section>
+                            {builded && (
+                                <section className={styles.word_info}>
+                                    <Translations translations={targetTranslations} size={14}/>
+                                </section>
+                            )}
+                            {builded && !isFinished && (
+                                <TrainingNextButton onGoNext={onGoNext}/>
+                            )}
+                        </div>
+                        
+                    ) : (
+                        <TrainingFinish 
+                            currentIndexView={currentIndexView} 
+                            targetLength={notes.length} 
+                            wrongTouchCount={wrongTouchCount}
+                            onRestartTraining={onRestartTraining}
+                        />
                     )}
-
-                    {!currentQuestion && <NoNotes/>}
-
-                </div>
-            </div>
+                    </main>) : (<NoNotes/>)
+                }
+            </section>
         </Modal>
     );
 }

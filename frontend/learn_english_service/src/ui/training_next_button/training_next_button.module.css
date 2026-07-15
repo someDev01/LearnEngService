@@ -1,0 +1,18 @@
+
+.training_next_button{
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 20px;
+    border: none;
+    outline: none;
+    background-color: #ff7904;
+    border-radius: 6px;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+
+}
