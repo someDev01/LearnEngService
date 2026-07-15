@@ -1,6 +1,6 @@
 import { Volume2Icon } from "lucide-react";
-import { useSpeech } from "../../utils/speesh/useSpeesh";
 import styles from '../training_pronuntion/training_pronuntion.module.css';
+import { useSpeech } from "../../utils/speech/useSpeech";
 
 function TrainingPronuntion({target}){
 
