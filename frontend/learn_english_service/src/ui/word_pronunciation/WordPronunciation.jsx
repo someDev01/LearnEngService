@@ -1,4 +1,4 @@
-import { useSpeech } from '../../utils/speesh/useSpeesh';
+import { useSpeech } from '../../utils/speech/useSpeech';
 import styles from '../word_pronunciation/word_pronunciation.module.css';
 import { Volume2Icon } from 'lucide-react';
 
