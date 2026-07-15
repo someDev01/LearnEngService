@@ -141,7 +141,7 @@ function TrainingModal({isOpen, trainingNotes=[]}) {
             <section className={styles.training}>
                 <header className={styles.header}>
                     {notes.length > 0 && !isFinished && (
-                        <TrainingProgress currentIndex={currentIndex} notes={notes}/>
+                        <TrainingProgress currentIndex={currentIndex} trainingWords={trainingWords.length}/>
                     )}
                     <ButtonX onClick={onClose}/>
                 </header>
@@ -167,7 +167,7 @@ function TrainingModal({isOpen, trainingNotes=[]}) {
                     ) : (
                         <TrainingFinish 
                             currentIndexView={currentIndexView} 
-                            targetLength={notes.length} 
+                            targetLength={trainingWords.length} 
                             wrongTouchCount={wrongTouchCount}
                             onRestartTraining={onRestartTraining}
                         />
