@@ -30,7 +30,7 @@ function Hero(){
     return(
         <div className={styles.hero}>
             <PreviewText/>
-            <ButtonSignIn onClick={onOpenAuthModal}/>
+            {!isAuth && <ButtonSignIn onClick={onOpenAuthModal}/>}
             <Opportunites/>
         </div>
     )
