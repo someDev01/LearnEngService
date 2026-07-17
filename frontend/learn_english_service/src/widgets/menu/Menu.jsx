@@ -24,7 +24,7 @@ function Menu({isOpen, onClose, user}){
     const navigation = useNavigate();
 
     const [isOpening, setIsOpening] = useState(false);
-    const [profileData, setProfileData] = useState(null);
+    const [profileData, setProfileData] = useState({});
 
     useEffect(() => {
         if(isOpen){
@@ -43,7 +43,7 @@ function Menu({isOpen, onClose, user}){
                 setProfileData(response.data);
             }
             else{
-                setProfileData(null);
+                setProfileData({});
                 toast.error(response.error);
             }
         }
@@ -90,7 +90,7 @@ function Menu({isOpen, onClose, user}){
                     <div className={styles.header_part}>
                         <ButtonX onClick={onClose}/>
                         <Profile user={user}/>
-                        <Progress addedCount={profileData.addedCount} trainedCount={profileData.trainedCount}/>
+                        <Progress addedCount={profileData?.addedCount} trainedCount={profileData?.trainedCount}/>
                     </div>
                     <div className={styles.middle_part}>
                         <div className={styles.menu_buttons}>
@@ -98,7 +98,7 @@ function Menu({isOpen, onClose, user}){
                                 onClick={onNavigateDictionary}
                                 title="Личный словарь"
                                 type="dict"
-                                count={profileData.notesCount}
+                                count={profileData?.notesCount}
                             >
                                 <Book size={18} color='rgb(255, 86, 13)'/>
                             </ButtonNavigate>
@@ -115,7 +115,7 @@ function Menu({isOpen, onClose, user}){
                                 onClick={onNavigateVideos}
                                 title="Видео"
                                 type="videos"
-                                count={profileData.videosCount}
+                                count={profileData?.videosCount}
                             >
                                 <TvMinimalPlay size={18} color='rgb(255, 86, 13)'/>
                             </ButtonNavigate>

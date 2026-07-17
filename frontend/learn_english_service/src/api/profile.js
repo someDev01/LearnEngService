@@ -3,7 +3,7 @@ import apiClient from "./client";
 export const profileApi = {
     getProfile: async() => {
         try{
-            const response = await apiClient.get('profile');
+            const response = await apiClient.get('profile/');
             return {success: true, data: response.data};
         }
         catch(e){
