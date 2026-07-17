@@ -1,12 +1,13 @@
 ﻿using Application.Auth.Dtos;
 using Application.Interfaces.Context;
+using Application.Interfaces.UnitOfWork;
 using Domain.Model.Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Auth.Queries.GetUserById;
 
-public class GetUserByIdHandler(IDataContext context) : IRequestHandler<GetUserByIdQuery, Result<UserByIdDto>>
+public class GetUserByIdHandler(IDataContext context, IUnitOfWork unitOfWork) : IRequestHandler<GetUserByIdQuery, Result<UserByIdDto>>
 {
     public async Task<Result<UserByIdDto>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
@@ -17,6 +18,13 @@ public class GetUserByIdHandler(IDataContext context) : IRequestHandler<GetUserB
                 u.Email!.Value, 
                 u.Name!.Value))
             .FirstOrDefaultAsync(cancellationToken);
+
+        var updateUser = await context.Users
+            .Where(u => u.Id == request.UserId)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        updateUser.UpdateName(userDto.Email);
+        await unitOfWork.CommitAsync(cancellationToken);    
 
         if (userDto is null)
             return Result<UserByIdDto>.Failure("Пользователь не найден");
