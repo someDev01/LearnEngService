@@ -12,7 +12,7 @@ function ButtonNavigate({onClick, title, children, type=null, count=null}){
                 <div className={styles.title}>{title}</div>
             </div>
             <div className={styles.count_and_follow}>
-                {type === 'dict' && (
+                {count > 0 && (
                     <div className={styles.count_block}>
                         <p>{count}</p>
                     </div>

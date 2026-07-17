@@ -1,5 +1,6 @@
 ﻿using Api.Endpoints.Auth;
 using Api.Endpoints.Note;
+using Api.Endpoints.Profile;
 using Api.Endpoints.Subtitle;
 using Api.Endpoints.Translate;
 using Api.Endpoints.YoutubeVideo;
@@ -70,6 +71,7 @@ public static class DependencyInjection
         app.AddNoteEndpoints();
         app.AddTranslateEndpoints();
         app.AddUserEndpoints();
+        app.AddProfileEndpoint();
         return app;
     }
 

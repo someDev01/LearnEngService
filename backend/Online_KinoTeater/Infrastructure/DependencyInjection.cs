@@ -84,7 +84,9 @@ using StackExchange.Redis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Application.Interfaces.ProfileQuery;
 using Application.Interfaces.VerificationCodeSender;
+using Application.Services.ProfileQuery;
 using Application.Services.VerificationCodeSender;
 using Application.Validators.UpdateNote;
 using Microsoft.EntityFrameworkCore;
@@ -160,6 +162,8 @@ public static class DependencyInjection
 
         services.AddScoped<INoteReadService, NoteReadService>();
         services.AddScoped<IVideoReadService, VideoReadService>();
+
+        services.AddScoped<IProfileQueryService, ProfileQueryService>();
 
         services.AddScoped<INoteCacheService, NoteCacheService>();
         services.AddScoped<IVideoCacheService, VideoCacheService>();

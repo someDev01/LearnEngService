@@ -16,7 +16,7 @@ import Modal from '../../modal/Modal';
 import { useEffect, useState } from 'react';
 import ButtonX from '../../ui/button_x/ButtonX';
 import Progress from '../progress/Progress';
-import { noteApi } from '../../api/note';
+import { profileApi } from '../../api/profile';
 
 function Menu({isOpen, onClose, user}){
 
@@ -24,7 +24,7 @@ function Menu({isOpen, onClose, user}){
     const navigation = useNavigate();
 
     const [isOpening, setIsOpening] = useState(false);
-    const [notes, setNotes] = useState([]);
+    const [profileData, setProfileData] = useState(null);
 
     useEffect(() => {
         if(isOpen){
@@ -36,19 +36,19 @@ function Menu({isOpen, onClose, user}){
     }, [isOpen]);
 
     useEffect(() => {
-        const fetchDictionary = async() => {
-            const response = await noteApi.getDictionary();
+        const fetchProfile = async() => {
+            const response = await profileApi.getProfile();
 
             if(response.success){
-                setNotes(response.data);
+                setProfileData(response.data);
             }
             else{
-                setNotes([]);
+                setProfileData(null);
                 toast.error(response.error);
             }
         }
 
-        fetchDictionary();
+        fetchProfile();
     }, []);
 
     const onNavigateDictionary = () => {
@@ -90,7 +90,7 @@ function Menu({isOpen, onClose, user}){
                     <div className={styles.header_part}>
                         <ButtonX onClick={onClose}/>
                         <Profile user={user}/>
-                        <Progress userNotes={notes}/>
+                        <Progress addedCount={profileData.addedCount} trainedCount={profileData.trainedCount}/>
                     </div>
                     <div className={styles.middle_part}>
                         <div className={styles.menu_buttons}>
@@ -98,7 +98,7 @@ function Menu({isOpen, onClose, user}){
                                 onClick={onNavigateDictionary}
                                 title="Личный словарь"
                                 type="dict"
-                                count={notes.length}
+                                count={profileData.notesCount}
                             >
                                 <Book size={18} color='rgb(255, 86, 13)'/>
                             </ButtonNavigate>
@@ -115,6 +115,7 @@ function Menu({isOpen, onClose, user}){
                                 onClick={onNavigateVideos}
                                 title="Видео"
                                 type="videos"
+                                count={profileData.videosCount}
                             >
                                 <TvMinimalPlay size={18} color='rgb(255, 86, 13)'/>
                             </ButtonNavigate>
