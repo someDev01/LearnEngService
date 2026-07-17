@@ -5,11 +5,12 @@ function NotificationToast(){
     return(
         <>
             <ToastContainer
-                position='bottom-right'
+                position='top-center'
                 autoClose={2000}
                 hideProgressBar={true}
                 pauseOnFocusLoss={false}
                 pauseOnHover={false}
+                closeButton={false}
                 theme='dark'
             />
         </>

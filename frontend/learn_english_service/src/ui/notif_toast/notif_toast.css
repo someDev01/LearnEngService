@@ -3,23 +3,27 @@
 .Toastify__toast{
     min-height: 30px;
     width: 350px;
+    top: 35px;
     font-size: 14px;
     border-radius: 16px;
 }
 
 .Toastify__toast--success{
-    background-color: #002b0e !important;
-    border-left: 3px solid #009637;
+    background-color: #002a10 !important;
+    border: 1px solid #007846;
+    border-top: 2px solid #009842;
 }
 
 .Toastify__toast--error{
-    background-color: #2b0100 !important;
-    border-left: 3px solid #961e00;
+    background-color: #2a1413 !important;
+    border: 1px solid #961e00;
+    border-top: 2px solid #ae2300;
 }
 
 @media (max-width: 768px){
 
     .Toastify__toast{
         width: 82vw;
+        margin-bottom: 8px;
     }
 }
