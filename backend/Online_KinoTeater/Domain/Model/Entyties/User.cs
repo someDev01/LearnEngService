@@ -44,4 +44,18 @@ public class User : Entity
         var name = nameResult.Value;
         return Result<User>.Success(new User(email, name, role));
     }
+    
+    //к удалению
+    public Result InitializeName()
+    {
+        if (Name is not null)
+            return Result.Success();
+
+        var nameResult = Name.Create(Email.Value);
+        if (!nameResult.IsSuccess)
+            return Result.Failure(nameResult.Error!);
+
+        Name = nameResult.Value!;
+        return Result.Success();
+    }
 }
