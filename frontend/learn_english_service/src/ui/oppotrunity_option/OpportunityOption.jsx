@@ -8,12 +8,12 @@ function OpportunityOption({index, openIndex, title, type, imgTag, content, onCl
                 <div className={styles.option_title}>
                     <div className={styles.option_icon}>
                         {type === "clip" ? 
-                            <Clapperboard size={22} color='#f88934'/> :
+                            <Clapperboard size={22} color='#ff7231'/> :
                             type === "sub" ? 
-                            <SubtitlesIcon size={22} color='#f88934'/> : 
+                            <SubtitlesIcon size={22} color='#ff7231'/> : 
                             type === "dict" ?
-                            <BookMarkedIcon size={22} color='#f88934'/> :
-                            <Brain size={22} color='#f88934'/> }
+                            <BookMarkedIcon size={22} color='#ff7231'/> :
+                            <Brain size={22} color='#ff7231'/> }
                     </div>
                     <p>{title}</p>
                 </div>
