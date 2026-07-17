@@ -18,9 +18,9 @@ public class FillUsersNamesCommandHandler(IDataContext context, IUnitOfWork unit
 
             if (!result.IsSuccess)
                 return Result.Failure(result.Error!);
+            
+            await unitOfWork.CommitAsync(cancellationToken);
         }
-
-        await unitOfWork.CommitAsync(cancellationToken);
 
         return Result.Success();
     }
