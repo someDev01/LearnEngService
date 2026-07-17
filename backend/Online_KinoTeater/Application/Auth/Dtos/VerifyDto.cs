@@ -2,4 +2,5 @@
 
 public record VerifyDto(
     string Jwt,
-    string Email);
+    string Email,
+    string Name);

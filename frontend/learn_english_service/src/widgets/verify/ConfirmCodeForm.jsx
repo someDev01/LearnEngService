@@ -52,8 +52,8 @@ function ConfirmCodeForm(){
         if (result.success) {
             dispatch(resetResendTime());
             dispatch(setUser({
-                name: result.data.name,
                 email: result.data.email,
+                name: result.data.name,
             }));
             
             dispatch(resetTempUser());

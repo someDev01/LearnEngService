@@ -63,6 +63,7 @@ public static class AuthEndpoints
             {
                 isVerified = result.IsSuccess,
                 email = result.Value.Email,
+                name = result.Value.Name,
                 step = "done"
             });
         });

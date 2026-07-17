@@ -120,7 +120,7 @@ public class VerificationCodeCommandHandler(
         await authVerificationPolicyService.ResetVerificationAttemptsAsync(request.Email);
         #endregion
 
-        var result = new VerifyDto(jwt, userExisting.Email!.Value);
+        var result = new VerifyDto(jwt, userExisting.Email.Value, userExisting.Name.Value);
 
         return Result<VerifyDto>.Success(result);
     }
