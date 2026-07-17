@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeMenu, openMenu } from '../../redux/slices/menuSlice';
 import ButtonSignIn from '../../ui/button_signin/ButtonSignIn';
 import AuthFlow from '../auth/AuthFlow';
-import { openModalAuth } from '../../redux/slices/modalSlice';
 import TrainingModal from '../training/TrainingModal';
 
 function Header(){
@@ -29,9 +28,7 @@ function Header(){
                     <Link to='/' style={{textDecoration: 'none'}} replace>
                         <Logo title="VoClip"/>
                     </Link>
-                    {user ? 
-                        <ButtonMenu onOpen={onOpen} /> : 
-                        <ButtonSignIn onClick={() => dispatch(openModalAuth())}/>}
+                    {user && <ButtonMenu onOpen={onOpen}/>}
                 </div>
             </div>
             {isOpenMenu && <Menu isOpen={isOpenMenu} onClose={onClose} user={user}/>}
