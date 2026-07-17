@@ -48,7 +48,7 @@ public class User : Entity
     //к удалению
     public Result InitializeName()
     {
-        if (Name is not null)
+        if (!string.IsNullOrWhiteSpace(Name.Value))
             return Result.Success();
 
         var nameResult = Name.Create(Email.Value);
