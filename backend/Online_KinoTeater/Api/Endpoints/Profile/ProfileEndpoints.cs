@@ -9,7 +9,7 @@ public static class ProfileEndpoints
 {
     public static IEndpointRouteBuilder AddProfileEndpoint(this IEndpointRouteBuilder app)
     {
-        var groupProfile = app.MapGroup("api/profile")
+        var groupProfile = app.MapGroup("profile")
             .WithTags("Profile");
         
         groupProfile.MapGet("/", async (ClaimsPrincipal claim, IMediator mediator) =>
