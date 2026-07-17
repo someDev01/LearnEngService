@@ -1,4 +1,3 @@
-using Application.User.Commands;
 using Application.User.Queries.GetAllUsers;
 using MediatR;
 
@@ -19,16 +18,6 @@ public static class UserEndpoints
 
             return Results.Ok(result.Value);
         }).RequireAuthorization("AdminOnlyAccess");
-    
-        //к удалению
-        userGroup.MapPost("users/fill-names", async (IMediator mediator) =>
-        {
-            var result = await mediator.Send(new FillUsersNamesCommand());
-            
-            return result.IsSuccess
-                ? Results.Ok()
-                : Results.BadRequest(result.Error);
-        });
         
         return app;
     }

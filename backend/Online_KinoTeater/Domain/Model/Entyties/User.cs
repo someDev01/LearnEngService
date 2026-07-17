@@ -43,19 +43,5 @@ public class User : Entity
 
         var name = nameResult.Value;
         return Result<User>.Success(new User(email, name, role));
-    }
-    
-    //к удалению
-    public Result InitializeName()
-    {
-        if (!string.IsNullOrWhiteSpace(Name.Value))
-            return Result.Success();
-
-        var nameResult = Name.Create(Email.Value);
-        if (!nameResult.IsSuccess)
-            return Result.Failure(nameResult.Error!);
-
-        Name = nameResult.Value!;
-        return Result.Success();
-    }
+    } 
 }
