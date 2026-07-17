@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace Application.Validators.SendVerify;
 
-public class SendVerificationsCodeCommandValidator: AbstractValidator<SendVerificationCodeCommand>
+public class SendVerificationsCodeCommandValidator: AbstractValidator<SendAuthenticationCodeCommand>
 {
     public SendVerificationsCodeCommandValidator()
     {

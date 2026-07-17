@@ -34,7 +34,7 @@ function Header(){
                         <ButtonSignIn onClick={() => dispatch(openModalAuth())}/>}
                 </div>
             </div>
-            {isOpenMenu && <Menu isOpen={isOpenMenu} onClose={onClose} email={user?.email}/>}
+            {isOpenMenu && <Menu isOpen={isOpenMenu} onClose={onClose} user={user}/>}
             {isOpenAuth && <AuthFlow isOpen={isOpenAuth}/>}
             {isOpenTraining && <TrainingModal isOpen={isOpenTraining}/>}
         </>

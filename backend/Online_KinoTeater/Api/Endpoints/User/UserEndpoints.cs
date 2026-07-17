@@ -18,7 +18,7 @@ public static class UserEndpoints
 
             return Results.Ok(result.Value);
         }).RequireAuthorization("AdminOnlyAccess");
-
+        
         return app;
     }
 }

@@ -15,6 +15,7 @@ public class GetUsersHandler(IDataContext context) : IRequestHandler<GetUsersQue
             .Select(u => new UserDto(
                 u.Id,
                 u.Email!.Value,
+                u.Name!.Value,
                 u.Role.ToString()!,
                 u.CreatedAt))
             .ToListAsync(cancellationToken);

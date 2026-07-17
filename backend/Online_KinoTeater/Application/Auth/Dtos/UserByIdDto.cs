@@ -1,3 +1,3 @@
 ﻿namespace Application.Auth.Dtos;
 
-public record UserByIdDto(string Email);
+public record UserByIdDto(string Email, string Name);

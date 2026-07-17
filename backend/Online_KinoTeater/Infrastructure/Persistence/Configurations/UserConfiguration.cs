@@ -20,6 +20,14 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
             e.HasIndex(p => p.Value);
         });
+        
+        builder.OwnsOne(u => u.Name, n =>
+        {
+            n.Property(p => p.Value)
+                .HasColumnName("Name")
+                .HasMaxLength(20)
+                .IsRequired();
+        });
 
         builder.Property(u => u.Role)
             .HasConversion<string>()

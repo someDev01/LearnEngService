@@ -25,7 +25,7 @@ public static class AuthEndpoints
             .WithTags("Admin-Auth");
 
         #region EMAIL ENDPOINTS
-        authGroup.MapPost("send-code", async ([FromBody] SendVerificationCodeCommand command, IMediator mediator) =>
+        authGroup.MapPost("send-code", async ([FromBody] SendAuthenticationCodeCommand command, IMediator mediator) =>
         {
             var result = await mediator.Send(command);
             if (!result.IsSuccess)
@@ -106,6 +106,7 @@ public static class AuthEndpoints
             return Results.Ok(new
             {
                 email = result.Value!.Email,
+                name = result.Value!.Name,
             });
         }).RequireAuthorization();
 

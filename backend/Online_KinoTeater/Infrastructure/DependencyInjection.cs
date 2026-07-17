@@ -84,6 +84,8 @@ using StackExchange.Redis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Application.Interfaces.VerificationCodeSender;
+using Application.Services.VerificationCodeSender;
 using Application.Validators.UpdateNote;
 using Microsoft.EntityFrameworkCore;
 
@@ -154,6 +156,8 @@ public static class DependencyInjection
         services.AddScoped<IAuthVerificationPolicyService, AuthVerificationPolicyService>();
         services.AddScoped<IVerificationCodeService, VerificationCodeService>();
 
+        services.AddScoped<IVerificationCodeSenderService, VerificationCodeSenderService>();
+
         services.AddScoped<INoteReadService, NoteReadService>();
         services.AddScoped<IVideoReadService, VideoReadService>();
 
@@ -205,7 +209,7 @@ public static class DependencyInjection
         #endregion
 
         #region VALIDATORS
-        services.AddScoped<IValidator<SendVerificationCodeCommand>, SendVerificationsCodeCommandValidator>();
+        services.AddScoped<IValidator<SendAuthenticationCodeCommand>, SendVerificationsCodeCommandValidator>();
         services.AddScoped<IValidator<VerificationCodeCommand>, VerificationCodeCommandValidator>();
         services.AddScoped<IValidator<VerificationCodeAndSecretAdminCommand>, VerificationCodeAdminCommandValidator>();
 

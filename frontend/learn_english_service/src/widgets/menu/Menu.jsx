@@ -18,7 +18,7 @@ import ButtonX from '../../ui/button_x/ButtonX';
 import Progress from '../progress/Progress';
 import { noteApi } from '../../api/note';
 
-function Menu({isOpen, onClose, email}){
+function Menu({isOpen, onClose, user}){
 
     const dispatch = useDispatch();
     const navigation = useNavigate();
@@ -89,7 +89,7 @@ function Menu({isOpen, onClose, email}){
                 <div className={styles.menu_section}>
                     <div className={styles.header_part}>
                         <ButtonX onClick={onClose}/>
-                        <Profile email={email}/>
+                        <Profile user={user}/>
                         <Progress userNotes={notes}/>
                     </div>
                     <div className={styles.middle_part}>

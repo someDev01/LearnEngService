@@ -11,7 +11,9 @@ public enum Role
 
 public class User : Entity
 {
-    public Email? Email { get; private set; }
+    public Email Email { get; private set; }
+    
+    public Name Name { get; private set; }
 
     public Role? Role { get; private set; }
 
@@ -19,9 +21,10 @@ public class User : Entity
 
     protected User() { }
 
-    private User(Email email, Role? role)
+    private User(Email email, Name name, Role? role)
     {
         Email = email;
+        Name = name;
         Role = role;
         CreatedAt = DateTime.UtcNow;
     }
@@ -34,6 +37,11 @@ public class User : Entity
         if (role is null)
             return Result<User>.Failure("Роль для пользователя не указана");
 
-        return Result<User>.Success(new User(email, role));
+        var nameResult = Name.Create(email.Value);
+        if(!nameResult.IsSuccess)
+            return Result<User>.Failure(nameResult.Error!);
+
+        var name = nameResult.Value;
+        return Result<User>.Success(new User(email, name, role));
     }
 }

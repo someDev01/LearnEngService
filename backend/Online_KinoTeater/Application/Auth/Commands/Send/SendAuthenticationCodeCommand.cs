@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.Auth.Commands.Send;
 
-public record SendVerificationCodeCommand(string Email) : IRequest<Result<TimeSpan>>;
+public record SendAuthenticationCodeCommand(string Email) : IRequest<Result<TimeSpan>>;

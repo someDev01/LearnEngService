@@ -13,7 +13,9 @@ public class GetUserByIdHandler(IDataContext context) : IRequestHandler<GetUserB
         var userDto = await context.Users
             .AsNoTracking()
             .Where(u => u.Id == request.UserId)
-            .Select(u => new UserByIdDto(u.Email!.Value))
+            .Select(u => new UserByIdDto(
+                u.Email!.Value, 
+                u.Name!.Value))
             .FirstOrDefaultAsync(cancellationToken);
 
         if (userDto is null)
