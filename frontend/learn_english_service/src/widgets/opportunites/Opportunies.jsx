@@ -35,6 +35,9 @@ function Opportunites(){
 
     return(
         <div className={styles.opportunites}>
+            <header className={styles.how_work_info}>
+                <p>Как это работает</p>
+            </header>
             {options.map((op, index) => (
                 <OpportunityOption
                     key={index}

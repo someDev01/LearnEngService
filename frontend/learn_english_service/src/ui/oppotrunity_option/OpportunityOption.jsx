@@ -19,8 +19,8 @@ function OpportunityOption({index, openIndex, title, type, imgTag, content, onCl
                 </div>
                 <div className={styles.dropdown_button}>
                     {openIndex === index ? 
-                        <ChevronUpIcon size={20} color='rgb(184, 184, 184)'/> : 
-                        <ChevronDown size={20} color='rgb(184, 184, 184)'/>
+                        <ChevronUpIcon size={20} color='rgb(255, 92, 33)'/> : 
+                        <ChevronDown size={20} color='rgb(255, 92, 33)'/>
                     }
                     
                 </div>
