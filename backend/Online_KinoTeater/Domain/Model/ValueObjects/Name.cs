@@ -9,7 +9,7 @@ public record Name(string Value): ValueObject
         if (string.IsNullOrWhiteSpace(email))
             return Result<Name>.Failure("Имя не указано");
 
-        string name = email.Split("@")[0].Trim();
+        string name = email.Split('@')[0].Trim();
         
         return Result<Name>.Success(new Name(name));
     }
