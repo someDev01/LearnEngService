@@ -19,13 +19,6 @@ public class GetUserByIdHandler(IDataContext context, IUnitOfWork unitOfWork) : 
                 u.Name!.Value))
             .FirstOrDefaultAsync(cancellationToken);
 
-        var updateUser = await context.Users
-            .Where(u => u.Id == request.UserId)
-            .FirstOrDefaultAsync(cancellationToken);
-
-        updateUser.UpdateName(userDto.Email);
-        await unitOfWork.CommitAsync(cancellationToken);    
-
         if (userDto is null)
             return Result<UserByIdDto>.Failure("Пользователь не найден");
 

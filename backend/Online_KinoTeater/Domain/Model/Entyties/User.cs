@@ -44,12 +44,4 @@ public class User : Entity
         var name = nameResult.Value;
         return Result<User>.Success(new User(email, name, role));
     }
-
-    public Result UpdateName(string name)
-    {
-        var nameResult = Name.Create(name);
-        Name = nameResult.Value;
-
-        return Result.Success();
-    }
 }
