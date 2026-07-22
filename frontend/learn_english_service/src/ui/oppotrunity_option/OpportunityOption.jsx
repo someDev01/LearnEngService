@@ -3,17 +3,17 @@ import styles from '../oppotrunity_option/opportunity_option.module.css';
 
 function OpportunityOption({index, openIndex, title, type, imgTag, content, onClick}){
     return(
-        <div className={styles.option_block}>
+        <div className={`${styles.option_block} ${openIndex === index ? styles.open : ''}`}>
             <div className={styles.option_trigger} onClick={onClick} style={{borderBottom: openIndex === index ? '1px solid rgb(48, 48, 48)' : ''}}>
                 <div className={styles.option_title}>
                     <div className={styles.option_icon}>
                         {type === "clip" ? 
-                            <Clapperboard size={22} color='#ff7231'/> :
+                            <Clapperboard size={22} color='#ff6720'/> :
                             type === "sub" ? 
-                            <SubtitlesIcon size={22} color='#ff7231'/> : 
+                            <SubtitlesIcon size={22} color='#ff6720'/> : 
                             type === "dict" ?
-                            <BookMarkedIcon size={22} color='#ff7231'/> :
-                            <Brain size={22} color='#ff7231'/> }
+                            <BookMarkedIcon size={22} color='#ff6720'/> :
+                            <Brain size={22} color='#ff6720'/> }
                     </div>
                     <p>{title}</p>
                 </div>

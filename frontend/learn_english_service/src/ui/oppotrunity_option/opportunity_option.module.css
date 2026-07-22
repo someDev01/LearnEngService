@@ -4,8 +4,13 @@
     flex-direction: column;
     width: 100%;
     border-radius: 10px;
-    border: 1px solid rgb(46, 46, 46);
-    background-color: #191919;
+    border: 1px solid rgb(38, 38, 38);
+    background-color: #121212;
+    transition: border-color .4s ease;
+}
+
+.option_block.open{
+    border-color: #ff5500;
 }
 
 .option_trigger{
@@ -21,8 +26,8 @@
     justify-content: center;
     align-items: center;
     padding: 6px;
-    background-color: #282828;
-    border: 1px solid rgb(72, 72, 72);
+    background-color: #222222;
+    border: 1px solid rgb(60, 60, 60);
     border-radius: 8px;
 }
 
