@@ -1,3 +1,4 @@
+import Footer from "../../widgets/footer/Footer";
 import Hero from "../../widgets/hero/Hero";
 
 function HomePage(){
@@ -5,6 +6,7 @@ function HomePage(){
         <>
             <main>
                 <Hero/>
+                <Footer/>
             </main>
         </>
     )

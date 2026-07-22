@@ -1,6 +1,6 @@
 import styles from '../hero/hero.module.css';
-import Opportunites from '../../ui/opportunites/Opportunies';
 import PreviewHero from '../preview_hero/PreviewHero';
+import Opportunites from './../opportunites/Opportunies';
 
 function Hero(){
 
