@@ -48,3 +48,8 @@
     margin: 0;
     color: rgb(173, 173, 173);
 }
+
+.actions_confirm{
+    display: flex;
+    flex-direction: column;
+}

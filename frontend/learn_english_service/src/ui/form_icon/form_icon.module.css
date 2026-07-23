@@ -1,0 +1,10 @@
+
+.form_icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px;
+    background-color: rgb(25, 25, 25);
+    border-radius: 50%;
+    border: 1px solid rgb(48, 48, 48);
+}

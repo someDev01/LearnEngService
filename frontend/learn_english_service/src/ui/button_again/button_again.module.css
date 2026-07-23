@@ -1,16 +1,28 @@
 
-
 .button_again{
     user-select: none;
     cursor: pointer;
-    padding: 6px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    gap: 8px;
     outline: none;
     border: none;
+    background-color: #2e3337;
     font-size: 14px;
-    color: rgb(255, 255, 255);
+    color: rgb(255, 98, 0);
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    border-radius: 6px;
-    border: 1px solid rgb(255, 164, 94);
-    background-color: transparent;
+    border-radius: 8px;
+    margin-top: 5px;
     margin-bottom: 10px;
+}
+
+.button_again.disabled{
+    background-color: #1c1c1c;
+    border: 1px solid #3a3a3a;
+
+    span{
+        color: rgb(162, 162, 162);
+    }
 }

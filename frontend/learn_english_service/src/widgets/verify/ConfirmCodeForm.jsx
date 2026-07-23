@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 import CodeInput from '../../ui/code/CodeInput';
 import { useEffect, useState } from 'react';
 import ButtonAgain from '../../ui/button_again/ButtonAgain';
+import FormIcon from '../../ui/form_icon/FormIcon';
+import { ShieldCheckIcon } from 'lucide-react';
 
 function ConfirmCodeForm(){
 
@@ -82,25 +84,30 @@ function ConfirmCodeForm(){
     return(
         <>
             <div className={styles.text_confirm}>
+                <FormIcon>
+                    <ShieldCheckIcon size={36} color='#ff6600'/>
+                </FormIcon>
                 <p className={styles.title}>Подтвердите ваш email</p>
                 <p className={styles.details}>
-                    Мы отправили 5-значный код на <span className={styles.email_text}>{tempUser?.email}</span>
+                    Код отправлен на <span className={styles.email_text}>{tempUser?.email}</span>
                 </p>
                 <p className={styles.check_spam}>Не пришел код? Проверьте папку «Спам»</p>
 
             </div>
-            <CodeInput
-                values={values}
-                refs={inputRefs}
-                onChange={handleChange}
-                onKeyDown={onKeyDown}
-            />
+            <div className={styles.actions_confirm}>
+                <CodeInput
+                    values={values}
+                    refs={inputRefs}
+                    onChange={handleChange}
+                    onKeyDown={onKeyDown}
+                />
 
-            <ButtonAgain
-                isResendDisabled={isResendDisabled}
-                handleResendCode={handleResendCode}
-                leftResendTime={leftResendTime}
-            />
+                <ButtonAgain
+                    isResendDisabled={isResendDisabled}
+                    handleResendCode={handleResendCode}
+                    leftResendTime={leftResendTime}
+                />
+            </div>
         </>
      
     )

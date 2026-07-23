@@ -7,6 +7,9 @@ import { resetTempUser, setError, setResendTime, setStep, setTempUser } from '..
 import { toast } from 'react-toastify';
 import ContinueButtonLoader from '../../ui/button_loader/ContinueButtonLoader';
 import { useState } from 'react';
+import FormIcon from '../../ui/form_icon/FormIcon';
+import { MailCheck } from 'lucide-react';
+import EmailNotice from '../../ui/email_notice/EmailNotice';
 
 function EmailSignInForm(){
 
@@ -38,7 +41,9 @@ function EmailSignInForm(){
 
     return(
         <>
-            <div className={styles.logo}>VOCLIP</div>
+            <FormIcon>
+                <MailCheck size={36} color='#ff6600'/>
+            </FormIcon>
             <div className={styles.title}>Введите почту</div>
             <div className={styles.description}>чтобы войти или создать аккаунт</div>
 
@@ -52,9 +57,12 @@ function EmailSignInForm(){
                     highLightErrorBorder={highLightErrorBorder}
                 />
             </div>
-            <ButtonContinue onClick={onSubmit} disabled={loading}>
-                {loading ? <ContinueButtonLoader/>: <p>Продолжить</p>}
-            </ButtonContinue>
+            <div className={styles.button_and_notice}>
+                <ButtonContinue onClick={onSubmit} disabled={loading}>
+                    {loading ? <ContinueButtonLoader/>: <p>Продолжить</p>}
+                </ButtonContinue>
+                <EmailNotice/>
+            </div>
         </>
     )
 }
