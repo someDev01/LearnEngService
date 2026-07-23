@@ -42,7 +42,7 @@ function EmailSignInForm(){
     return(
         <>
             <FormIcon>
-                <MailCheck size={36} color='#ff6600'/>
+                <MailCheck size={32} color='#ff6600'/>
             </FormIcon>
             <div className={styles.title}>Введите почту</div>
             <div className={styles.description}>чтобы войти или создать аккаунт</div>

@@ -85,7 +85,7 @@ function ConfirmCodeForm(){
         <>
             <div className={styles.text_confirm}>
                 <FormIcon>
-                    <ShieldCheckIcon size={36} color='#ff6600'/>
+                    <ShieldCheckIcon size={32} color='#ff6600'/>
                 </FormIcon>
                 <p className={styles.title}>Подтвердите ваш email</p>
                 <p className={styles.details}>
