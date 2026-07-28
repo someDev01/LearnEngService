@@ -50,7 +50,7 @@ function ContentPage(){
     const onNavigationToPlayer = () => {
         navigation("/video-player", {
             state:{
-                openedVideo
+                video: openedVideo
             }
         })
     }
