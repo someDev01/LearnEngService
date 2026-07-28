@@ -23,13 +23,16 @@ function ViewNoteForm({isOpen, note, onClose, onOpenVideo}){
     const youtubeId = note.source?.youtubeId;
     const youtubeVideoTitle = note.source?.youtubeVideoTitle;
     const context = note.source?.context;
-    const duration = note.source?.durationContext;    
+    const duration = note.source?.durationContext;   
+    const startTime = duration.hours * 3600 +
+                      duration.minutes * 60 +
+                      duration.seconds; 
 
     const video = {
         id,
         youtubeId,
         titleVideo: youtubeVideoTitle,
-        duration
+        startTime
     };
 
     const onNavigationToPlayer = () => {
