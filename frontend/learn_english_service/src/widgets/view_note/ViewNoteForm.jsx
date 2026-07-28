@@ -24,9 +24,9 @@ function ViewNoteForm({isOpen, note, onClose, onOpenVideo}){
     const youtubeVideoTitle = note.source?.youtubeVideoTitle;
     const context = note.source?.context;
     const duration = note.source?.durationContext;   
-    const startTime = duration?.hours * 3600 +
+    const startTime = duration ? duration?.hours * 3600 +
                       duration?.minutes * 60 +
-                      duration?.seconds; 
+                      duration?.seconds : 0; 
 
     const video = {
         id,
