@@ -22,10 +22,6 @@ const timeoutVideos = 500;
 function ContentPage(){
 
     const isOpen = useSelector(state => state.modal.isOpenVideoModal);    
-    //const openedVideo = useSelector(state => state.modal.openedVideo);
-    //const [openedVideo, setOpenedVideo] = useState(null);
-    console.log('openedVideo', openedVideo);
-    
 
     const navigation = useNavigate();
 
@@ -177,11 +173,6 @@ function ContentPage(){
                     </div>
                 </div>
             </div>
-            {/* {isOpen && openedVideo && <VideoPlayer
-                isOpen={isOpen}
-                videoId={openedVideo?.id}
-                selectedYoutubeId={openedVideo.youtubeId}
-            />} */}
         </>
     )
 }
