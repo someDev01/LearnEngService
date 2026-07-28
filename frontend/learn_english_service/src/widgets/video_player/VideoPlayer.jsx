@@ -82,9 +82,7 @@ function VideoPlayer(){
             seconds,
             text,
             context
-        );
-        console.log('созданная заметка', response.data);
-        
+        );        
 
         if(response.success){
             toast.success("Заметка создана")
@@ -171,17 +169,6 @@ function VideoPlayer(){
                         onWordClick={handleWordClick}
                         onHasWordInNotes={onHasWordInNotes}
                     />  
-                    <div className={styles.card_added}>
-                        <p>Добавленные слова из видео 45</p>
-                        <button>Тренироваваться</button>
-                        <div className={styles.cards}>
-                            <div className="" style={{display:'flex',flexDirection:'column', padding:'10px', color:'white', backgroundColor:"#1c1c1c",
-                                    border:'1px solid #232323', borderRadius:'6px'}}>
-                                <p>happy</p>
-                                <p>счастливый</p>
-                            </div>
-                        </div>
-                    </div>      
                 </div>
             </div>
 
