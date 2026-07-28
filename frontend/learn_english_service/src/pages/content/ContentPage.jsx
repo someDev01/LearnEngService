@@ -23,7 +23,7 @@ function ContentPage(){
 
     const isOpen = useSelector(state => state.modal.isOpenVideoModal);    
     //const openedVideo = useSelector(state => state.modal.openedVideo);
-    const [openedVideo, setOpenedVideo] = useState(null);
+    //const [openedVideo, setOpenedVideo] = useState(null);
     console.log('openedVideo', openedVideo);
     
 
@@ -47,10 +47,45 @@ function ContentPage(){
 
     const [showWarming, setShowWarming] = useState(true);
 
-    const onNavigationToPlayer = () => {
+    useEffect(() => {
+        setSearchPage(1);
+        setSearchResults([]);
+        setSearchHasMore(false);
+    }, [query.trim()]);
+
+    useEffect(() => {  
+        setLoading(true);
+        
+        const timeout = setTimeout(() => {
+            
+            const fetchVideos = async() => {       
+                const response = await videoApi.getVideos(page, pageSize);
+            
+                if(response.success){
+                    const data = response.data;
+                    setData(data.data);
+                }
+                else{            
+                    toast.error(response.error);
+                    setLoading(false);
+                    return;
+                }
+
+                setLoading(false);
+                setHasMore(response.data.page < response.data.totalPages);
+            }
+            fetchVideos();
+
+        }, timeoutVideos);
+
+        return () => clearTimeout(timeout);
+
+    }, [dispatch]);
+
+    const onNavigationToPlayer = (video) => {
         navigation("/video-player", {
             state:{
-                video: openedVideo
+                video
             }
         })
     }
@@ -95,41 +130,6 @@ function ContentPage(){
             setSearchResults([]);
         }
     };
-
-    useEffect(() => {
-        setSearchPage(1);
-        setSearchResults([]);
-        setSearchHasMore(false);
-    }, [query.trim()]);
-
-    useEffect(() => {  
-        setLoading(true);
-        
-        const timeout = setTimeout(() => {
-            
-            const fetchVideos = async() => {       
-                const response = await videoApi.getVideos(page, pageSize);
-            
-                if(response.success){
-                    const data = response.data;
-                    setData(data.data);
-                }
-                else{            
-                    toast.error(response.error);
-                    setLoading(false);
-                    return;
-                }
-
-                setLoading(false);
-                setHasMore(response.data.page < response.data.totalPages);
-            }
-            fetchVideos();
-
-        }, timeoutVideos);
-
-        return () => clearTimeout(timeout);
-
-    }, [dispatch]);
     
     const displayVideos = query.trim().length >= 2 ? searchResults: data;
 
@@ -158,7 +158,6 @@ function ContentPage(){
                                     key={item.id}
                                     video={item}
                                     youtubeId={item.youtubeId}
-                                    setOpenedVideo={setOpenedVideo}
                                     onNavigate={onNavigationToPlayer}
                                 />
                             ))}

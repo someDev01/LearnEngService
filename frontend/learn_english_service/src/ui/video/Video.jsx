@@ -16,8 +16,7 @@ function Video({video, youtubeId, setOpenedVideo, onNavigate}){
     return(
         <>
             <div className={styles.video} onClick={() => {
-                setOpenedVideo(video);
-                onNavigate();
+                onNavigate(video);
                 onCloseMenu();
             }}>
                 <div className={styles.video_preview}>
