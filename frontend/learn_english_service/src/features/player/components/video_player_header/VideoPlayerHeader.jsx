@@ -7,7 +7,7 @@ function VideoPlayerHeader({video}){
     return(
         <header className={styles.video_player_header}>
             <BackButton/>
-            <InfoVideo title={title}/>
+            <InfoVideo video={video}/>
         </header>
     )
 }
