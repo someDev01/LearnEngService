@@ -1,55 +1,43 @@
 import { useState } from 'react';
-import styles from './opportunies.module.css';
-import OpportunityOption from '../../ui/oppotrunity_option/OpportunityOption';
-
-const options = [
-    {
-            title: 'Короткие видео',
-            content: 'Изучай английский с помощью коротких YouTube-видео. Находи интересующие тебя видео и выбирай контент по уровню сложности — от начального до продвинутого. Это поможет изучать английский на материалах, которые подходят именно тебе',
-            type: 'clip',
-            img: <img src='/opp/videos.png' alt=''/>
-        },
-        {
-            title: 'Субтитры',
-            content: 'Получай перевод слов прямо во время просмотра, сохраняй их в один клик и сразу замечай уже изученную лексику благодаря автоматическомй подсветке слов',
-            type: 'sub',
-            img: <img src='/opp/subs.png' alt=''/>
-        },
-        {
-            title: 'Словарь',
-            content: 'Создавай личный словарь из слов, фразовых глаголов и устойчивых выражений. Для каждой заметки сохраняются переводы, примеры, источник, отуда было изучено слово',
-            type: 'dict',
-            img: <img src='/opp/dict.png' alt=''/>
-        },
-        {
-            title: 'Тренировка',
-            content: 'Закрепляй слова с помощью интерактивных упражнений. Тренировка строится на реальных примерах использования, а слова которые вызывают больше трудностей, автоматически повторяются чаще',
-            type: 'train',
-            img: <img src='/opp/train.png' alt=''/>
-        }
-];
+import styles from '../opportunites/opportunies.module.css';
+import Opportunity from '../../ui/oppotrunity/Opportunity';
 
 function Opportunites(){
 
-    const [openIndex, setOpenIndex] = useState(null);
+    const options = [
+        {
+            title: 'Короткие видео',
+            content: 'Изучай английский с помощью коротких YouTube-видео, выбирая контент по своему уровню и интересам.',
+            type: 'clip',
+        },
+        {
+            title: 'Словарь с заметками',
+            content: 'Добавляй незнакомые слова в личный словарь, чтобы легко повторять и закреплять новую лексику.',
+            type: 'dict',
+        },
+        {
+            title: 'Тренировка на слух',
+            content: 'Слушайте произношение слов и собирайте их по буквам, чтобы лучше запоминать написание и понимать речь на слух.',
+            type: 'train',
+        }
+    ];
 
     return(
         <div className={styles.opportunites}>
             <header className={styles.how_work_info}>
-                <p>Как это работает</p>
+                <p>Возможности сервиса</p>
             </header>
-            {options.map((op, index) => (
-                <OpportunityOption
-                    key={index}
-                    index={index}
-                    openIndex={openIndex}
-                    title={op.title}
-                    type={op.type}
-                    imgTag={op.img}
-                    content={op.content}
-                    onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                />
-            ))}
+            <div className={styles.cards}>
+                {options.map((op, index) => (
+                    <Opportunity
+                        key={index}
+                        index={index}
+                        title={op.title}
+                        type={op.type}
+                        description={op.content}
+                    />
+                ))}
+            </div>
         </div>
     )
 }

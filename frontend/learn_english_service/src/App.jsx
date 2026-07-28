@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 import DictionaryPage from './pages/dictionary/DictionaryPage';
 import ContentPage from './pages/content/ContentPage';
 import NotificationToast from './ui/notif_toast/NotificationToast';
+import ProfilePage from './features/profile/page/ProfilePage';
+import VideoPlayer from './widgets/video_player/VideoPlayer';
 
 function App() {
 
@@ -34,10 +36,12 @@ function App() {
     <>
       <Routes>
           <Route element={<Layout/>}>
-            <Route path='/' element={<HomePage/>}/>
+            <Route path='/' element={<HomePage/>}/> 
             <Route element={<ProtectedRoute isAuth={isAuth}/>}>
               <Route path='/videos/' element={<ContentPage/>}/>
               <Route path='/dictionary' element={<DictionaryPage/>}/>
+              <Route path='/profile' element={<ProfilePage/>}/>
+              <Route path='video-player' element={<VideoPlayer/>}/>
             </Route>
           </Route>
       
@@ -55,6 +59,14 @@ function ProtectedRoute({isAuth}){
   
   if(!isAuth)
     return <Navigate to='/' replace/>
+
+  return <Outlet/>
+}
+
+function PublicRoute({isAuth}){
+  if(isAuth){
+    return <Navigate to='/main' replace/>
+  }
 
   return <Outlet/>
 }

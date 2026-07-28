@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import styles from '../dictionary/dictionary_page.module.css';
 import TitleDictionary from '../../ui/title_dictionary/TitleDictionary';
 import ButtonCreateNote from '../../ui/button_create_note/ButtonCreateNote';
-import NotesSearch from '../../ui/notes_search/NotesSearch';
 import Note from '../../ui/note/Note';
 import { noteApi } from '../../api/note';
 import { toast } from 'react-toastify';
@@ -20,6 +19,7 @@ import LoadMoreButton from '../../ui/button_load_more/LoadMoreButton';
 import LoaderSearch from '../../ui/loader_search/LoaderSearch';
 import { useSearch } from '../../hooks/search/useSearch';
 import NoFound from '../../ui/nofound/NoFound';
+import SearchContent from '../../ui/search/SearchContent';
 
 const notesTimeout = 500; 
 function DictionaryPage(){
@@ -220,9 +220,10 @@ function DictionaryPage(){
                         <ButtonCreateNote onClick={onOpenEditNote}/>
                     </div>
                     <div className={styles.bottom_part}>
-                        <NotesSearch
+                        <SearchContent
                             query={query}
                             setQuery={setQuery}
+                            placeholder="Поиск заметок..."
                         />
                     </div>
                 </div>

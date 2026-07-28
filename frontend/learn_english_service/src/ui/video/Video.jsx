@@ -6,20 +6,21 @@ import styles from '../video/video.module.css';
 import { openVideoModal } from '../../redux/slices/modalSlice';
 import TitleVideo from '../title_video/TitleVideo';
 import { closeMenu } from '../../redux/slices/menuSlice';
+import { useNavigate } from 'react-router-dom';
 
-function Video({video, youtubeId}){
+function Video({video, youtubeId, setOpenedVideo, onNavigate}){
 
-    const dispatch = useDispatch();     
-
+    const dispatch = useDispatch();  
+    
     const onCloseMenu = () => {dispatch(closeMenu())};
-
     return(
         <>
             <div className={styles.video} onClick={() => {
-                dispatch(openVideoModal(video))
+                setOpenedVideo(video);
+                onNavigate();
                 onCloseMenu();
             }}>
-                <div className={styles.preview_part}>
+                <div className={styles.video_preview}>
                     <PreviewVideo imgUrl={`https://img.youtube.com/vi/${youtubeId}/mqdefault.jpg`}/> 
                     <Duration 
                         hours={video.duration.hours ?? 0}
@@ -29,7 +30,7 @@ function Video({video, youtubeId}){
                 </div>
                 <div className={styles.details}>
                     <TitleVideo title={video.titleVideo}/>
-                    <LexicalComplexity lvl={video.lexicalComplexity}/>
+                    <LexicalComplexity video={video}/>
                 </div>
             </div>
         </>

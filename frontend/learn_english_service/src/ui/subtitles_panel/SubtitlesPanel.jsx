@@ -18,6 +18,8 @@ function SubtitlesPanel({
       <div className={styles.track}>
         {isShowedEn && (
           <div className={styles.subtitles_en}>
+            <span className={styles.language}>en</span>
+
             {words.map((word, index) => {
 
               const one = word;
@@ -54,7 +56,8 @@ function SubtitlesPanel({
 
         {isShowedRu && (
           <div className={styles.subtitles_ru}>
-            <p>{textRu}</p>
+            <span className={styles.language}>ru</span>
+            <span>{textRu}</span>
           </div>
         )}
       </div>

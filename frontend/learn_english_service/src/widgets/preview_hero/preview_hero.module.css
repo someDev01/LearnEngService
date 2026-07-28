@@ -1,7 +1,15 @@
 
 .preview_hero{
     display: flex;
-    width: 800px;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 1200px;
     max-width: 100%;
-    gap: 4px;
+    gap: 10px;
+}
+
+@media (max-width: 768px){
+    .preview_hero{
+        flex-direction: column;
+    }
 }

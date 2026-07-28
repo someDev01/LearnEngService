@@ -1,0 +1,43 @@
+
+.opportunity_card{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: rgb(25, 25, 25);
+}
+
+.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.icon.clip{
+    background-color: rgb(52, 18, 18);
+}
+
+.icon.dict{
+    background-color: rgb(56, 32, 18);
+}
+
+.icon.train{
+    background-color: rgb(38, 56, 18);
+}
+
+.title{
+    margin: 0;
+    color: rgb(230, 230, 230);
+    font-size: 18px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.description{
+    color: rgb(175, 175, 175);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+}

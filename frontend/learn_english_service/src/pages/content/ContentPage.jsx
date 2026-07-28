@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from '../content/content_page.module.css';
 import ButtonBack from "../../ui/button_back/ButtonBack";
 import DescriptionContent from "../../ui/description_content/DescriptionContent";
@@ -9,20 +9,23 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import VideosSkeleton from "../../ui/videos_skeleton/VideosSkeleton";
 import VideoPlayer from "../../widgets/video_player/VideoPlayer";
-import SearchVideo from "../../ui/search/SearchVideo";
 import { GetPageSize } from "../../utils/size/getPageSize";
 import { useSearch } from "../../hooks/search/useSearch";
 import LoadMoreButton from "../../ui/button_load_more/LoadMoreButton";
 import LoaderSearch from "../../ui/loader_search/LoaderSearch";
 import NoFound from "../../ui/nofound/NoFound";
 import VpnWarming from "../../ui/vpn_warming/VpnWarming";
+import SearchContent from "../../ui/search/SearchContent";
 
 const timeoutVideos = 500;
 
 function ContentPage(){
 
     const isOpen = useSelector(state => state.modal.isOpenVideoModal);    
-    const openedVideo = useSelector(state => state.modal.openedVideo);
+    //const openedVideo = useSelector(state => state.modal.openedVideo);
+    const [openedVideo, setOpenedVideo] = useState(null);
+
+    const navigation = useNavigate();
 
     const dispatch = useDispatch();
     const [data, setData] = useState(null);   
@@ -41,6 +44,14 @@ function ContentPage(){
     });
 
     const [showWarming, setShowWarming] = useState(true);
+
+    const onNavigationToPlayer = () => {
+        navigation("/video-player", {
+            state:{
+                openedVideo
+            }
+        })
+    }
 
     const loadMore = async() => {
         const nextPage = page + 1;
@@ -127,9 +138,10 @@ function ContentPage(){
                     <div className={styles.top_part}>
                         <ButtonBack/>
                         {showWarming && (<VpnWarming onClick={() => setShowWarming(false)}/>)}
-                        <SearchVideo
+                        <SearchContent
                             query={query}
                             setQuery={setQuery}
+                            placeholder="Поиск видео..."
                         />
                     </div>
                     <div className={styles.bottom_part}>
@@ -144,6 +156,8 @@ function ContentPage(){
                                     key={item.id}
                                     video={item}
                                     youtubeId={item.youtubeId}
+                                    setOpenedVideo={setOpenedVideo}
+                                    onNavigate={onNavigationToPlayer}
                                 />
                             ))}
                             {loading && (<VideosSkeleton/>)}

@@ -1,7 +1,13 @@
+using System.Text.Json.Serialization;
 using Api;
 using Infrastructure;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 builder.Services.IncludeCors(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);

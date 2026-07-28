@@ -84,8 +84,12 @@ using StackExchange.Redis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Application.Interfaces.DictionaryLevelCalculator;
+using Application.Interfaces.DictionaryLevelService;
 using Application.Interfaces.ProfileQuery;
 using Application.Interfaces.VerificationCodeSender;
+using Application.Services.DictionaryLevelCalculator;
+using Application.Services.DictionaryLevelService;
 using Application.Services.ProfileQuery;
 using Application.Services.VerificationCodeSender;
 using Application.Validators.UpdateNote;
@@ -168,6 +172,9 @@ public static class DependencyInjection
         services.AddScoped<INoteCacheService, NoteCacheService>();
         services.AddScoped<IVideoCacheService, VideoCacheService>();
 
+        services.AddScoped<IDictionaryLevelCalculator, DictionaryLevelCalculator>();
+        services.AddScoped<IDictionaryLevelService, DictionaryLevelService>();
+        
         services.AddHttpClient<IEmailService, ResendEmailService>(options =>
         {
             options.BaseAddress = new Uri(configuration["Email:BaseUrl"]!);

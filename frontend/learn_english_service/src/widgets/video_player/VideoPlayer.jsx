@@ -14,8 +14,11 @@ import { formatTime } from '../../utils/format_time/formatTime';
 import { noteApi } from '../../api/note';
 import WordPopUp from '../popup/WordPopup';
 import ButtonX from '../../ui/button_x/ButtonX';
+import VideoPlayerHeader from '../../features/player/components/video_player_header/VideoPlayerHeader';
+import { useLocation } from 'react-router-dom';
 
-function VideoPlayer({isOpen, videoId, selectedYoutubeId , startTime = null}){
+//function VideoPlayer({videoId, selectedYoutubeId , startTime = null}){
+function VideoPlayer(){
 
     const dispatch = useDispatch();
     const isOpenPopup = useSelector(state => state.modal.isOpenModalWordPopup);    
@@ -26,6 +29,10 @@ function VideoPlayer({isOpen, videoId, selectedYoutubeId , startTime = null}){
     const [usersNotes, setUsersNotes] = useState([]);
     const [noteCreating, setNoteCreating] = useState(false);
     const [selectedWord, setSelectedWord] = useState(null); 
+
+    const location = useLocation();
+
+    const video = location.state?.video;
 
     const onHasWordInNotes = (word) => {
         if(!word) return false;
@@ -67,7 +74,7 @@ function VideoPlayer({isOpen, videoId, selectedYoutubeId , startTime = null}){
         const context = currentEn?.text;
            
         const response = await noteApi.createNoteWithContext(
-            videoId,
+            video?.id,
             data.youtubeId,
             data.youtubeVideoTitle,
             hours,
@@ -134,21 +141,18 @@ function VideoPlayer({isOpen, videoId, selectedYoutubeId , startTime = null}){
                     return;
                 }
             }
-            fetchVideoPlayer(videoId);
-    }, [videoId, dispatch]);    
+            fetchVideoPlayer(video?.id);
+    }, [video?.id, dispatch]);    
     
     return(
         <>
-            <Modal isOpen={isOpen}>
                 <div className={styles.video_container}>                
-                    <div className={styles.top_part}>
-                        <ButtonX onClick={closeModal}/>
-                    </div>
+                    <VideoPlayerHeader title={video?.titleVideo}/>
                     <YoutubePlayer 
-                        youtubeId={selectedYoutubeId}
+                        youtubeId={video?.youtubeId}
                         onTimeChange={setCurrentTime}
                         onPlayerReady={setPlayer}
-                        startTime={startTime}
+                        
                     />
                     <Controls
                         onToggleEn={onToggleEn}
@@ -156,16 +160,28 @@ function VideoPlayer({isOpen, videoId, selectedYoutubeId , startTime = null}){
                         isShowedEn={isShowedEn}
                         isShowedRu={isShowedRu}
                     />
-                    <SubtitlesPanel
-                        isShowedEn={isShowedEn}
-                        isShowedRu={isShowedRu}
-                        textEn={currentEn?.text}
-                        textRu={currentRu?.text}
-                        onWordClick={handleWordClick}
-                        onHasWordInNotes={onHasWordInNotes}
-                    />        
+                    <div className={styles.content}>
+                        <SubtitlesPanel
+                            isShowedEn={isShowedEn}
+                            isShowedRu={isShowedRu}
+                            textEn={currentEn?.text}
+                            textRu={currentRu?.text}
+                            onWordClick={handleWordClick}
+                            onHasWordInNotes={onHasWordInNotes}
+                        />  
+                        <div className={styles.card_added}>
+                            <p>Добавленные слова из видео 45</p>
+                            <button>Тренироваваться</button>
+                            <div className={styles.cards}>
+                                <div className="" style={{display:'flex',flexDirection:'column', padding:'10px', color:'white', backgroundColor:"#1c1c1c",
+                                        border:'1px solid #232323', borderRadius:'6px'}}>
+                                    <p>happy</p>
+                                    <p>счастливый</p>
+                                </div>
+                            </div>
+                        </div>      
+                    </div>
                 </div>
-            </Modal>
 
             <WordPopUp 
                 isOpen={isOpenPopup} 

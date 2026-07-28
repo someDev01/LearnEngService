@@ -1,7 +1,10 @@
+using Domain.Model.Enum;
+
 namespace Application.Profile.Dtos;
 
 public record ProfileDto(
-    int AddedCount,
     int TrainedCount,
     int NotesCount,
-    int VideosCount);
+    int VideosCount,
+    EnglishLevel EnglishLevel,
+    IReadOnlyList<LastActivityDto?> Activities);

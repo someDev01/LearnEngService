@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import styles from '../header/header.module.css';
 import Logo from '../../ui/logo/Logo';
 import ButtonMenu from '../../ui/button_menu/ButtonMenu';
-import Menu from '../menu/Menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeMenu, openMenu } from '../../redux/slices/menuSlice';
 import ButtonSignIn from '../../ui/button_signin/ButtonSignIn';
 import AuthFlow from '../auth/AuthFlow';
 import TrainingModal from '../training/TrainingModal';
+import SideBar from '../side_bar/SideBar';
 
 function Header(){
 
@@ -31,7 +31,7 @@ function Header(){
                     {user && <ButtonMenu onOpen={onOpen}/>}
                 </div>
             </div>
-            {isOpenMenu && <Menu isOpen={isOpenMenu} onClose={onClose} user={user}/>}
+            {isOpenMenu && <SideBar isOpen={isOpenMenu} onClose={onClose}/>}
             {isOpenAuth && <AuthFlow isOpen={isOpenAuth}/>}
             {isOpenTraining && <TrainingModal isOpen={isOpenTraining}/>}
         </>

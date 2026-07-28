@@ -6,7 +6,9 @@
     align-items: center;
     flex: 2 1 0;
     width: 100%;
-    background-color: #232323;
+    padding: 20px;
+    background-color: #0f0f0f;
+    border: 1px solid #1f1f1f;;
     border-radius: 8px;
 }
 
@@ -61,99 +63,28 @@
     gap: 4px;
 }
 
-.subtitles_en{
-    text-align: center;
-    .en{
-        user-select: text;
-        font-size: 22px;
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        margin: 0;
-    }
+.subtitles_ru, .subtitles_en{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    width: 100%;
+    gap: 12px;
 }
 
-.subtitles_ru{
-    p{
-        user-select: none;
-        color: rgb(169, 169, 169);
+.subtitles_ru span{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #ababab;
+}
+
+.language{
+    user-select: none;
+    font-size: 18px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0;
+}
+
+@media(max-width:768px){
+    .language{
         font-size: 16px;
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        margin: 0;
-    }
-}
-
-
-
-@media (max-width: 768px){
-    .button_add{
-        user-select: none;
-        cursor: pointer;
-        text-align: center;
-        width: 100%;
-        padding: 2px 2px;
-        border-radius: 2px;
-        background-color: rgb(255, 173, 106);
-
-        p{
-            margin: 0;
-            font-size: 12px;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: rgb(0, 0, 0);
-        }
-    }
-
-    .popup_word{
-        position: absolute;
-        top: -20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        max-width: 80px;
-        width: 100%;
-        border: 1px solid rgb(66, 66, 66);
-        border-radius: 4px;
-        padding: 6px;
-        gap: 4px;
-        z-index: 50;
-
-        .selected_text{
-            text-align: center;
-            padding: 2px;
-            margin: 0;
-            border: 1px solid rgb(129, 129, 129);
-            border-radius: 2px;
-            box-shadow: none;
-        }
-    }
-
-    
-    .subtitles_en{
-        text-align: center;
-        .en{
-            user-select: text;
-            font-size: 18px;
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            margin: 0;
-        }
-    }
-
-    .subtitles_ru{
-        p{
-            user-select: none;
-            color: rgb(169, 169, 169);
-            font-size: 12px;
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            margin: 0;
-        }
-    }
-}
-
-@media (min-width: 1440px){
-    .subtitles_en .en{
-        font-size: 24px;
-    }
-
-    .subtitles_ru p{
-        font-size: 18px;
     }
 }

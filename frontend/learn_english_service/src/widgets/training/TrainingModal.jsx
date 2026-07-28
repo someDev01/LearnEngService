@@ -12,12 +12,12 @@ import ButtonX from "../../ui/button_x/ButtonX";
 import { Volume2Icon } from "lucide-react";
 import Translations from "../../ui/translations/Translations";
 import Examples from "../../ui/examples/Examples";
-import TrainingProgress from "../../ui/training_progress/TrainingProgress";
 import TrainingPronuntion from "../../ui/training_pronuntion/TrainingPronuntion";
 import Slots from "../../ui/slots/Slots";
 import Tiles from "../../ui/tiles/Tiles";
 import TrainingNextButton from "../../ui/training_next_button/TrainingNextButton";
 import TrainingFinish from './../../ui/training_finish/TrainingFinish';
+import ProggressBar from "../../ui/progress_bar/ProgressBar";
 
 function TrainingModal({isOpen, trainingNotes=[]}) {
 
@@ -140,10 +140,10 @@ function TrainingModal({isOpen, trainingNotes=[]}) {
         <Modal isOpen={isOpen}>
             <section className={styles.training}>
                 <header className={styles.header}>
-                    {notes.length > 0 && !isFinished && (
-                        <TrainingProgress currentIndex={currentIndex} trainingWords={trainingWords.length}/>
-                    )}
                     <ButtonX onClick={onClose}/>
+                    {notes.length > 0 && !isFinished && (
+                        <ProggressBar currentIndex={currentIndex} total={trainingWords.length}/>
+                    )}
                 </header>
                 {notes.length > 0 ? (
                     <main className={styles.main}>
