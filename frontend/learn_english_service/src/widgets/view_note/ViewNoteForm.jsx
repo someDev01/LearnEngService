@@ -14,6 +14,8 @@ function ViewNoteForm({isOpen, note, onClose, onOpenVideo}){
     
     const navigation = useNavigate();
 
+    if(!note) return null;
+
     const id = note.source?.youtubeVideoId;
     const youtubeId = note.source?.youtubeId;
     const youtubeVideoTitle = note.source?.youtubeVideoTitle;
@@ -53,7 +55,7 @@ function ViewNoteForm({isOpen, note, onClose, onOpenVideo}){
                 </div>
                 <div className={styles.bottom_part}>
                     <Examples examples={note.examples} word={note.word}/>
-                    {note.source && <Source 
+                    {note?.source && <Source 
                         youtubeVideoId={id}
                         youtubeVideoTitle={youtubeVideoTitle} 
                         context={context}
