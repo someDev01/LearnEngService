@@ -3,10 +3,18 @@ import styles from '../subtitles_panel/subtitles_panel.module.css';
 import ButtonAddNote from '../button_add/ButtonAddNote';
 import { useSelector } from 'react-redux';
 
-function SubtitlesPanel({ 
-  isShowedEn, isShowedRu, textEn, textRu, onWordClick, onHasWordInNotes}) {
-
-  const words = (textEn || "").toLowerCase().split(" ");
+function SubtitlesPanel({
+  isShowedEn,
+  isShowedRu,
+  textEn,
+  textRu,
+  onWordClick,
+  onHasWordInNotes,
+}) {
+  const words = (textEn || "")
+    .toLowerCase()
+    .split(" ")
+    .filter(Boolean);
 
   const handleWordClick = (word, e) => {
     e.stopPropagation();
@@ -17,47 +25,53 @@ function SubtitlesPanel({
     <div className={styles.subtitles_panel}>
       <div className={styles.track}>
         {isShowedEn && (
-          <div className={styles.subtitles_en}>
+          <div className={styles.subtitles_row}>
             <span className={styles.language}>en</span>
 
-            {words.map((word, index) => {
+            <div className={styles.words_line}>
+              {words.map((word, index) => {
+                const one = word;
+                const prevTwo = index > 0 ? words[index - 1] + " " + word : null;
+                const prevThree =
+                  index > 1
+                    ? words[index - 2] + " " + words[index - 1] + " " + word
+                    : null;
+                const two = index < words.length - 1 ? word + " " + words[index + 1] : null;
+                const three =
+                  index < words.length - 2
+                    ? word + " " + words[index + 1] + " " + words[index + 2]
+                    : null;
 
-              const one = word;
-              const prevTwo = index > 0  ? words[index - 1] + " " + word : null;
-              const prevThree = index > 1 ? words[index - 2] + " " + words[index - 1] + " " + word : null;
-              const two = index < words.length - 1 ? word + " " + words[index + 1] : null;
-              const three = index < words.length - 2 ? word + " " + words[index + 1] + " " + words[index + 2] : null;
+                const isHighlighted =
+                  onHasWordInNotes(one) ||
+                  (two && onHasWordInNotes(two)) ||
+                  (three && onHasWordInNotes(three)) ||
+                  (prevTwo && onHasWordInNotes(prevTwo)) ||
+                  (prevThree && onHasWordInNotes(prevThree));
 
-              const isHighlighted =
-                onHasWordInNotes(one) ||
-                (two && onHasWordInNotes(two)) ||
-                (three && onHasWordInNotes(three)) || 
-                (prevTwo && onHasWordInNotes(prevTwo)) || 
-                (prevThree && onHasWordInNotes(prevThree));
-
-              return (
-                <span
-                  className={styles.en}
-                  key={index}
-                  onClick={(e) => handleWordClick(word, e)}
-                  style={{
-                    color:
-                       isHighlighted
-                        ? '#ffc7a2'
-                        : 'white',
-                  }}
-                >
-                  {word + " "}
-                </span>
-              );
-            })}
+                return (
+                  <span
+                    key={index}
+                    className={styles.en_word}
+                    onClick={(e) => handleWordClick(word, e)}
+                    style={{
+                      color: isHighlighted ? '#ffc7a2' : 'white',
+                    }}
+                  >
+                    {word + " "}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         )}
 
         {isShowedRu && (
-          <div className={styles.subtitles_ru}>
+          <div className={styles.subtitles_row}>
             <span className={styles.language}>ru</span>
-            <span>{textRu}</span>
+            <div className={styles.words_line}>
+              <span className={styles.ru_text}>{textRu}</span>
+            </div>
           </div>
         )}
       </div>
