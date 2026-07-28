@@ -148,42 +148,42 @@ function VideoPlayer(){
     
     return(
         <>
-                <div className={styles.video_container}>                
-                    <VideoPlayerHeader video={video}/>
-                    <YoutubePlayer 
-                        youtubeId={video?.youtubeId}
-                        onTimeChange={setCurrentTime}
-                        onPlayerReady={setPlayer}
-                        
-                    />
-                    <Controls
-                        onToggleEn={onToggleEn}
-                        onToggleRu={onToggleRu}
+            <div className={styles.video_container}>                
+                <VideoPlayerHeader video={video}/>
+                <YoutubePlayer 
+                    youtubeId={video?.youtubeId}
+                    onTimeChange={setCurrentTime}
+                    onPlayerReady={setPlayer}
+                    
+                />
+                <Controls
+                    onToggleEn={onToggleEn}
+                    onToggleRu={onToggleRu}
+                    isShowedEn={isShowedEn}
+                    isShowedRu={isShowedRu}
+                />
+                <div className={styles.content}>
+                    <SubtitlesPanel
                         isShowedEn={isShowedEn}
                         isShowedRu={isShowedRu}
-                    />
-                    <div className={styles.content}>
-                        <SubtitlesPanel
-                            isShowedEn={isShowedEn}
-                            isShowedRu={isShowedRu}
-                            textEn={currentEn?.text}
-                            textRu={currentRu?.text}
-                            onWordClick={handleWordClick}
-                            onHasWordInNotes={onHasWordInNotes}
-                        />  
-                        <div className={styles.card_added}>
-                            <p>Добавленные слова из видео 45</p>
-                            <button>Тренироваваться</button>
-                            <div className={styles.cards}>
-                                <div className="" style={{display:'flex',flexDirection:'column', padding:'10px', color:'white', backgroundColor:"#1c1c1c",
-                                        border:'1px solid #232323', borderRadius:'6px'}}>
-                                    <p>happy</p>
-                                    <p>счастливый</p>
-                                </div>
+                        textEn={currentEn?.text}
+                        textRu={currentRu?.text}
+                        onWordClick={handleWordClick}
+                        onHasWordInNotes={onHasWordInNotes}
+                    />  
+                    <div className={styles.card_added}>
+                        <p>Добавленные слова из видео 45</p>
+                        <button>Тренироваваться</button>
+                        <div className={styles.cards}>
+                            <div className="" style={{display:'flex',flexDirection:'column', padding:'10px', color:'white', backgroundColor:"#1c1c1c",
+                                    border:'1px solid #232323', borderRadius:'6px'}}>
+                                <p>happy</p>
+                                <p>счастливый</p>
                             </div>
-                        </div>      
-                    </div>
+                        </div>
+                    </div>      
                 </div>
+            </div>
 
             <WordPopUp 
                 isOpen={isOpenPopup} 
