@@ -9,9 +9,12 @@ import Transcription from '../../ui/transcription/Transcription';
 import Translations from '../../ui/translations/Translations';
 import Word from '../../ui/word/Word';
 import styles from '../view_note/view_note_form.module.css';
+import { useDispatch } from 'react-redux';
+import { closeModalViewNote } from '../../redux/slices/modalSlice';
 
 function ViewNoteForm({isOpen, note, onClose, onOpenVideo}){
     
+    const dispatch = useDispatch();
     const navigation = useNavigate();
 
     if(!note) return null;
@@ -30,6 +33,7 @@ function ViewNoteForm({isOpen, note, onClose, onOpenVideo}){
     };
 
     const onNavigationToPlayer = () => {
+        dispatch(closeModalViewNote());
         navigation("/video-player", {
             state:{
                 video

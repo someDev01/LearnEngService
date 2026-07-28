@@ -151,7 +151,7 @@ function VideoPlayer(){
                     youtubeId={video?.youtubeId}
                     onTimeChange={setCurrentTime}
                     onPlayerReady={setPlayer}
-                    
+                    startTime={video.duration}
                 />
                 <Controls
                     onToggleEn={onToggleEn}
