@@ -26,6 +26,7 @@ function VideoPlayer(){
     const [player, setPlayer] = useState(null);
     const [data, setData] = useState(null);
     const [usersNotes, setUsersNotes] = useState([]);
+    const [addedNotesFromVideo, setAddedNotesFromVideo] = useState([]);
     const [noteCreating, setNoteCreating] = useState(false);
     const [selectedWord, setSelectedWord] = useState(null); 
 
@@ -82,6 +83,8 @@ function VideoPlayer(){
             text,
             context
         );
+        console.log('созданная заметка', response.data);
+        
 
         if(response.success){
             toast.success("Заметка создана")

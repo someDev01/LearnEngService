@@ -3,8 +3,8 @@
     display: flex;
     padding: 6px;
     gap: 10px;
-    background-color: rgb(27, 27, 27);
-    border: 1px solid rgb(45, 45, 45);
+    background-color: #111111;
+    border: 1px solid #282727;
     border-radius: 10px;
 }
 
