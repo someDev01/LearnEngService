@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import ContinueButtonLoader from '../../ui/button_loader/ContinueButtonLoader';
 import { useState } from 'react';
 import FormIcon from '../../ui/form_icon/FormIcon';
-import { MailCheck } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import EmailNotice from '../../ui/email_notice/EmailNotice';
 
 function EmailSignInForm(){
@@ -42,7 +42,7 @@ function EmailSignInForm(){
     return(
         <>
             <FormIcon>
-                <MailCheck size={32} color='#ff6600'/>
+                <Mail size={32} color='#ff6600'/>
             </FormIcon>
             <div className={styles.title}>Введите почту</div>
             <div className={styles.description}>чтобы войти или создать аккаунт</div>
