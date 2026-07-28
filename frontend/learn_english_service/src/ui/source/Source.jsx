@@ -4,7 +4,7 @@ import EllipsisText from '../ellipsis_text/EllipsisText';
 
 import styles from '../source/source.module.css';
 
-function Source({youtubeVideoTitle, context, duration, word, onOpenVideo}){
+function Source({youtubeVideoTitle, context, duration, word, onNavigateToPlayer}){
 
     const time = formatDuration(duration || {});
 
@@ -17,7 +17,7 @@ function Source({youtubeVideoTitle, context, duration, word, onOpenVideo}){
                     <EllipsisText 
                         youtubeVideoTitle={youtubeVideoTitle} 
                         word={word}
-                        onClick={onOpenVideo}
+                        onClick={onNavigateToPlayer}
                     />
                     {duration && <div className={styles.duration_source}>
                         <p>{time}</p>

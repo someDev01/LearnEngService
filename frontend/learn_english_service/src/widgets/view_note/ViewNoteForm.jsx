@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Modal from '../../modal/Modal';
 import ButtonClose from '../../ui/button_close/ButtonClose';
 import ButtonX from '../../ui/button_x/ButtonX';
@@ -10,12 +11,29 @@ import Word from '../../ui/word/Word';
 import styles from '../view_note/view_note_form.module.css';
 
 function ViewNoteForm({isOpen, note, onClose, onOpenVideo}){
+    
+    const navigation = useNavigate();
 
-    const youtubeVideoId = note.source?.youtubeVideoId;
+    const id = note.source?.youtubeVideoId;
     const youtubeId = note.source?.youtubeId;
     const youtubeVideoTitle = note.source?.youtubeVideoTitle;
     const context = note.source?.context;
     const duration = note.source?.durationContext;    
+
+    const video = {
+        id,
+        youtubeId,
+        titleVideo: youtubeVideoTitle,
+        duration
+    };
+
+    const onNavigationToPlayer = () => {
+        navigation("/video-player", {
+            state:{
+                video
+            }
+        })
+    }
     
     return(
         <Modal isOpen={isOpen}>
@@ -36,12 +54,12 @@ function ViewNoteForm({isOpen, note, onClose, onOpenVideo}){
                 <div className={styles.bottom_part}>
                     <Examples examples={note.examples} word={note.word}/>
                     {note.source && <Source 
-                        youtubeVideoId={youtubeVideoId}
+                        youtubeVideoId={id}
                         youtubeVideoTitle={youtubeVideoTitle} 
                         context={context}
                         duration={duration}
                         word={note.word}
-                        onOpenVideo={() => onOpenVideo(youtubeVideoId, youtubeId, duration)}
+                        onNavigateToPlayer={onNavigationToPlayer()}
                     />}
                 </div>
             </div>
