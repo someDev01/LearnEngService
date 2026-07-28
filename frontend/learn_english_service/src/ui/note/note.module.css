@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
     padding: 6px 10px;
-    border: 1px solid #292b2b;
-    background-color: #131414;
+    border: 1px solid #222323;
+    background-color: #101111;
     border-radius: 10px;
     transition:  border-color .3s ease;
 }

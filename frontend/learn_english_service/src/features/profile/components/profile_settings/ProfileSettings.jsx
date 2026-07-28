@@ -7,9 +7,12 @@ import { authApi } from '../../../../api/auth';
 import { resetStep, resetUser, setError } from '../../../../redux/slices/authSlice';
 import { toast } from 'react-toastify';
 import { closeMenu } from '../../../../redux/slices/menuSlice';
+import { useDispatch } from 'react-redux';
 
 function ProfileSettings(){
 
+    const dispatch = useDispatch();
+    
     const onOpenNotification = () => {
         console.log('Уведомления открыты');
         
