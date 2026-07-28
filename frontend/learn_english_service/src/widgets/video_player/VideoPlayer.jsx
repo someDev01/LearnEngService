@@ -33,6 +33,8 @@ function VideoPlayer(){
     const location = useLocation();
 
     const video = location.state?.video;
+    console.log('video из nav', video);
+    
 
     const onHasWordInNotes = (word) => {
         if(!word) return false;
