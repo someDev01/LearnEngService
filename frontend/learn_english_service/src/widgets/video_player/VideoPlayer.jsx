@@ -147,7 +147,7 @@ function VideoPlayer(){
     return(
         <>
                 <div className={styles.video_container}>                
-                    <VideoPlayerHeader title={video?.titleVideo}/>
+                    <VideoPlayerHeader video={video}/>
                     <YoutubePlayer 
                         youtubeId={video?.youtubeId}
                         onTimeChange={setCurrentTime}
