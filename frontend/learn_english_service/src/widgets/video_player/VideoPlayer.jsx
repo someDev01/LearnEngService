@@ -17,7 +17,6 @@ import ButtonX from '../../ui/button_x/ButtonX';
 import VideoPlayerHeader from '../../features/player/components/video_player_header/VideoPlayerHeader';
 import { useLocation } from 'react-router-dom';
 
-//function VideoPlayer({videoId, selectedYoutubeId , startTime = null}){
 function VideoPlayer(){
 
     const dispatch = useDispatch();
@@ -32,9 +31,7 @@ function VideoPlayer(){
 
     const location = useLocation();
 
-    const video = location.state?.video;
-    console.log('video из nav', video);
-    
+    const video = location.state?.video;    
 
     const onHasWordInNotes = (word) => {
         if(!word) return false;
