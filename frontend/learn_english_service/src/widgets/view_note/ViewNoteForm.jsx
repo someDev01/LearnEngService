@@ -59,7 +59,7 @@ function ViewNoteForm({isOpen, note, onClose, onOpenVideo}){
                         context={context}
                         duration={duration}
                         word={note.word}
-                        onNavigateToPlayer={onNavigationToPlayer()}
+                        onNavigateToPlayer={onNavigationToPlayer}
                     />}
                 </div>
             </div>
