@@ -42,23 +42,20 @@
 .words_line {
   flex: 1;
   min-width: 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 0;
+  display: block;
   text-align: left;
   line-height: 1.6;
   word-break: break-word;
 }
 
-.en_word {
+.word_item {
   cursor: pointer;
   user-select: none;
+  display: inline;
   white-space: normal;
 }
 
-.en_word:hover {
+.word_item:hover {
   color: #ffc7a2;
 }
 

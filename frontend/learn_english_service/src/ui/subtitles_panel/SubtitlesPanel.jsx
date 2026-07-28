@@ -11,10 +11,7 @@ function SubtitlesPanel({
   onWordClick,
   onHasWordInNotes,
 }) {
-  const words = (textEn || "")
-    .toLowerCase()
-    .split(" ")
-    .filter(Boolean);
+  const words = (textEn || "").trim().split(/\s+/).filter(Boolean);
 
   const handleWordClick = (word, e) => {
     e.stopPropagation();
@@ -31,16 +28,10 @@ function SubtitlesPanel({
             <div className={styles.words_line}>
               {words.map((word, index) => {
                 const one = word;
-                const prevTwo = index > 0 ? words[index - 1] + " " + word : null;
-                const prevThree =
-                  index > 1
-                    ? words[index - 2] + " " + words[index - 1] + " " + word
-                    : null;
-                const two = index < words.length - 1 ? word + " " + words[index + 1] : null;
-                const three =
-                  index < words.length - 2
-                    ? word + " " + words[index + 1] + " " + words[index + 2]
-                    : null;
+                const prevTwo = index > 0 ? `${words[index - 1]} ${word}` : null;
+                const prevThree = index > 1 ? `${words[index - 2]} ${words[index - 1]} ${word}` : null;
+                const two = index < words.length - 1 ? `${word} ${words[index + 1]}` : null;
+                const three = index < words.length - 2 ? `${word} ${words[index + 1]} ${words[index + 2]}` : null;
 
                 const isHighlighted =
                   onHasWordInNotes(one) ||
@@ -52,13 +43,12 @@ function SubtitlesPanel({
                 return (
                   <span
                     key={index}
-                    className={styles.en_word}
+                    className={styles.word_item}
                     onClick={(e) => handleWordClick(word, e)}
-                    style={{
-                      color: isHighlighted ? '#ffc7a2' : 'white',
-                    }}
+                    style={{ color: isHighlighted ? '#ffc7a2' : 'white' }}
                   >
-                    {word + " "}
+                    {word}
+                    {index < words.length - 1 ? ' ' : ''}
                   </span>
                 );
               })}
@@ -78,5 +68,6 @@ function SubtitlesPanel({
     </div>
   );
 }
+
 
 export default SubtitlesPanel;
