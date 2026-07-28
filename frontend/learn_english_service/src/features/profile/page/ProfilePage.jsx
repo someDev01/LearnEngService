@@ -29,6 +29,8 @@ function ProfilePage(){
         fetchProfile();
     }, []);
 
+    
+
     return(
         <div className={styles.profile}>
             <ProfileHeader user={user}/>

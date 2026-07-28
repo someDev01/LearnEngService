@@ -3,6 +3,10 @@ import styles from '../profile_settings/profile_settings.module.css';
 import Title from '../title/Title';
 import ProfileForm from '../profile_form/ProfileForm';
 import ProfileItem from '../profile_item/ProfileItem';
+import { authApi } from '../../../../api/auth';
+import { resetStep, resetUser, setError } from '../../../../redux/slices/authSlice';
+import { toast } from 'react-toastify';
+import { closeMenu } from '../../../../redux/slices/menuSlice';
 
 function ProfileSettings(){
 
@@ -11,7 +15,27 @@ function ProfileSettings(){
         
     };
 
-    const onLogout = () => {console.log('Выход из аккаунта произошел');
+    const onLogout = async() => {
+        try{
+            const response = await authApi.logout();
+            if(response.success){
+                dispatch(resetStep());
+                dispatch(resetUser());
+                toast.success('Вы вышли из аккаунта');
+            }
+            else{
+                dispatch(setError(response.error));
+                toast.error(response.error);
+            }
+        }
+        catch(e){
+            toast.error(e.error.message);
+            e.response?.data?.message || e.message;
+        }
+        finally{
+            dispatch(closeMenu());
+            navigation('/');
+        }
     }
 
     const items = [
