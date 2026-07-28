@@ -6,7 +6,7 @@ function InfoVideo({video}){
         <div className={styles.info_video}>
             <h3>{video.titleVideo}</h3>
             <div style={{display:'flex', justifyContent:'center', alignContent:'center', width:'50px'}}>
-                <LexicalComplexity lexicalComplexity={video.lexicalComplexity}/>
+                <LexicalComplexity video={video}/>
             </div>
         </div>
     )
