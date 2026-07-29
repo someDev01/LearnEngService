@@ -12,10 +12,6 @@ public class ProfileQueryService(
 {
     public async Task<ProfileDto> GetAsync(Guid userId, CancellationToken cancellationToken)
     {
-        var trainedNotesCount = await context.Notes
-            .Where(n => n.UserId == userId && n.LastTrainedAt != null)
-            .CountAsync(cancellationToken);
-        
         var notesCount = await context.Notes
             .Where(n => n.UserId == userId)
             .CountAsync(cancellationToken);
@@ -51,7 +47,6 @@ public class ProfileQueryService(
         .ToList();
 
         var profileDto = new ProfileDto(
-            trainedNotesCount,
             notesCount,
             videosCount,
             englishLevel,

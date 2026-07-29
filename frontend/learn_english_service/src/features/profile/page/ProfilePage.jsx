@@ -29,14 +29,11 @@ function ProfilePage(){
         fetchProfile();
     }, []);
 
-    
-
     return(
         <div className={styles.profile}>
             <ProfileHeader user={user}/>
             <ProfileProgress
                 notesCount={profileData.notesCount}
-                trainedCount={profileData.trainedCount}
                 videosCount={profileData.videosCount}
                 englishLevel={profileData.englishLevel}
             />

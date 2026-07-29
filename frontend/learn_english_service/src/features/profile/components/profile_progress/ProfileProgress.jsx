@@ -1,19 +1,14 @@
-import { BookOpenText, BrainIcon, LetterTextIcon, PlayCircle } from 'lucide-react';
+import { BookOpenText, LetterTextIcon, PlayCircle } from 'lucide-react';
 import styles from '../profile_progress/profile_progress.module.css';
 import AppIcon from '../app_icon/AppIcon';
 
-function ProfileProgress({notesCount, trainedCount, videosCount, englishLevel}){
+function ProfileProgress({notesCount, videosCount, englishLevel}){
 
     const cards = [
         {
             Icon: BookOpenText,
             value: notesCount,
             title: 'Слов',
-        },
-        {
-            Icon: BrainIcon,
-            value: trainedCount,
-            title: 'Изучено',
         },
         {
             Icon: PlayCircle,
@@ -23,7 +18,7 @@ function ProfileProgress({notesCount, trainedCount, videosCount, englishLevel}){
         {
             Icon: LetterTextIcon,
             value: englishLevel,
-            title: 'Уровень',
+            title: 'Уровень словаря',
         }
     ];
     return(
