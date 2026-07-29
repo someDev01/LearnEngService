@@ -14,6 +14,8 @@ public class User : Entity
     public Email Email { get; private set; }
     
     public Name Name { get; private set; }
+    
+    public string? AvatarPath { get; private set; }
 
     public Role? Role { get; private set; }
 
@@ -44,4 +46,13 @@ public class User : Entity
         var name = nameResult.Value;
         return Result<User>.Success(new User(email, name, role));
     } 
+    
+    public Result UploadAvatar(string avatarPath)
+    {
+        if (string.IsNullOrWhiteSpace(avatarPath))
+            return Result.Failure("Путь к аватарке обязателен");
+
+        AvatarPath = avatarPath;
+        return Result.Success();
+    }
 }

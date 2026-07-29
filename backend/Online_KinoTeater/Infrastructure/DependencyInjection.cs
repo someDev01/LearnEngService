@@ -84,10 +84,12 @@ using StackExchange.Redis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Application.Interfaces.AvatarService;
 using Application.Interfaces.DictionaryLevelCalculator;
 using Application.Interfaces.DictionaryLevelService;
 using Application.Interfaces.ProfileQuery;
 using Application.Interfaces.VerificationCodeSender;
+using Application.Services.AvatarService;
 using Application.Services.DictionaryLevelCalculator;
 using Application.Services.DictionaryLevelService;
 using Application.Services.ProfileQuery;
@@ -174,6 +176,8 @@ public static class DependencyInjection
 
         services.AddScoped<IDictionaryLevelCalculator, DictionaryLevelCalculator>();
         services.AddScoped<IDictionaryLevelService, DictionaryLevelService>();
+
+        services.AddScoped<IAvatarService, AvatarService>();
         
         services.AddHttpClient<IEmailService, ResendEmailService>(options =>
         {

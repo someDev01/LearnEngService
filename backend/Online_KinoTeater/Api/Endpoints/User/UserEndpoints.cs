@@ -1,3 +1,6 @@
+using System.Security.Claims;
+using Application.Common.Claims;
+using Application.User.Commands.UploadAvatar;
 using Application.User.Queries.GetAllUsers;
 using MediatR;
 
@@ -18,6 +21,27 @@ public static class UserEndpoints
 
             return Results.Ok(result.Value);
         }).RequireAuthorization("AdminOnlyAccess");
+
+        userGroup.MapPost("upload-avatar", async (
+            IFormFile file,
+            ClaimsPrincipal claims,
+            IMediator mediator) =>
+        {
+            await using var stream = file.OpenReadStream();
+            
+            var userId = claims.GetUserId();
+            var result = await mediator.Send(new UploadAvatarCommand(
+                userId,
+                stream,
+                file.FileName,
+                file.ContentType));
+
+            if (!result.IsSuccess)
+                return Results.BadRequest(result.Error);
+
+            return Results.Ok();
+        }).RequireAuthorization()
+            .DisableAntiforgery();
         
         return app;
     }
