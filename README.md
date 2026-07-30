@@ -2,58 +2,55 @@
 
 🔴 Live Demonstration: https://voclip.ru
 
-Веб-сервис для изучения английского языка через персональный словарь и контент из YouTube. Основная идея проекта заключается в том, что пользователь формирует собственную базу английских слов и выражений во время изучения языка, а затем закрепляет их с помощью встроенной системы тренировок.
+Voclip is a web service for learning English through a personal vocabulary dictionary and YouTube content. The main idea of the project is that users build their own collection of English words and expressions while studying and then reinforce them using an integrated training system.
 
-Сервис состоит из четырех основных частей:
- - персональный словарь
- - пространство с youtube-видео
- - тренировка для закрепления изученного материала
- - профиль пользователя
+The service consists of four main modules:
+ - Personal Dictionary
+ - YouTube Learning
+ - Training
+ - User Profile
 
-### Персональный словарь
+### Personal Dictionary
 #Screenshot: [dictionary](image/dictionary.png)
-Пользователь может создавать собственную базу английских слов и выражений для дальнейшего изучения.
-Заметка может содержать:
-- отдельные слова
-- фразовые глаголы
-- устойчивые выражения
-- языковые конструкции
+Users can build their own collection of English words and expressions for future learning. A dictionary note can contain:
+- Individual words
+- Phrasal verbs
+- Idiomatic expressions
+- Grammar constructions
 
-Для каждой заметки можно сохранить:
-- один или несколько переводов
-- один или несколько примеров
-- источник изучения
+Each note can store:
+- One or more translations
+- One or more example sentences
+- A learning source
 
-Источником может быть:
-- контекст из youtube-видео
+The learning source can be:
+- Context extracted from a YouTube video
 
-### Изучение через Youtube
+### Learning with YouTube
 #Screenshot: [video](image/video.png) и [player](image/player.png)
-Сервис предоставляет пространство с коротким youtube-видео для изучения языка в реальном контексте.
-Во время просмотра пользователь может добавить новые слова и выражения в свой словарь. Если слово уже присутствует в словаре пользователя, оно дополнительно подсвечивается в контексте.
-Таким образом пользователь не изучает слово изолированно, а встречает их  в реальной речи и контексте.
+The service provides a collection of short YouTube videos for learning English in a real-world context. While watching a video, users can save new words and expressions directly to their personal dictionary.
+If a word already exists in the user's dictionary, it is highlighted inside the subtitles. This allows users to learn vocabulary in context instead of studying isolated words.
 
-### Тренировка
+### Training
 #Screenshot: [train](image/train.png)
-После добавления слов в словарь пользователь может закрепить их с помощью тренировки.
-Для каждой заметки рассчитывается рейтинг изучения:
-- при правильном ответе рейтинг увеличивается
-- при неправильном ответе рейтинг уменьшается
+After adding words to the dictionary, users can reinforce their knowledge through training exercises.
+Each dictionary note has a learning score:
+- The score increases after a correct answer.
+- The score decreases after an incorrect answer
+The lower the score, the more frequently the word appears during training.
 
-Чем ниже рейтинг заметки, тем чаще слово будет появляться в тренировке
-
-### Профиль пользователя
+### User Profile
 #Screenshot: [profile](image/profile.png)
-В профиле пользователь может просматривать персональную информацию и статистику обучения.
-Доступны следующие возможности:
-- загрузка и изменение аватарки
-- просмотр общего количества слов в словаре
-- просмотр уровня словаря
-- просмотр кол-во видео на сервисе
-- просмотр последней активности пользователя (например, последние добавленные или изученные слова)
+The user profile provides personal information and learning statistics. It includes the following features:
+- Uploading and changing the profile avatar
+- Viewing the total number of saved words
+- Viewing the current dictionary level
+- Viewing the total number of videos available in the service
+- Viewing the user's latest activity (for example, recently added or recently trained words)
 
-### Авторизация
-Весь функционал доступен только авторизованным пользователям. Регистрация и вход выполняются через подтверждение электронной почты. Пользователь указывает email-адрес и получает одноразовый код для входа в систему.
+### Authentication
+All functionality is available only to authenticated users.
+Registration and sign-in are performed using email verification. Users enter their email address and receive a one-time verification code to access the service.
 
 ## Technology Stack
 Backend
@@ -90,6 +87,6 @@ DevOps
 - Nginx
 - Linux VPS
 - Git
-- env (on vps server)
+- env (stored on vps server)
 
 
