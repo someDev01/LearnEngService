@@ -44,7 +44,7 @@ public class ProfileQueryService(
             .AsNoTracking()
             .FirstOrDefaultAsync(u => u.Id == userId,cancellationToken);
         var avatarUrl = string.IsNullOrWhiteSpace(user?.AvatarPath) ? 
-            null : fileStorageService.GetPublicUrl(user.AvatarPath);
+            null : fileStorageService.GetPublicUrl(user.AvatarPath).Value;
 
         var activities = new[]
         {
@@ -59,7 +59,7 @@ public class ProfileQueryService(
             videosCount,
             englishLevel,
             activities,
-            avatarUrl!.Value);
+            avatarUrl!);
 
         return profileDto;
     }
