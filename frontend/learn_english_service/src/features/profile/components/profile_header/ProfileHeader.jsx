@@ -43,7 +43,7 @@ function ProfileHeader({user}){
                         onChange={handleUpload}
                     />
                     <label htmlFor="avatar" className={styles.avatarLabel}>
-                        {user?.avatarUrl ? <img src={user?.avatarUrl} alt="Аватар" /> : <p>Загрузить изображение</p>}
+                        {user?.avatarUrl ? <img src={user?.avatarUrl} alt='' /> : <p>Загрузить изображение</p>}
                     </label>
                     <div className={styles.icon_photo}>
                         <Camera size={18} color="white" />
