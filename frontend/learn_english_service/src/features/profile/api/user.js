@@ -3,7 +3,7 @@ import apiClient from "../../../api/client";
 export const userApi = {
     uploadAvatar: async(formData) => {
         try{
-            const response = await apiClient.post('upload-avatar', formData);
+            const response = await apiClient.post('user/upload-avatar', formData);
             return {success: true, data: response.data};
         }
         catch(e){

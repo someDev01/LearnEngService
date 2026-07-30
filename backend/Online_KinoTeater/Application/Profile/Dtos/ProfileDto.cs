@@ -6,4 +6,5 @@ public record ProfileDto(
     int NotesCount,
     int VideosCount,
     EnglishLevel EnglishLevel,
-    IReadOnlyList<LastActivityDto?> Activities);
+    IReadOnlyList<LastActivityDto?> Activities,
+    string AvatarUrl);

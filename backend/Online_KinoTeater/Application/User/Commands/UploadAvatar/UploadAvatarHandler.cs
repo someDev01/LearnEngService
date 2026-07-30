@@ -7,19 +7,21 @@ namespace Application.User.Commands.UploadAvatar;
 
 public class UploadAvatarHandler(
     IAvatarService avatarService,
-    IUserRepository userRepository): IRequestHandler<UploadAvatarCommand, Result>
+    IUserRepository userRepository): IRequestHandler<UploadAvatarCommand, Result<string>>
 {
-    public async Task<Result> Handle(UploadAvatarCommand request, CancellationToken cancellationToken)
+    public async Task<Result<string>> Handle(UploadAvatarCommand request, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByIdAsync(request.UserId, cancellationToken);
         if (user is null)
-            return Result.Failure("Пользователь не найден");
+            return Result<string>.Failure("Пользователь не найден");
 
-        return await avatarService.SetAsync(
+        var result = await avatarService.SetAsync(
             user,
             request.FileStream,
             request.ContentType,
             request.OriginalFileName,
             cancellationToken);
+
+        return Result<string>.Success(result.Value!);
     }
 }

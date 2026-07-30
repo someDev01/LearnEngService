@@ -1,6 +1,7 @@
 using Application.Interfaces.Context;
 using Application.Interfaces.DictionaryLevelService;
 using Application.Interfaces.ProfileQuery;
+using Application.Interfaces.Storage;
 using Application.Profile.Dtos;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace Application.Services.ProfileQuery;
 
 public class ProfileQueryService(
     IDictionaryLevelService dictionaryLevelService,
+    IFileStorageService fileStorageService,
     IDataContext context): IProfileQueryService
 {
     public async Task<ProfileDto> GetAsync(Guid userId, CancellationToken cancellationToken)
@@ -37,6 +39,12 @@ public class ProfileQueryService(
                 n.Word,
                 n.LastTrainedAt!.Value))
             .FirstOrDefaultAsync(cancellationToken);
+        
+        var user = await context.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Id == userId,cancellationToken);
+        var avatarUrl = string.IsNullOrWhiteSpace(user?.AvatarPath) ? 
+            null : fileStorageService.GetPublicUrl(user.AvatarPath);
 
         var activities = new[]
         {
@@ -50,7 +58,8 @@ public class ProfileQueryService(
             notesCount,
             videosCount,
             englishLevel,
-            activities);
+            activities,
+            avatarUrl!.Value);
 
         return profileDto;
     }

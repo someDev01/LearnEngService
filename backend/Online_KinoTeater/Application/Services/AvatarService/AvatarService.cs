@@ -9,7 +9,7 @@ public class AvatarService(
     IFileStorageService fileStorageService,
     IUnitOfWork unitOfWork): IAvatarService
 {
-    public async Task<Result> SetAsync(
+    public async Task<Result<string>> SetAsync(
         Domain.Model.Entyties.User user, 
         Stream file, 
         string contentType, 
@@ -23,12 +23,13 @@ public class AvatarService(
 
         var uploadedResult = await fileStorageService.UploadAsync(file, key, contentType, cancellationToken);
         if (!uploadedResult.IsSuccess)
-            return Result.Failure($"{uploadedResult.Error}");
+            return Result<string>.Failure($"{uploadedResult.Error}");
 
         user.UploadAvatar(key);
         await unitOfWork.CommitAsync(cancellationToken);
 
-        return Result.Success();
+        var url = fileStorageService.GetPublicUrl(key);
+        return Result<string>.Success(url.Value!);
     }
     
     private static string BuildAvatarKey(Guid userId, string originalFileName)

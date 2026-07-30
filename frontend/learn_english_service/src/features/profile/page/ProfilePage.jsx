@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LastActivity from '../components/last_activity/LastActivity';
 import ProfileHeader from '../components/profile_header/ProfileHeader';
 import ProfileProgress from '../components/profile_progress/ProfileProgress';
@@ -7,9 +7,11 @@ import Title from '../components/title/Title';
 import styles from '../page/profile_page.module.css';
 import { useEffect, useState } from 'react';
 import { profileApi } from '../../../api/profile';
+import { setUser } from '../../../redux/slices/authSlice';
 
 function ProfilePage(){
 
+    const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user);
 
     const [profileData, setProfileData] = useState({});
@@ -20,6 +22,10 @@ function ProfilePage(){
             
             if(response.success){
                 setProfileData(response.data);
+                dispatch(setUser({
+                    ...user,
+                    avatarUrl: `${response.data?.avatarUrl}?t=${Date.now()}`
+                }));
             }
             else{
                 setProfileData({});

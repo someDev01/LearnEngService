@@ -7,4 +7,4 @@ public record UploadAvatarCommand(
     Guid UserId,
     Stream FileStream,
     string OriginalFileName,
-    string ContentType): IRequest<Result>;
+    string ContentType): IRequest<Result<string>>;

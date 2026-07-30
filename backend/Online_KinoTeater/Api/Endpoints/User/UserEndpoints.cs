@@ -39,7 +39,10 @@ public static class UserEndpoints
             if (!result.IsSuccess)
                 return Results.BadRequest(result.Error);
 
-            return Results.Ok();
+            return Results.Ok(new
+            {
+                avatarUrl = result.Value
+            });
         }).RequireAuthorization()
             .DisableAntiforgery();
         

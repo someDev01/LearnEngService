@@ -17,7 +17,7 @@ export function useAuthMe(){
                 if(response.success){
                     dispatch(setUser({
                         email: response.data?.email,
-                        name: response.data.name
+                        name: response.data.name,
                     }));
                 }
                 else{

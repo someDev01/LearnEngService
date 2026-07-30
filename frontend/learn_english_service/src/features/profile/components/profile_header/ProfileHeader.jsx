@@ -1,8 +1,12 @@
 import { Camera } from 'lucide-react';
 import styles from '../profile_header/profile_header.module.css';
 import { userApi } from '../../api/user';
+import { setUser } from '../../../../redux/slices/authSlice';
+import { useDispatch } from 'react-redux';
 
 function ProfileHeader({user}){
+
+    const dispatch = useDispatch();
 
     const handleUpload = async(e) => {
         const file = e.target.files[0];
@@ -15,7 +19,10 @@ function ProfileHeader({user}){
         const response = await userApi.uploadAvatar(formData);
 
         if(response.success){
-            console.log(response.data);
+            dispatch(setUser({
+                ...user,
+                avatarUrl: `${response.data?.avatarUrl}?t=${Date.now()}`
+            }))
         }
         else{
             console.log(response.error);
@@ -36,12 +43,11 @@ function ProfileHeader({user}){
                         onChange={handleUpload}
                     />
                     <label htmlFor="avatar" className={styles.avatarLabel}>
-                        <img src="/avatar.png" alt="Аватар пользователя" />
-
-                        <div className={styles.icon_photo}>
-                            <Camera size={18} color="white" />
-                        </div>
+                        {user?.avatarUrl ? <img src={user?.avatarUrl} alt="Аватар" /> : <p>Загрузить изображение</p>}
                     </label>
+                    <div className={styles.icon_photo}>
+                        <Camera size={18} color="white" />
+                    </div>
                 </div>
                 <div className={styles.user_data}>
                     <div className={styles.name_and_email}>
