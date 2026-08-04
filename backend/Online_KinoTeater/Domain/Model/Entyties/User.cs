@@ -34,7 +34,7 @@ public class User : Entity
     public static Result<User> Create(Email email, Role? role)
     {
         if (email is null)
-            return Result<User>.Failure("email для создания пользователя обязателена");
+            return Result<User>.Failure("email для создания пользователя обязательна");
 
         if (role is null)
             return Result<User>.Failure("Роль для пользователя не указана");

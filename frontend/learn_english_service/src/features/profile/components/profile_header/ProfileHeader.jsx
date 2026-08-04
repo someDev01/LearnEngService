@@ -3,6 +3,7 @@ import styles from '../profile_header/profile_header.module.css';
 import { userApi } from '../../api/user';
 import { setUser } from '../../../../redux/slices/authSlice';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function ProfileHeader({user}){
 
@@ -23,10 +24,10 @@ function ProfileHeader({user}){
                 ...user,
                 avatarUrl: `${response.data?.avatarUrl}?t=${Date.now()}`
             }))
+            toast.success("Изображение загружено");
         }
         else{
-            console.log(response.error);
-            
+            toast.error(response.error);
         }
     };
 

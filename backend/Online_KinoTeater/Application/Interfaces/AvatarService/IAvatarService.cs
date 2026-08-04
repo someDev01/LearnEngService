@@ -6,8 +6,6 @@ public interface IAvatarService
 {
     Task<Result<string>> SetAsync(
         Domain.Model.Entyties.User user,
-        Stream file,
-        string contentType,
-        string originalFileName,
+        Stream stream,
         CancellationToken cancellationToken);
 }

@@ -3,6 +3,7 @@ using Application.Common.Claims;
 using Application.User.Commands.UploadAvatar;
 using Application.User.Queries.GetAllUsers;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Api.Endpoints.User;
 
@@ -26,7 +27,10 @@ public static class UserEndpoints
             IFormFile file,
             ClaimsPrincipal claims,
             IMediator mediator) =>
-        {
+        {   
+            if(file is null)
+                return Results.BadRequest("Файл обязателен");
+            
             await using var stream = file.OpenReadStream();
             
             var userId = claims.GetUserId();
@@ -34,6 +38,7 @@ public static class UserEndpoints
                 userId,
                 stream,
                 file.FileName,
+                file.Length,
                 file.ContentType));
 
             if (!result.IsSuccess)

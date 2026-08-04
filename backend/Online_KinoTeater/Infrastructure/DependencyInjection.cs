@@ -87,6 +87,7 @@ using System.Text;
 using Application.Interfaces.AvatarService;
 using Application.Interfaces.DictionaryLevelCalculator;
 using Application.Interfaces.DictionaryLevelService;
+using Application.Interfaces.ImageProcessor;
 using Application.Interfaces.ProfileQuery;
 using Application.Interfaces.VerificationCodeSender;
 using Application.Services.AvatarService;
@@ -94,7 +95,10 @@ using Application.Services.DictionaryLevelCalculator;
 using Application.Services.DictionaryLevelService;
 using Application.Services.ProfileQuery;
 using Application.Services.VerificationCodeSender;
+using Application.User.Commands.UploadAvatar;
 using Application.Validators.UpdateNote;
+using Application.Validators.UploadAvatar;
+using Infrastructure.Services.ImageProcessor;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
@@ -178,6 +182,7 @@ public static class DependencyInjection
         services.AddScoped<IDictionaryLevelService, DictionaryLevelService>();
 
         services.AddScoped<IAvatarService, AvatarService>();
+        services.AddScoped<IImageProcessor, ImageProcessor>();
         
         services.AddHttpClient<IEmailService, ResendEmailService>(options =>
         {
@@ -234,6 +239,7 @@ public static class DependencyInjection
         services.AddScoped<IValidator<CreateSubtitleCommand>, CreateSubtitleCommandValidator>();
         services.AddScoped<IValidator<UpdateSubtitleCommand>, UpdateSubtitleCommandValidator>();
         services.AddScoped<IValidator<TranslateWordCommand>, TranslateWordCommandValidator>();
+        services.AddScoped<IValidator<UploadAvatarCommand>, UploadAvatarCommandValidator>();
         #endregion
 
         return services;
