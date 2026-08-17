@@ -29,7 +29,8 @@ services:
       Email__ResendApiKey: ${RESEND_APIKEY}
       Email__From: ${EMAIL_FROM}
       YoutubeApi__ApiKey: ${YOUTUBE_APIKEY}
-      Llm__ApiKey: ${LLM_APIKEY}
+      Llm__Providers__0__ApiKey: ${LLM_GROQ_APIKEY}
+      Llm__Providers__1__ApiKey: ${LLM_OPENROUTER_APIKEY}
       Admin__Secret: ${ADMIN_SECRET}
       Admin__XAdminKey: ${XADMINKEY}
       S3Storage__AccessKey: ${S3_ACCESSKEY}

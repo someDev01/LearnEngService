@@ -69,7 +69,6 @@ using Infrastructure.Services.Translate;
 using Infrastructure.Services.Youtube;
 using Infrastructure.Settings.Email;
 using Infrastructure.Settings.Jwt;
-using Infrastructure.Settings.Llm;
 using Infrastructure.Settings.Storage;
 using Infrastructure.Settings.Translate;
 using Infrastructure.Settings.Youtube;
@@ -88,13 +87,16 @@ using Application.Interfaces.AvatarService;
 using Application.Interfaces.DictionaryLevelCalculator;
 using Application.Interfaces.DictionaryLevelService;
 using Application.Interfaces.ImageProcessor;
+using Application.Interfaces.Llm;
 using Application.Interfaces.ProfileQuery;
 using Application.Interfaces.VerificationCodeSender;
 using Application.Services.AvatarService;
 using Application.Services.DictionaryLevelCalculator;
 using Application.Services.DictionaryLevelService;
+using Application.Services.Llm;
 using Application.Services.ProfileQuery;
 using Application.Services.VerificationCodeSender;
+using Application.Settings.Llm;
 using Application.User.Commands.UploadAvatar;
 using Application.Validators.UpdateNote;
 using Application.Validators.UploadAvatar;
@@ -183,6 +185,8 @@ public static class DependencyInjection
 
         services.AddScoped<IAvatarService, AvatarService>();
         services.AddScoped<IImageProcessor, ImageProcessor>();
+
+        services.AddScoped<ILlmService, LlmService>();
         
         services.AddHttpClient<IEmailService, ResendEmailService>(options =>
         {
@@ -190,10 +194,11 @@ public static class DependencyInjection
             options.DefaultRequestHeaders.Add("Authorization", $"Bearer {configuration["Email:ResendApiKey"]}");
         });
 
-        services.AddHttpClient<ILlmClient, GroqClient>(options =>
+        services.AddHttpClient<ILlmClient, GroqClient>((sp, options) =>
         {
-            options.BaseAddress = new Uri(configuration["Llm:BaseUrl"]!);
-            options.DefaultRequestHeaders.Add("Authorization", $"Bearer {configuration["Llm:ApiKey"]}");
+            var settings = sp.GetRequiredService<IOptions<LlmSettings>>().Value;
+            options.BaseAddress = new Uri(settings.Providers[0].BaseUrl);
+            options.DefaultRequestHeaders.Add("Authorization", $"Bearer {settings.Providers[0].ApiKey}");
         });
 
         services.AddHttpClient<ITranslateService, MyMemoryTranslateService>((sp, options) =>

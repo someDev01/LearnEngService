@@ -33,7 +33,6 @@ public class Note : Entity
         List<string>? translations,
         Transcription transcription,
         List<Example>? examples,
-        int repetitionScore,
         Lvl? lvl = null,
         Source? source = null)
     {
@@ -42,7 +41,7 @@ public class Note : Entity
         Translations = translations ?? [];
         Transcription = transcription;
         Examples = examples ?? [];
-        RepetitionScore = repetitionScore;
+        RepetitionScore = 0;
         Lvl = lvl;
         Source = source;
         CreatedAt = DateTime.UtcNow;
@@ -55,7 +54,6 @@ public class Note : Entity
         List<string>? translations,
         Transcription transcription,
         List<Example>? examples,
-        int repetitionScore,
         Lvl? lvl = null,
         Source? source = null)
     {
@@ -77,7 +75,6 @@ public class Note : Entity
             translations ?? [],
             transcription,
             examples ?? [],
-            repetitionScore,
             lvl,
             source));
     }

@@ -1,45 +1,39 @@
 ﻿using Application.Common.Prompt;
-using Application.Interfaces.Clients.Llm;
 using Application.Interfaces.Vocabulary;
 using Application.InternalDtos.Translated;
 using Application.Requests.Vocabulary;
 using Domain.Model.Common;
 using System.Text.Json;
+using Application.Interfaces.Llm;
 
 namespace Application.Services.Vocabulary;
 
-public class VocabularyService(ILlmClient llmClient) : IVocabularyService
+public class VocabularyService(ILlmService llmService) : IVocabularyService
 {
-    public async Task<Result<NoteDataDto?>> GenerationTranslateAsync(
+    public async Task<Result<NoteDataDto?>> GenerateAsync(
         VocabularyRequestDto request,
         CancellationToken cancellationToken)
     {
         var prompt = PromptBuilder.Build(
             request.Text,
             request.Context,
-            request.IsIncludedTranslations,
-            request.IsIncludedExamples);
+            request.Translations!,
+            request.Example);
 
-        var result = await Execute(prompt, cancellationToken);
-        return result;
-    }
-
-    private async Task<Result<NoteDataDto?>> Execute(string prompt,  CancellationToken cancellationToken)
-    {
-        var response = await llmClient.SendAsync(prompt, cancellationToken);
-        if (!response.IsSuccess) return Result<NoteDataDto?>.Failure(response.Error!);
-
-        if (string.IsNullOrWhiteSpace(response.Value))
-            return Result<NoteDataDto?>.Success(null);
-
+        var response = await llmService.ExecuteAsync(
+            Common.Llm.LlmProvider.Groq,
+            Common.Llm.LlmPurpose.Note,
+            prompt,
+            cancellationToken);
+        if (!response.IsSuccess)
+            return Result<NoteDataDto?>.Failure(response.Error!);
+        
         try
         {
-            var result = JsonSerializer.Deserialize<NoteDataDto>(
-                response!.Value,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var result = JsonSerializer.Deserialize<NoteDataDto>(response.Value!);
             return Result<NoteDataDto?>.Success(result);
         }
-        catch (JsonException ex)
+        catch(Exception ex)
         {
             return Result<NoteDataDto?>.Failure($"{ex.Message}");
         }

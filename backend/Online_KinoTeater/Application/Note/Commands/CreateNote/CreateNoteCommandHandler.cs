@@ -60,12 +60,12 @@ public class CreateNoteCommandHandler(
                 ex.Translate.ToLowerInvariant().Trim()))
             .ToList();
         
-        var resultFromGroq = await vocabularyService.GenerationTranslateAsync(
+        var resultFromGroq = await vocabularyService.GenerateAsync(
             new VocabularyRequestDto(
                 editedWord,
                 Context: null,
-                IsIncludedTranslations: editedTranslations.Count == 0, 
-                IsIncludedExamples: editedExamples.Count == 0), 
+                editedTranslations, 
+                editedExamples), 
             cancellationToken);
         if (!resultFromGroq.IsSuccess) return Result<NoteDto>.Failure(resultFromGroq.Error!);
 
@@ -80,7 +80,6 @@ public class CreateNoteCommandHandler(
         var translations = editedTranslations.Count > 0 ? editedTranslations : groqTranslations ?? [];
         var examplesDto = editedExamples.Count > 0 ? editedExamples : groqExamples ?? [];
         var word = string.IsNullOrWhiteSpace(groqWord) ? editedWord : groqWord;
-        int repetitionScore = 0;
         #endregion
 
         #region VALUEOBJECTS/ONE -> DOMAIN
@@ -113,7 +112,6 @@ public class CreateNoteCommandHandler(
             translations,
             transcriptionResult.Value!,
             examples!,
-            repetitionScore,
             lvlResult.Value);
 
         if (!noteResult.IsSuccess)

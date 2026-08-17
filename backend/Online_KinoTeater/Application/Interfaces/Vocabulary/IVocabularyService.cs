@@ -6,7 +6,7 @@ namespace Application.Interfaces.Vocabulary;
 
 public interface IVocabularyService
 {
-    Task<Result<NoteDataDto?>> GenerationTranslateAsync(
+    Task<Result<NoteDataDto?>> GenerateAsync(
         VocabularyRequestDto request,
         CancellationToken cancellationToken);
 }

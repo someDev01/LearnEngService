@@ -1,7 +1,9 @@
-﻿namespace Application.Requests.Vocabulary;
+﻿using Application.SharedDtos;
+
+namespace Application.Requests.Vocabulary;
 
 public record VocabularyRequestDto(
     string Text,
     string? Context = null,
-    bool IsIncludedTranslations = true,
-    bool IsIncludedExamples = true);
+    List<string?> Translations = null,
+    List<ExampleDto>? Example = null);
