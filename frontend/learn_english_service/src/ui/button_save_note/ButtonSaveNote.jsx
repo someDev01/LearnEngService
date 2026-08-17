@@ -4,7 +4,7 @@ import styles from '../button_save_note/button_save_note.module.css';
 function ButtonSaveNote({onClick, loadingSave}){
     return(
         <div className={styles.wrapper}>
-            <div className={styles.button_save} onClick={onClick}>
+            <div className={styles.button_save} onClick={loadingSave ? undefined : onClick}>
                 {loadingSave ? <ContinueButtonLoader/> : <p>Сохранить</p>}
             </div>
         </div>

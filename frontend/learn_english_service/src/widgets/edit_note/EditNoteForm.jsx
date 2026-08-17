@@ -51,6 +51,8 @@ function EditNoteForm({isOpen, onClose, onCreateNote, onUpdateNote, note, isEdit
     }, [note]);
 
     const handleSave = () => {
+        if(loadingSave) return;
+
         if(!wordInput.trim()){
             setWordInputError("заполните поле");
             return;

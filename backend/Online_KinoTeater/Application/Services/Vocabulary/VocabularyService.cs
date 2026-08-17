@@ -21,7 +21,7 @@ public class VocabularyService(ILlmService llmService) : IVocabularyService
             request.Example);
 
         var response = await llmService.ExecuteAsync(
-            Common.Llm.LlmProvider.Groq,
+            Common.Llm.LlmProvider.OpenRouter,
             Common.Llm.LlmPurpose.Note,
             prompt,
             cancellationToken);

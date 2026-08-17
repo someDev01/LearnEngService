@@ -81,8 +81,10 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
+using Application.Common.Llm;
 using Application.Interfaces.AvatarService;
 using Application.Interfaces.DictionaryLevelCalculator;
 using Application.Interfaces.DictionaryLevelService;
@@ -101,6 +103,8 @@ using Application.User.Commands.UploadAvatar;
 using Application.Validators.UpdateNote;
 using Application.Validators.UploadAvatar;
 using Infrastructure.Services.ImageProcessor;
+using Infrastructure.Services.Llm.Groq;
+using Infrastructure.Services.Llm.OpenRouter;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
@@ -188,29 +192,47 @@ public static class DependencyInjection
 
         services.AddScoped<ILlmService, LlmService>();
         
-        services.AddHttpClient<IEmailService, ResendEmailService>(options =>
+        services.AddHttpClient<IEmailService, ResendEmailService>(client =>
         {
-            options.BaseAddress = new Uri(configuration["Email:BaseUrl"]!);
-            options.DefaultRequestHeaders.Add("Authorization", $"Bearer {configuration["Email:ResendApiKey"]}");
+            client.BaseAddress = new Uri(configuration["Email:BaseUrl"]!);
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {configuration["Email:ResendApiKey"]}");
         });
 
-        services.AddHttpClient<ILlmClient, GroqClient>((sp, options) =>
+        services.AddHttpClient<ILlmClient, GroqClient>((sp, client) =>
         {
             var settings = sp.GetRequiredService<IOptions<LlmSettings>>().Value;
-            options.BaseAddress = new Uri(settings.Providers[0].BaseUrl);
-            options.DefaultRequestHeaders.Add("Authorization", $"Bearer {settings.Providers[0].ApiKey}");
+            var provider = settings.Providers
+                .First(s => s.Provider == LlmProvider.Groq.ToString());
+            
+            client.BaseAddress = new Uri(provider.BaseUrl);
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue(
+                    "Bearer",
+                    provider.ApiKey);
         });
 
-        services.AddHttpClient<ITranslateService, MyMemoryTranslateService>((sp, options) =>
+        services.AddHttpClient<ILlmClient, OpenRouterClient>((sp, client) =>
+        {
+            var settings = sp.GetRequiredService<IOptions<LlmSettings>>().Value;
+            var provider = settings.Providers
+                .First(s => s.Provider == LlmProvider.OpenRouter.ToString());
+            
+            client.BaseAddress = new Uri(provider.BaseUrl);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Bearer",
+                provider.ApiKey);
+        });
+
+        services.AddHttpClient<ITranslateService, MyMemoryTranslateService>((sp, client) =>
         {
             var settings = sp.GetRequiredService<IOptions<MyMemoryTranslationSettings>>().Value;
-            options.BaseAddress = new Uri(settings.BaseUrl);
+            client.BaseAddress = new Uri(settings.BaseUrl);
         });
 
-        services.AddHttpClient<IYoutubeClient, YoutubeClient>((sp, options) =>
+        services.AddHttpClient<IYoutubeClient, YoutubeClient>((sp, client) =>
         {
             var settings = sp.GetRequiredService<IOptions<YoutubeApiSettings>>().Value;
-            options.BaseAddress = new Uri(settings.BaseUrl);
+            client.BaseAddress = new Uri(settings.BaseUrl);
         });
 
         services.AddScoped<IFileStorageService, S3StorageService>();
