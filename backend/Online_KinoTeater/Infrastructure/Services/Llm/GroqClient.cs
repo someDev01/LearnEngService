@@ -5,11 +5,13 @@ using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 using Application.Common.Llm;
+using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Services.Llm;
 
 public class GroqClient(
-    HttpClient client) : ILlmClient
+    HttpClient client,
+    ILogger<GroqClient> logger) : ILlmClient
 {
     public LlmProvider Provider => LlmProvider.Groq;
 
@@ -32,7 +34,8 @@ public class GroqClient(
             };
 
             var response = await client.PostAsJsonAsync(uri, body, cancellationToken);
-
+            logger.LogInformation($"uri: {uri}");
+            
             if (response.StatusCode == HttpStatusCode.TooManyRequests)
                 return Result<string?>.Failure("LLM_RATE_LIMITED");
         

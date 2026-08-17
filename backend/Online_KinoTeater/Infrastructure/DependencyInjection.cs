@@ -199,7 +199,6 @@ public static class DependencyInjection
             var settings = sp.GetRequiredService<IOptions<LlmSettings>>().Value;
             options.BaseAddress = new Uri(settings.Providers[0].BaseUrl);
             options.DefaultRequestHeaders.Add("Authorization", $"Bearer {settings.Providers[0].ApiKey}");
-            Console.WriteLine($"===LLM KEY===: {settings.Providers[0].ApiKey}");
         });
 
         services.AddHttpClient<ITranslateService, MyMemoryTranslateService>((sp, options) =>
