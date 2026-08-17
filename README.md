@@ -68,7 +68,7 @@ Backend
 - Redis
 - JWT 
 - S3 Storage (Supabase)
-- Groq Api (LLM)
+- LLM (Groq Api, OpenRouter Api)
 - Youtube Data Api
 - MyMemory Api (translation service)
 - Resend Api (send email)
