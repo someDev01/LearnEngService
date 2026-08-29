@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{6DF0AAF8-B6A5-4098-86E7-BAB40D2F05F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Online_KinoTeater.UnitTests", "Online_KinoTeater.UnitTests\Online_KinoTeater.UnitTests.csproj", "{530CB61C-29AE-43C6-BAB3-9AE80ECED3C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6DF0AAF8-B6A5-4098-86E7-BAB40D2F05F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DF0AAF8-B6A5-4098-86E7-BAB40D2F05F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DF0AAF8-B6A5-4098-86E7-BAB40D2F05F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{530CB61C-29AE-43C6-BAB3-9AE80ECED3C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{530CB61C-29AE-43C6-BAB3-9AE80ECED3C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{530CB61C-29AE-43C6-BAB3-9AE80ECED3C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{530CB61C-29AE-43C6-BAB3-9AE80ECED3C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
