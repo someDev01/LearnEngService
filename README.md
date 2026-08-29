@@ -1,6 +1,6 @@
-# Voclip
+# Voclipy
 
-🔴 Live Demonstration: https://voclip.ru
+🔴 Live Demonstration: https://voclipy.ru
 
 Voclip is a web service for learning English through a personal vocabulary dictionary and YouTube content. The main idea of the project is that users build their own collection of English words and expressions while studying and then reinforce them using an integrated training system.
 
