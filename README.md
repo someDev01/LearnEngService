@@ -66,7 +66,8 @@ Backend
 - Fluent Validation
 - PostgreSQL
 - Redis
-- JWT 
+- JWT
+- xUnit(Unit tests)
 - S3 Storage (Supabase)
 - LLM (Groq Api, OpenRouter Api)
 - Youtube Data Api
