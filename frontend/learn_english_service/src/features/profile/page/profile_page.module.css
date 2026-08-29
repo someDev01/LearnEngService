@@ -12,16 +12,11 @@
 
 .block  {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     gap: 10px;
 }
 
-@media(max-width: 768px){
-    .block{
-        flex-direction: column;
-    }
-}
 
 @media(max-width: 1440px){
     .profile{
