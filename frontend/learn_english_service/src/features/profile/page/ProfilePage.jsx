@@ -3,7 +3,6 @@ import LastActivity from '../components/last_activity/LastActivity';
 import ProfileHeader from '../components/profile_header/ProfileHeader';
 import ProfileProgress from '../components/profile_progress/ProfileProgress';
 import ProfileSettings from '../components/profile_settings/ProfileSettings';
-import Title from '../components/title/Title';
 import styles from '../page/profile_page.module.css';
 import { useEffect, useState } from 'react';
 import { profileApi } from '../../../api/profile';

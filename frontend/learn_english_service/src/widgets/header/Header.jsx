@@ -26,7 +26,7 @@ function Header(){
             <div className={styles.header__container}>
                 <div className={styles.header_line}>
                     <Link to='/' style={{textDecoration: 'none'}} replace>
-                        <Logo title="VoClip"/>
+                        <Logo title="VoClipy"/>
                     </Link>
                     {user && <ButtonMenu onOpen={onOpen}/>}
                 </div>
