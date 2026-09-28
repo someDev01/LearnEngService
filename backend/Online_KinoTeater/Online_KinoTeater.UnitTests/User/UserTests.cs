@@ -31,7 +31,32 @@ public class UserTests
     }
 
     [Fact]
-    public void Create_Should_HaveNullAvatarPath_When_EmailAndRoleIsValid()
+    public void Create_Should_ReturnFailure_When_EmailIsInvalidAndRoleIsValid()
+    {
+        // Act
+        var user = Domain.Model.Entyties.User.Create(null, Role.User);
+        
+        // Assert
+        Assert.False(user.IsSuccess);
+        Assert.Null(user.Value);
+    }
+
+    [Fact]
+    public void Create_Should_ReturnFailure_When_RoleIsInvalidAndEmailIsValid()
+    {
+        // Arrange
+        var email = Domain.Model.ValueObjects.Email.Create("example@mail.ru").Value!;
+        
+        // Act
+        var user = Domain.Model.Entyties.User.Create(email, null);
+
+        // Assert
+        Assert.False(user.IsSuccess);
+        Assert.Null(user.Value);
+    }
+
+    [Fact]
+    public void Create_Should_CreateUserWithNullAvatarPath_When_EmailAndRoleAreValid()
     {
         // Arrange
         var email = Domain.Model.ValueObjects.Email.Create("example@mail.ru").Value!;
@@ -54,9 +79,10 @@ public class UserTests
         const string avatarInput = "avatar/123.png";
         
         // Act 
-        user.UploadAvatar(avatarInput);
+        var result = user.UploadAvatar(avatarInput);
         
         // Assert
+        Assert.True(result.IsSuccess);
         Assert.Equal(avatarInput, user.AvatarPath);
     }
     
