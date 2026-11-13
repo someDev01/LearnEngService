@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces.Context;
+using Domain.Model.Enum;
 using Domain.Repositories.Subtitle;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,11 +22,11 @@ public class SubtitleRepository(IDataContext context) : ISubtitleRepository
     }
 
     public async Task<bool> ExistsAsync(
-        Guid contentId,
-        string language,
+        Guid videoId,
+        LanguageCode languageCode,
         CancellationToken cancellationToken) =>
             await context.Subtitles
-                .AnyAsync(s => s.VideoId == contentId &&
-                    s.LanguageCode == language,
+                .AnyAsync(s => s.VideoId == videoId &&
+                    s.LanguageCode == languageCode,
                     cancellationToken);
 }

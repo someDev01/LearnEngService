@@ -2,5 +2,5 @@
 
 public record CreateSubtitlesRequest(
     Guid VideoId,
-    string Language,
+    string LanguageCode,
     string Format);

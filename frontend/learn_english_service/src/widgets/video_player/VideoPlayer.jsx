@@ -104,8 +104,8 @@ function VideoPlayer(){
 
     const loadSubtitles = async(subtitles) => {
 
-        const enSub = subtitles.find(s => s.language === 'en');
-        const ruSub = subtitles.find(s => s.language === 'ru');
+        const enSub = subtitles.find(s => s.languageCode.toLowerCase() === 'en');
+        const ruSub = subtitles.find(s => s.languageCode.toLowerCase() === 'ru');
 
         if(!enSub && !ruSub) return;
 

@@ -2,6 +2,6 @@
 
 public record SubtitleDto(
     Guid Id,
-    string Language,
+    string LanguageCode,
     string Value,
     string Format);

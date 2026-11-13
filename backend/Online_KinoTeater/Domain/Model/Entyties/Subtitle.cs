@@ -1,4 +1,5 @@
 ﻿using Domain.Model.Common;
+using Domain.Model.Enum;
 using Domain.Model.ValueObjects;
 
 namespace Domain.Model.Entyties;
@@ -7,9 +8,7 @@ public class Subtitle : Entity
 {
     public Guid VideoId { get; private set; }
 
-    public string LanguageCode { get; private set; }
-
-    public Language Language => new(LanguageCode);
+    public LanguageCode LanguageCode { get; private set; }
 
     public string FileKey { get; private set; }
 
@@ -19,29 +18,29 @@ public class Subtitle : Entity
 
     private Subtitle(
         Guid videoId,
-        Language language,
+        LanguageCode languageCode,
         string fileUrl,
         SubtitleFormat format)
     {
         VideoId = videoId;
-        LanguageCode = language.Code;
+        LanguageCode = languageCode;
         FileKey = fileUrl;
         Format = format;
     }
 
     public static Result<Subtitle> Create(
         Guid videoId,
-        Language language,
+        LanguageCode languageCode,
         string fileUrl,
         SubtitleFormat format)
     {
-        if (language is null)
-            return Result<Subtitle>.Failure("Язык субтитров не указан!");
+        if (!System.Enum.IsDefined(languageCode))
+            return Result<Subtitle>.Failure("Языковые дорожки для субтитров не определены");
 
         if (string.IsNullOrEmpty(fileUrl))
-            return Result<Subtitle>.Failure("Файл субититров не указан");
+            return Result<Subtitle>.Failure("Файл субтитров не указан");
 
-        return Result<Subtitle>.Success(new Subtitle(videoId, language, fileUrl, format));
+        return Result<Subtitle>.Success(new Subtitle(videoId, languageCode, fileUrl, format));
     }
 
     #region UPDATE PROPERTIES

@@ -1,4 +1,6 @@
-﻿namespace Domain.Repositories.Subtitle;
+﻿using Domain.Model.Enum;
+
+namespace Domain.Repositories.Subtitle;
 
 public interface ISubtitleRepository
 {
@@ -7,8 +9,8 @@ public interface ISubtitleRepository
     Task AddAsync(Model.Entyties.Subtitle subtitle, CancellationToken cancellationToken);
 
     Task<bool> ExistsAsync(
-        Guid contentId,
-        string language,
+        Guid videoId,
+        LanguageCode languageCode,
         CancellationToken cancellationToken);
 
     Task DeleteAsync(Model.Entyties.Subtitle subtitle, CancellationToken cancellationToken);

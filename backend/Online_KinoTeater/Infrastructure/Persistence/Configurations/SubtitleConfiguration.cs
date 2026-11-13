@@ -23,8 +23,8 @@ public class SubtitleConfiguration : IEntityTypeConfiguration<Subtitle>
 
         builder.Property(p => p.LanguageCode)
             .HasColumnName("LanguageCode")
-            .HasMaxLength(20)
-            .IsRequired();
+            .HasConversion<string>()
+            .IsRequired();  
         #endregion
 
         builder.HasIndex(s => new

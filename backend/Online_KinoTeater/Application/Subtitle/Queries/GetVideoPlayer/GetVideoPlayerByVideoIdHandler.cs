@@ -52,7 +52,7 @@ public class GetVideoPlayerByVideoIdHandler(
             .Where(sb => sb.VideoId == request.VideoId)
             .Select(sb => new SubtitleDto(
                 sb.Id,
-                sb.Language!.Code,
+                sb.LanguageCode.ToString(),
                 sb.FileKey,
                 sb.Format.ToString()))
             .ToListAsync(cancellationToken);
@@ -64,7 +64,7 @@ public class GetVideoPlayerByVideoIdHandler(
                 .Select(
                     async sb => new SubtitleDto(
                         sb.Id,
-                        sb.Language,
+                        sb.LanguageCode.ToString(),
                         await fileStorageService.GetFileContentAsync(sb.Value, cancellationToken),
                         sb.Format))))
                 .ToList();

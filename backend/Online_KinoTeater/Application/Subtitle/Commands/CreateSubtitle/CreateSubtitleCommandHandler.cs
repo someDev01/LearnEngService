@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces.Storage;
 using Application.Interfaces.UnitOfWork;
 using Domain.Model.Common;
+using Domain.Model.Enum;
 using Domain.Model.ValueObjects;
 using Domain.Repositories.Subtitle;
 using Domain.Repositories.Video;
@@ -29,19 +30,21 @@ public class CreateSubtitleCommandHandler(
 
         #endregion
 
-        #region CHECK EXISTS
+        #region CHECK EXISTS AND PARSE
         var youtubeVideo = await videoRepository.GetByIdAsync(request.VideoId, cancellationToken);
         if(youtubeVideo is null)
             return Result<Guid>.Failure("Такое видео не найдено");
 
+        Enum.TryParse<LanguageCode>(request.LanguageCode, ignoreCase: true, out var languageResult);
+        
         var exists = await subtitleRepository.ExistsAsync(
             request.VideoId,
-            request.Language,
+            languageResult,
             cancellationToken);
 
         if (exists)
-            return Result<Guid>.Failure($"Субтитр : " +
-                $" '{request.Language}' уже есть ");
+            return Result<Guid>.Failure($"Субтитр :" +
+                $"'{request.LanguageCode}' уже есть ");
 
         Enum.TryParse<SubtitleFormat>(request.Format, true, out var format);
         #endregion
@@ -58,16 +61,10 @@ public class CreateSubtitleCommandHandler(
             return Result<Guid>.Failure(uploadResult.Error!);
         #endregion
 
-        #region VALUEOBJECTS/ONE -> DOMAIN
-        var languageResult = Language.Create(request.Language);
-        if (!languageResult.IsSuccess)
-            return Result<Guid>.Failure(languageResult.Error!);
-        #endregion
-
         #region CREATE
         var subtitleResult = Domain.Model.Entyties.Subtitle.Create(
             request.VideoId,
-            Language.Create(request.Language).Value!,
+            languageResult,
             uploadResult.Value!,
             format);
 

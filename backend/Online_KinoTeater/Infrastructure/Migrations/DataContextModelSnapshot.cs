@@ -75,8 +75,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("LanguageCode")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)")
+                        .HasColumnType("text")
                         .HasColumnName("LanguageCode");
 
                     b.Property<Guid>("VideoId")

@@ -27,6 +27,12 @@ public static class SubtitleEndpoints
             return Results.Ok(result.Value);
         }).RequireAuthorization();
 
+        subtitleGroup.MapGet("/all", async (IMediator mediator) =>
+        {
+            var result = await mediator.Send(new GetSubtitlesQuery()); 
+            return Results.Ok(result.Value);
+        }).RequireAuthorization("AdminOnlyAccess");
+
         subtitleGroup.MapGet("/by-videoId", async (
             [FromQuery] Guid videoId,
             IMediator mediator) =>
@@ -45,7 +51,7 @@ public static class SubtitleEndpoints
         {
             var result = await mediator.Send(new CreateSubtitleCommand(
                 request.VideoId,
-                request.Language,
+                request.LanguageCode,
                 subtitles.OpenReadStream(),
                 subtitles.FileName,
                 request.Format,

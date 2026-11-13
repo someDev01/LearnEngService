@@ -22,7 +22,7 @@ public class GetSubtitlesVideoHandler(
             .Where(sb => sb.VideoId == request.VideoId)
             .Select(sb => new SubtitleDto(
                 sb.Id,
-                sb.Language.Code,
+                sb.LanguageCode.ToString(),
                 sb.FileKey,
                 sb.Format.ToString()))
             .ToListAsync(cancellationToken);

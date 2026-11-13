@@ -5,7 +5,7 @@ namespace Application.Subtitle.Commands.CreateSubtitle;
 
 public record CreateSubtitleCommand(
     Guid VideoId,
-    string Language,
+    string LanguageCode,
     Stream FileStream,
     string Key,
     string Format,
