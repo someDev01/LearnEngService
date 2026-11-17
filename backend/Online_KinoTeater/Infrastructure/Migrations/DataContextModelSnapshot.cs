@@ -195,10 +195,16 @@ namespace Infrastructure.Migrations
                                 .HasForeignKey("NoteId");
                         });
 
-                    b.OwnsOne("Domain.Model.ValueObjects.Source", "Source", b1 =>
+                    b.OwnsMany("Domain.Model.ValueObjects.Source", "Sources", b1 =>
                         {
                             b1.Property<Guid>("NoteId")
                                 .HasColumnType("uuid");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
+
+                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("Id"));
 
                             b1.Property<string>("Context")
                                 .IsRequired()
@@ -230,9 +236,9 @@ namespace Infrastructure.Migrations
                                 .HasColumnType("character varying(100)")
                                 .HasColumnName("YoutubeVideoTitle");
 
-                            b1.HasKey("NoteId");
+                            b1.HasKey("NoteId", "Id");
 
-                            b1.ToTable("Notes");
+                            b1.ToTable("NoteSources", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("NoteId");
@@ -261,7 +267,7 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("Lvl");
 
-                    b.Navigation("Source");
+                    b.Navigation("Sources");
 
                     b.Navigation("Transcription")
                         .IsRequired();

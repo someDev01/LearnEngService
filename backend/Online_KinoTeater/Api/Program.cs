@@ -21,10 +21,10 @@ builder.Services.IncludeSwaggerSpec();
 
 WebApplication app = builder.Build();
 
+app.UseSwagger();
+app.UseSwaggerUI();
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
 
 await app.ApplyMigrations();

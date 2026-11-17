@@ -10,6 +10,8 @@ using Application.Note.Queries.Search;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Application.Note.Commands.AddNoteSource;
+using Application.Note.Commands.DeleteNoteSource;
 
 namespace Api.Endpoints.Note;
 
@@ -94,6 +96,30 @@ public static class NoteEndpoints
 
             return Results.Ok(result.Value);
         }).RequireAuthorization();
+        
+        noteGroup.MapPost("/add/source", async (
+            [FromBody] AddNoteSourceRequest request,
+            ClaimsPrincipal claims,
+            IMediator mediator) =>
+        {
+            var userId = claims.GetUserId();
+            var result = await mediator.Send(new AddNoteSourceCommand(
+                request.NoteId,
+                userId,
+                request.YoutubeVideoId,
+                request.YoutubeId,
+                request.YoutubeVideoTitle,
+                request.Context,
+                request.Hours,
+                request.Minutes,
+                request.Seconds));
+
+            if (!result.IsSuccess)
+                return Results.BadRequest(result.Error!);
+
+            return Results.Ok();
+
+        }).RequireAuthorization();
 
         noteGroup.MapPatch("/update", async (
             [FromBody] UpdateNoteRequest request,
@@ -128,6 +154,26 @@ public static class NoteEndpoints
             if (!result.IsSuccess)
                 return Results.BadRequest(result.Error);
             return Results.Ok();
+        }).RequireAuthorization();
+        
+        noteGroup.MapDelete("delete/source", async (
+            [FromBody] DeleteNoteSourceRequest request,
+            ClaimsPrincipal claims,
+            IMediator mediator) =>
+        {
+            var userId = claims.GetUserId();
+            var result = await mediator.Send(new DeleteNoteSourceCommand(
+                request.NoteId,
+                userId,
+                request.YoutubeVideoId,
+                request.Hours,
+                request.Minutes,
+                request.Seconds));
+
+            if (!result.IsSuccess)
+                return Results.BadRequest(result.Error!);
+
+            return Results.NoContent();
         }).RequireAuthorization();
 
         noteGroup.MapDelete("/delete", async (

@@ -10,6 +10,6 @@ public record NoteDto(
     string? Lvl,
     List<ExampleDto> Examples,
     int RepetitionScore,
-    SourceDto? Source,
+    IEnumerable<SourceDto>? Source,
     DateTime? LastTrainedAt,
     DateTime CreatedAt);

@@ -44,15 +44,15 @@ public class GetDictionaryHandler(
                     .Select(ex => new ExampleDto(ex.Text!, ex.Translate!))
                     .ToList(),
                 n.RepetitionScore,
-                n.Source == null ? null : new SourceDto(
-                    n.Source.YoutubeVideoId,
-                    n.Source.YoutubeId,
-                    n.Source.YoutubeVideoTitle,
-                    n.Source.Context,
+                n.Sources.Select(s => new SourceDto(
+                    s.YoutubeVideoId,
+                    s.YoutubeId,
+                    s.YoutubeVideoTitle,
+                    s.Context,
                     new DurationContextDto(
-                        n.Source.Hours,
-                        n.Source.Minutes,
-                        n.Source.Seconds)),
+                        s.Hours,
+                        s.Minutes,
+                        s.Seconds))).ToList(),
                 n.LastTrainedAt,
                 n.CreatedAt))
             .ToListAsync(cancellationToken);

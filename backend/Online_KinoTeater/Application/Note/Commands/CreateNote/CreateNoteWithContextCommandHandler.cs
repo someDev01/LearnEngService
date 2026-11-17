@@ -125,15 +125,16 @@ public class CreateNoteWithContextCommandHandler(
                 .Select(ex => new ExampleDto(ex.Text!, ex.Translate!))
                 .ToList(),
             note.RepetitionScore,
-            new SourceDto(
-                note.Source!.YoutubeVideoId,
-                note.Source!.YoutubeId,
-                note.Source.YoutubeVideoTitle,
-                note.Source.Context,
+            note.Sources.Select(s => new SourceDto(
+                s.YoutubeVideoId,
+                s.YoutubeId,
+                s.YoutubeVideoTitle,
+                s.Context,
                 new DurationContextDto(
-                    note.Source.Hours,
-                    note.Source.Minutes,
-                    note.Source.Seconds)),
+                    s.Hours,
+                    s.Minutes,
+                    s.Seconds)))
+                .ToList(),
             note.LastTrainedAt,
             note.CreatedAt);
 

@@ -19,11 +19,13 @@ public class Note : Entity
 
     public int RepetitionScore { get; set; }
 
-    public Source? Source { get; set; }
-
     public DateTime? LastTrainedAt { get; set; }
 
     public DateTime CreatedAt { get; set; }
+
+    public IReadOnlyCollection<Source> Sources => _sources.AsReadOnly();
+
+    private List<Source> _sources = [];
 
     protected Note() { }
 
@@ -43,9 +45,9 @@ public class Note : Entity
         Examples = examples ?? [];
         RepetitionScore = 0;
         Lvl = lvl;
-        Source = source;
         CreatedAt = DateTime.UtcNow;
         LastTrainedAt = null;
+        _sources = source is null ? [] : [source];
     }
 
     public static Result<Note> Create(
@@ -119,6 +121,35 @@ public class Note : Entity
             return Result.Failure("Пример для изменения не указан");
 
         Examples = examples ?? [];
+        return Result.Success();
+    }
+
+    public Result AddSource(Source source)
+    {
+        if (source is null)
+            return Result.Failure("Источник контекста заметки не указан");
+
+        if (_sources.Any(s => s.YoutubeVideoId == source.YoutubeVideoId &&
+                              s.Hours == source.Hours && 
+                              s.Minutes == source.Minutes && 
+                              s.Seconds == source.Seconds))
+            return Result.Failure("Такой источник контекст в заметке уже есть");
+        
+        _sources.Add(source);
+        return Result.Success();
+    }
+
+    public Result RemoveSource(Guid youtubeVideoId, int hours, int minutes, int seconds)
+    {
+        var existingSource = _sources
+            .FirstOrDefault(s => s.YoutubeVideoId == youtubeVideoId && 
+                                 s.Hours == hours && 
+                                 s.Minutes == minutes && 
+                                 s.Seconds == seconds);
+        if (existingSource is null)
+            return Result.Failure("Такого источника контекста в заметке нет");
+        
+        _sources.Remove(existingSource);
         return Result.Success();
     }
     #endregion

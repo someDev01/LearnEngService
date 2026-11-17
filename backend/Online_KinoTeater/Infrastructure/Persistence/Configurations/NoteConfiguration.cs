@@ -44,17 +44,21 @@ public class NoteConfiguration : IEntityTypeConfiguration<Note>
                 .IsRequired();
         });
 
-        builder.OwnsOne(n => n.Source, s =>
+        builder.OwnsMany(n => n.Sources, s =>
         {
+            s.ToTable("NoteSources");
+
+            s.WithOwner().HasForeignKey("NoteId");
+            
             s.Property(p => p.YoutubeVideoTitle)
                 .HasColumnName("YoutubeVideoTitle")
                 .HasMaxLength(100)
                 .IsRequired();
-
+            
             s.Property(p => p.Context)
                 .HasMaxLength(100)
                 .IsRequired();
-
+            
             s.Property(p => p.Hours)
                 .HasColumnName("DurationContextHours");
             s.Property(p => p.Minutes)
@@ -63,7 +67,9 @@ public class NoteConfiguration : IEntityTypeConfiguration<Note>
                 .HasColumnName("DurationContextSeconds");
         });
 
-
+        builder.Navigation(n => n.Sources)
+            .HasField("_sources")
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
         #endregion
 
         #region VALUEOBJECTS/MANY
