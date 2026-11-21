@@ -57,12 +57,13 @@
 
 .source_context{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: rgb(156, 156, 156);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
     padding-left: 12px;
     border-left: 2px solid rgb(255, 132, 0);
-
     p{
         user-select: none;
     }

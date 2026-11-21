@@ -8,10 +8,10 @@ import Word from '../../ui/word/Word';
 import styles from '../view_note/view_note_form.module.css';
 import NoteSource from '../../features/dictionary/components/noteSource/NoteSource';
 
-function ViewNoteForm({isOpen, note, onClose}){
+function ViewNoteForm({isOpen, note, onClose, onSourcesChange}){
     
     if(!note) return null;
-    
+
     return(
         <Modal isOpen={isOpen}>
             <div className={styles.view__container}>
@@ -32,7 +32,9 @@ function ViewNoteForm({isOpen, note, onClose}){
                     <Examples examples={note.examples} word={note.word}/>
                     {note?.source?.length > 0 && (
                         <NoteSource 
-                            source={note.source}
+                            sources={note.source}
+                            setSourceList={(newSources) => onSourcesChange(note.id, newSources)}
+                            noteId={note.id}
                             word={note.word}
                         />
                     )}

@@ -88,6 +88,18 @@ function DictionaryPage(){
         setTotalCount(prev => prev + 1);
     };
 
+    const handleSourcesChange = (noteId, newSources) => {
+        setNotes(prev => prev.map(note => note.id === noteId ? 
+            {...note, source: newSources} : 
+            note
+        ));
+
+        setOpenedNote(prev => prev.id === noteId ? 
+            {...prev, source: newSources}: 
+            prev
+        );
+    };
+
     const handleDelete = async(noteId) => {
         const response = await noteApi.deleteNote(noteId);
 
@@ -259,7 +271,7 @@ function DictionaryPage(){
                     <LoadMoreButton onClick={loadMoreSearch}/>
                 )}
             </div>
-            {isOpenView && <ViewNoteForm isOpen={isOpenView} note={openedNote} onClose={onCloseViewNote} onOpenVideo={onOpenVideo}/>}
+            {isOpenView && <ViewNoteForm isOpen={isOpenView} note={openedNote} onClose={onCloseViewNote} onOpenVideo={onOpenVideo} onSourcesChange={handleSourcesChange}/>}
             {isOpenEdit && 
                 <EditNoteForm 
                     isOpen={isOpenEdit} 

@@ -1,10 +1,11 @@
+import ActContextButton from '../../features/context/components/buttons/act_context_button/ActContextButton';
 import { formatDuration } from '../../utils/formatDuration/formatDuration';
 import { highlightWord } from '../../utils/highlight_word/highlightWord';
 import EllipsisText from '../ellipsis_text/EllipsisText';
 
 import styles from '../source/source.module.css';
 
-function Source({youtubeVideoTitle, context, duration, word, onNavigateToPlayer}){
+function Source({youtubeVideoTitle, context, duration, word, onNavigateToPlayer, onDelete}){
 
     const time = formatDuration(duration || {});
 
@@ -25,6 +26,7 @@ function Source({youtubeVideoTitle, context, duration, word, onNavigateToPlayer}
                 <p>
                     {highlightWord(context, word, styles.highlight)}
                 </p>
+                <ActContextButton type="delete" onClick={onDelete}/>
             </div>
         </div>
     )
