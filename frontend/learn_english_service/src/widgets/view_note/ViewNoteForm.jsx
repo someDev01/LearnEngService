@@ -1,48 +1,16 @@
-import { useNavigate } from 'react-router-dom';
 import Modal from '../../modal/Modal';
-import ButtonClose from '../../ui/button_close/ButtonClose';
 import ButtonX from '../../ui/button_x/ButtonX';
 import Examples from '../../ui/examples/Examples';
 import WordLvl from '../../ui/lvl/WordLvl';
-import Source from '../../ui/source/Source';
 import Transcription from '../../ui/transcription/Transcription';
 import Translations from '../../ui/translations/Translations';
 import Word from '../../ui/word/Word';
 import styles from '../view_note/view_note_form.module.css';
-import { useDispatch } from 'react-redux';
-import { closeModalViewNote } from '../../redux/slices/modalSlice';
+import NoteSource from '../../features/dictionary/components/noteSource/NoteSource';
 
-function ViewNoteForm({isOpen, note, onClose, onOpenVideo}){
+function ViewNoteForm({isOpen, note, onClose}){
     
-    const dispatch = useDispatch();
-    const navigation = useNavigate();
-
     if(!note) return null;
-
-    const id = note.source?.youtubeVideoId;
-    const youtubeId = note.source?.youtubeId;
-    const youtubeVideoTitle = note.source?.youtubeVideoTitle;
-    const context = note.source?.context;
-    const duration = note.source?.durationContext;   
-    const startTime = duration ? duration?.hours * 3600 +
-                      duration?.minutes * 60 +
-                      duration?.seconds : 0; 
-
-    const video = {
-        id,
-        youtubeId,
-        titleVideo: youtubeVideoTitle,
-        startTime
-    };
-
-    const onNavigationToPlayer = () => {
-        dispatch(closeModalViewNote());
-        navigation("/video-player", {
-            state:{
-                video
-            }
-        })
-    }
     
     return(
         <Modal isOpen={isOpen}>
@@ -62,14 +30,12 @@ function ViewNoteForm({isOpen, note, onClose, onOpenVideo}){
                 </div>
                 <div className={styles.bottom_part}>
                     <Examples examples={note.examples} word={note.word}/>
-                    {note?.source && <Source 
-                        youtubeVideoId={id}
-                        youtubeVideoTitle={youtubeVideoTitle} 
-                        context={context}
-                        duration={duration}
-                        word={note.word}
-                        onNavigateToPlayer={onNavigationToPlayer}
-                    />}
+                    {note?.source?.length > 0 && (
+                        <NoteSource 
+                            source={note.source}
+                            word={note.word}
+                        />
+                    )}
                 </div>
             </div>
         </Modal>
